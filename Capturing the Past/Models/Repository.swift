@@ -25,7 +25,7 @@ extension Repository {
 
     static let initialRepositories: [Repository] =
     [
-        Repository(id:1, name: "Repository 1", code: "repo1"),
-        Repository(id:2, name: "Repository 2", code: "repo2")
+        Repository(id:UUID(), name: "Repository 1", code: "repo1"),
+        Repository(id:UUID(), name: "Repository 2", code: "repo2")
     ]
 }
