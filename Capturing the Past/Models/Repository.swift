@@ -12,8 +12,8 @@ import Foundation
  * The numbering scheme is used in the national archive disocovery catelogue.
  *  The ID is used to link to archive entries
  */
-struct Repository {
-    var id: UUID
+struct Repository: Identifiable {
+    let id: UUID
     var name: String
     var code: String
 }

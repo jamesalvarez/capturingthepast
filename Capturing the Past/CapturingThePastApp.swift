@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct Capturing_the_PastApp: App {
+struct CapturingThePastApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()

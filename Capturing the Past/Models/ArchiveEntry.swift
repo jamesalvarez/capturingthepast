@@ -11,8 +11,8 @@ import SwiftUI
  * ArchiveEntry: Stores the user's selected references alongside a link
  * to the repository and the filenames for the photos taken
  */
-struct ArchiveEntry {
-    var id: UUID
+struct ArchiveEntry: Identifiable {
+    let id: UUID
     var repositoryID: UUID
     var catReference: String
     var item: Int

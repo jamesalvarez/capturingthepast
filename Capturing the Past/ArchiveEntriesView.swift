@@ -16,12 +16,11 @@ struct ArchiveEntriesView: View {
     
     var body: some View {
         List {
-            ForEach(archiveEntries, id: \.id) { archiveEntry in
+            ForEach(archiveEntries) { archiveEntry in
                 ArchiveEntryRowView(archiveEntry: archiveEntry)
             }
         }
     }
-
 }
 
 
