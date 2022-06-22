@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+/**
+ * ArchiveEntry: Stores the user's selected references alongside a link
+ * to the repository and the filenames for the photos taken
+ */
 struct ArchiveEntry {
     var id: UUID
     var repository: Repository
