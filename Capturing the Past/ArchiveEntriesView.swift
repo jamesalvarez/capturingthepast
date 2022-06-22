@@ -22,7 +22,7 @@ struct ArchiveEntriesView: View {
                 }
             }
         }
-        .navigationTitle("Daily Scrums")
+        .navigationTitle("Archives")
         .toolbar {
             Button(action: {}) {
                 Image(systemName: "plus")
