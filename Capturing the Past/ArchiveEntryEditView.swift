@@ -24,19 +24,21 @@ struct ArchiveEntryEditView: View {
                              Text(self.repositories[$0])
                          }
                      }
+                     */
 
-                     TextField("Catalogue reference", text: $catelogueRefernce)
-                     Stepper(value: $item, in: 0...999) {
-                         Text("Item: \(item)")
+                    TextField("Catalogue reference", text: $archiveEntry.catReference)
+                    Stepper(value: $archiveEntry.item, in: 0...999) {
+                        Text("Item: \(archiveEntry.item)")
+                    }
+                    Stepper(value: $archiveEntry.subItem, in: 0...999) {
+                        Text("Sub Item: \(archiveEntry.subItem)")
+                    }
+                    /*
+                     Stepper(value: $archiveEntry.specialCase, in: 0...999) {
+                        Text("Special Case: \($archiveEntry.specialCase)")
                      }
-                     Stepper(value: $subItem, in: 0...999) {
-                         Text("Sub Item: \(subItem)")
-                     }
-                     Stepper(value: $specialCase, in: 0...999) {
-                         Text("Special Case: \(specialCase)")
-                     }
-                     TextField("Note", text: $note)
-                      */
+                     */
+                    TextField("Note", text: $archiveEntry.note)
                 }
             }
         }
