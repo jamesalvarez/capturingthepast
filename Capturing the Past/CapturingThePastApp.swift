@@ -9,9 +9,27 @@ import SwiftUI
 
 @main
 struct CapturingThePastApp: App {
+    @StateObject private var store = ArchiveEntriesStore()
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationView {
+                ArchiveEntriesView(archiveEntries: $store.archiveEntries)
+            }
+            .onAppear {
+                ArchiveEntriesStore.load { result in
+
+                    switch result {
+                    case .failure(let error):
+
+                        fatalError(error.localizedDescription)
+
+                    case .success(let archiveEntries):
+
+                        store.archiveEntries = archiveEntries
+                    }
+                }
+            }
         }
     }
 }
