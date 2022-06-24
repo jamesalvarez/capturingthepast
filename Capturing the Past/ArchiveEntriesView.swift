@@ -16,6 +16,22 @@ struct ArchiveEntriesView: View {
     @State private var editedEntry: UUID? = nil
     @State private var editedData: ArchiveEntry.Data = .init()
     @State private var isEditing = false
+
+    func updateFromEditedData() {
+        if let editedEntry = editedEntry {
+            // Editing something already
+            if let entryIndex = archiveEntries.firstIndex(where: { entry in
+                entry.id == editedEntry
+            }) {
+                archiveEntries[entryIndex].update(from: editedData)
+            }
+        } else {
+            // new
+            let newEntry = ArchiveEntry(fromData: editedData)
+            archiveEntries.append(newEntry)
+        }
+    }
+
     var body: some View {
         List {
             ForEach($archiveEntries, id: \.id) { $archiveEntry in
@@ -44,20 +60,16 @@ struct ArchiveEntriesView: View {
                     .navigationBarItems(leading: Button("Cancel") {
                         isEditing = false
                         editedEntry = nil
-                    }, trailing: Button("Done") {
-                        isEditing = false
-
-                        if let editedEntry = editedEntry {
-                            // Editing something already
-                            if let entryIndex = archiveEntries.firstIndex(where: { entry in
-                                entry.id == editedEntry
-                            }) {
-                                archiveEntries[entryIndex].update(from: editedData)
-                            }
-                        } else {
-                            // new
-                            let newEntry = ArchiveEntry(fromData: editedData)
-                            archiveEntries.append(newEntry)
+                    }, trailing:
+                    HStack {
+                        Button("Done") {
+                            isEditing = false
+                            updateFromEditedData()
+                        }
+                        Button("Next") {
+                            updateFromEditedData()
+                            editedEntry = nil
+                            editedData = ArchiveEntry.Data()
                         }
                     })
             }
