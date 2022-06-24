@@ -13,7 +13,7 @@ import SwiftUI
  */
 struct ArchiveEntry: Identifiable, Codable {
     let id: UUID
-    var repositoryID: UUID
+    var repositoryID: UUID?
     var catReference: String
     var item: Int
     var subItem: Int
@@ -48,4 +48,34 @@ extension ArchiveEntry {
                          referenceSequence: "GB0387_PYE345_54_6_1_3",
                          photoRefs: [])
         ]
+}
+
+/**
+  * Data type to contain editable properties of ArchiveEntry, to process edits and updates
+ */
+extension ArchiveEntry {
+    struct Data {
+        var repositoryID: UUID? = nil
+        var catReference: String = ""
+        var item: Int = 0
+        var subItem: Int = 0
+        var specialCase: String = ""
+        var note: String = ""
+        var referenceSequence: String = ""
+        var photoRefs: [String] = []
+    }
+
+    var data: Data {
+        return Data(repositoryID: repositoryID, catReference: catReference, item: item, subItem: subItem, specialCase: specialCase, note: note, referenceSequence: referenceSequence, photoRefs: photoRefs)
+    }
+
+    mutating func update(from data: Data) {
+        repositoryID = data.repositoryID
+        catReference = data.catReference
+        item = data.item
+        subItem = data.subItem
+        specialCase = data.specialCase
+        note = data.note
+        photoRefs = data.photoRefs
+    }
 }

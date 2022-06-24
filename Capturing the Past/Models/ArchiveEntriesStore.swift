@@ -29,12 +29,11 @@ class ArchiveEntriesStore: ObservableObject {
         DispatchQueue.global(qos: .background).async {
             do {
                 let fileURL = try fileURL()
-
                 guard let file = try? FileHandle(forReadingFrom: fileURL) else {
-                    DispatchQueue.main.async {
-                        completion(.success([]))
-                    }
 
+                    DispatchQueue.main.async {
+                        completion(.success(ArchiveEntry.sampleEntries)) //TODO: Remove or place in debug only
+                    }
                     return
                 }
 

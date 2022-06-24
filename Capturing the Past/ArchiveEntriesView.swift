@@ -13,11 +13,17 @@ import SwiftUI
  */
 struct ArchiveEntriesView: View {
     @Binding var archiveEntries: [ArchiveEntry]
-
+    @State private var editedEntry: UUID? = nil
+    @State private var editedData: ArchiveEntry.Data = .init()
+    @State private var isEditing = false
     var body: some View {
         List {
-            ForEach($archiveEntries) { $archiveEntry in
-                NavigationLink(destination: ArchiveEntryEditView(archiveEntry: $archiveEntry)) {
+            ForEach($archiveEntries, id: \.id) { $archiveEntry in
+                Button(action: {
+                    editedEntry = archiveEntry.id
+                    editedData = archiveEntry.data
+                    isEditing = true
+                }) {
                     ArchiveEntryRowView(archiveEntry: archiveEntry)
                 }
             }
@@ -27,9 +33,37 @@ struct ArchiveEntriesView: View {
             Button(action: {}) {
                 Image(systemName: "plus")
             }
+            .accessibilityLabel("New archive entry")
+        }
+        .fullScreenCover(isPresented: $isEditing) {
+            NavigationView {
+                ArchiveEntryEditView(data: $editedData)
+                    .navigationTitle("Edit Entry")
+                    .navigationBarItems(leading: Button("Cancel") {
+                        isEditing = false
+                        editedEntry = nil
+                    }, trailing: Button("Done") {
+                        isEditing = false
+
+                        if let entryIndex = archiveEntries.firstIndex(where: { entry in
+                            entry.id == editedEntry
+                        }) {
+                            archiveEntries[entryIndex].update(from: editedData)
+                        }
+                    })
+            }
         }
     }
 }
+
+/*
+ .navigationTitle("Edit Archive Entry")
+ .navigationBarItems(leading: Button("Cancel") {
+
+ }, trailing: Button("Save") {
+ archiveEntry.update(from: data)
+ })
+ */
 
 struct ArchiveEntriesView_Previews: PreviewProvider {
     static var previews: some View {

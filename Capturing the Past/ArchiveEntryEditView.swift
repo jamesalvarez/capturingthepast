@@ -11,7 +11,7 @@ import SwiftUI
  * View for viewing and editing an archive entry
  */
 struct ArchiveEntryEditView: View {
-    @Binding var archiveEntry: ArchiveEntry
+    @Binding var data: ArchiveEntry.Data
     var repositories = ["Repository 1", "Repository 2"]
 
     var body: some View {
@@ -26,29 +26,32 @@ struct ArchiveEntryEditView: View {
                      }
                      */
 
-                    TextField("Catalogue reference", text: $archiveEntry.catReference)
-                    Stepper(value: $archiveEntry.item, in: 0...999) {
-                        Text("Item: \(archiveEntry.item)")
+                    TextField("Catalogue reference", text: $data.catReference)
+                    Spacer()
+                    Stepper(value: $data.item, in: 0...999) {
+                        Text("Item: \(data.item)")
                     }
-                    Stepper(value: $archiveEntry.subItem, in: 0...999) {
-                        Text("Sub Item: \(archiveEntry.subItem)")
+                    Stepper(value: $data.subItem, in: 0...999) {
+                        Text("Sub Item: \(data.subItem)")
                     }
+                    Spacer()
                     /*
                      Stepper(value: $archiveEntry.specialCase, in: 0...999) {
                         Text("Special Case: \($archiveEntry.specialCase)")
                      }
                      */
-                    TextField("Note", text: $archiveEntry.note)
+                    TextField("Note", text: $data.note)
                 }
             }
         }
+        
     }
 }
 
 struct ArchiveEntryEditView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ArchiveEntryEditView(archiveEntry: .constant(ArchiveEntry.sampleEntries[0]))
+            ArchiveEntryEditView(data: .constant(ArchiveEntry.sampleEntries[0].data))
         }
     }
 }
