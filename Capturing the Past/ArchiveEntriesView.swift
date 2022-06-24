@@ -30,10 +30,12 @@ struct ArchiveEntriesView: View {
         }
         .navigationTitle("Archives")
         .toolbar {
-            Button(action: {}) {
-                Image(systemName: "plus")
-            }
-            .accessibilityLabel("New archive entry")
+            Button(action: {
+                editedEntry = nil
+                editedData = ArchiveEntry.Data()
+                isEditing = true
+            }) { Image(systemName: "plus") }
+                .accessibilityLabel("New archive entry")
         }
         .fullScreenCover(isPresented: $isEditing) {
             NavigationView {
@@ -45,10 +47,17 @@ struct ArchiveEntriesView: View {
                     }, trailing: Button("Done") {
                         isEditing = false
 
-                        if let entryIndex = archiveEntries.firstIndex(where: { entry in
-                            entry.id == editedEntry
-                        }) {
-                            archiveEntries[entryIndex].update(from: editedData)
+                        if let editedEntry = editedEntry {
+                            // Editing something already
+                            if let entryIndex = archiveEntries.firstIndex(where: { entry in
+                                entry.id == editedEntry
+                            }) {
+                                archiveEntries[entryIndex].update(from: editedData)
+                            }
+                        } else {
+                            // new
+                            let newEntry = ArchiveEntry(fromData: editedData)
+                            archiveEntries.append(newEntry)
                         }
                     })
             }

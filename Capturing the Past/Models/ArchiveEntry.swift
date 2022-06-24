@@ -13,14 +13,16 @@ import SwiftUI
  */
 struct ArchiveEntry: Identifiable, Codable {
     let id: UUID
-    var repositoryID: UUID?
-    var catReference: String
-    var item: Int
-    var subItem: Int
-    var specialCase: String
-    var note: String
-    var referenceSequence: String
-    var photoRefs: [String]
+    var repositoryID: UUID? = nil
+    var catReference: String = ""
+    var item: Int = 0
+    var subItem: Int = 0
+    var specialCase: String = ""
+    var note: String = ""
+    var referenceSequence: String = ""
+    var photoRefs: [String] = []
+
+
 }
 
 /**
@@ -77,5 +79,18 @@ extension ArchiveEntry {
         specialCase = data.specialCase
         note = data.note
         photoRefs = data.photoRefs
+        referenceSequence = "\(catReference)_\(item)_\(subItem)_\(specialCase)"
+    }
+
+    init(fromData data: ArchiveEntry.Data) {
+        id = UUID()
+        repositoryID = data.repositoryID
+        catReference = data.catReference
+        item = data.item
+        subItem = data.subItem
+        specialCase = data.specialCase
+        note = data.note
+        photoRefs = data.photoRefs
+        referenceSequence = "\(catReference)_\(item)_\(subItem)_\(specialCase)"
     }
 }
