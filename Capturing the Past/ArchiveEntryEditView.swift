@@ -11,6 +11,7 @@ import SwiftUI
  * View for viewing and editing an archive entry
  */
 struct ArchiveEntryEditView: View {
+    @StateObject var vm = ViewModel()
     @Binding var data: ArchiveEntry.Data
     var repositories = ["Repository 1", "Repository 2"]
 
@@ -42,9 +43,18 @@ struct ArchiveEntryEditView: View {
                      */
                     TextField("Note", text: $data.note)
                 }
+                Section {
+                    NavigationLink(destination:
+                        PhotosView().environmentObject(vm)
+                        .onAppear {
+                            UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
+                        }) {
+                            Text("Photos")
+                        }
+
+                }
             }
         }
-        
     }
 }
 
