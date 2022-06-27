@@ -164,10 +164,11 @@ struct ArchiveEntryEditView: View {
                     Divider()
                     HStack {
                         Button(action: {
-                            addPhoto()
-                            image = nil
-                            showPicker = false
-
+                            if (imageName == sanitizeFilename(input: imageName)){
+                                addPhoto()
+                                image = nil
+                                showPicker = false
+                            }
                         }) {
                             Text("Ok")
                         }
