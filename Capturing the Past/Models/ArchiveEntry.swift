@@ -64,11 +64,13 @@ extension ArchiveEntry {
         var specialCase: String = ""
         var note: String = ""
         var referenceSequence: String = ""
-        var photoRefs: [String] = []
+        var photos: [Photo] = []
     }
 
     var data: Data {
-        return Data(repositoryID: repositoryID, catReference: catReference, item: item, subItem: subItem, specialCase: specialCase, note: note, referenceSequence: referenceSequence, photoRefs: photoRefs)
+        let photos = photoRefs.map { Photo(id: $0) }
+
+        return Data(repositoryID: repositoryID, catReference: catReference, item: item, subItem: subItem, specialCase: specialCase, note: note, referenceSequence: referenceSequence, photos: photos)
     }
 
     mutating func update(from data: Data) {
@@ -78,7 +80,7 @@ extension ArchiveEntry {
         subItem = data.subItem
         specialCase = data.specialCase
         note = data.note
-        photoRefs = data.photoRefs
+        photoRefs = data.photos.map { $0.id }
         referenceSequence = "\(catReference)_\(item)_\(subItem)_\(specialCase)"
     }
 
@@ -90,7 +92,7 @@ extension ArchiveEntry {
         subItem = data.subItem
         specialCase = data.specialCase
         note = data.note
-        photoRefs = data.photoRefs
+        photoRefs = data.photos.map { $0.id }
         referenceSequence = "\(catReference)_\(item)_\(subItem)_\(specialCase)"
     }
 }
