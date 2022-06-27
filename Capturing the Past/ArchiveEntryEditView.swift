@@ -30,6 +30,8 @@ struct ArchiveEntryEditView: View {
             if source == .camera {
                 try ImagePicker.checkPermissions()
             }
+            // Set imagename to the ref sequence (TODO: check for file existing)
+            imageName = sanitizeFilename(input: data.referenceSequence)
             showPicker = true
         } catch {
             showCameraAlert = true
@@ -105,7 +107,32 @@ struct ArchiveEntryEditView: View {
     }
 
     func didDismissImagePicker() {
-        // Handle the dismissing action.
+
+        // If an image was picked, then show the image name
+        if (image != nil) {
+            showPicker = true
+        }
+    }
+
+    func sanitizeFilename(input: String) -> String {
+        return String(input.map {
+            $0 == "/" ? "_" : ($0 == " " ? "_" : $0)
+        })
+    }
+
+    func addPhoto() {
+
+        // Santize imageName for file
+        imageName = sanitizeFilename(input: imageName)
+
+        let photo = Photo(id: imageName)
+        do {
+            try FileManager().saveImage("\(photo.id)", image: image!)
+            data.photos.append(Photo(id: imageName))
+        } catch {
+            showFileAlert = true
+            appError = CapturingThePastError.ErrorType(error: error as! CapturingThePastError)
+        }
     }
 
     var body: some View {
@@ -128,7 +155,7 @@ struct ArchiveEntryEditView: View {
                     Divider()
                     HStack {
                         Button(action: {
-                            data.photos.append(Photo(id: imageName))
+                            addPhoto()
                             image = nil
                             showPicker = false
 
