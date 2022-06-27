@@ -159,8 +159,17 @@ struct ArchiveEntryEditView: View {
                     .ignoresSafeArea()
             } else {
                 VStack {
-                    Text("Enter image name")
-                    TextField("Image name", text: $imageName)
+
+                    Text("Chosen image")
+                    Image(uiImage: image!)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 100, height: 100)
+                        .clipShape(RoundedRectangle(cornerRadius: 15))
+                        .shadow(color: .black.opacity(0.6), radius: 2, x: 2, y: 2)
+                    Divider()
+                    Text("Filename")
+                    TextField("Filename", text: $imageName)
                     Divider()
                     HStack {
                         Button(action: {
