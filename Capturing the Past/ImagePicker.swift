@@ -7,6 +7,7 @@
 
 import UIKit
 import SwiftUI
+import AVFoundation
 
 struct ImagePicker: UIViewControllerRepresentable {
     var sourceType: UIImagePickerController.SourceType = .photoLibrary
@@ -40,5 +41,29 @@ struct ImagePicker: UIViewControllerRepresentable {
             parent.presentationMode.wrappedValue.dismiss()
         }
     }
+
+    enum Source: String {
+        case library, camera
+    }
+
+
+
+    static func checkPermissions() throws {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            let authStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
+            switch authStatus {
+            case .denied:
+                throw CapturingThePastError.cameraDenied
+            case .restricted:
+                throw CapturingThePastError.cameraRestricted
+            default:
+                break
+            }
+        } else {
+            throw CapturingThePastError.cameraUnavailable
+        }
+    }
+
+
 }
 
