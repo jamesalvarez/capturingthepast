@@ -16,6 +16,8 @@ struct ArchiveEntriesView: View {
     @State private var editedEntry: UUID? = nil
     @State private var editedData: ArchiveEntry.Data = .init()
     @State private var isEditing = false
+    @Environment(\.scenePhase) private var scenePhase
+    let saveAction: ()->Void
 
     func updateFromEditedData() {
         if let editedEntry = editedEntry {
@@ -53,7 +55,7 @@ struct ArchiveEntriesView: View {
             }) { Image(systemName: "plus") }
                 .accessibilityLabel("New archive entry")
         }
-        .fullScreenCover(isPresented: $isEditing) {
+        .fullScreenCover(isPresented: $isEditing, onDismiss: saveAction) {
             NavigationView {
                 ArchiveEntryEditView(data: $editedData)
                     .navigationTitle("Edit Entry")
@@ -74,6 +76,9 @@ struct ArchiveEntriesView: View {
                     })
             }
         }
+        .onChange(of: scenePhase) { phase in
+            if phase == .inactive { saveAction() }
+        }
     }
 }
 
@@ -89,7 +94,7 @@ struct ArchiveEntriesView: View {
 struct ArchiveEntriesView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ArchiveEntriesView(archiveEntries: .constant(ArchiveEntry.sampleEntries))
+            ArchiveEntriesView(archiveEntries: .constant(ArchiveEntry.sampleEntries), saveAction: {})
         }
     }
 }

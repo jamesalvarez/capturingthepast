@@ -75,13 +75,13 @@
 				1A44ECB92858CD23006624B0 /* Preview Content */,
 				1A44ECC12862F890006624B0 /* Models */,
 				1A44ECB32858CD1F006624B0 /* CapturingThePastApp.swift */,
+				1A6291F62869B45F006B51CB /* CapturingThePastError.swift */,
 				1A44ECC628630157006624B0 /* ArchiveEntriesView.swift */,
 				1A44ECC828630431006624B0 /* ArchiveEntryRowView.swift */,
 				1A44ECB52858CD1F006624B0 /* ArchiveEntryEditView.swift */,
 				1A6291F82869BD4A006B51CB /* ButtonLabel.swift */,
 				1A6291EE2869AA8A006B51CB /* ImagePicker.swift */,
 				1A6291F22869AA91006B51CB /* FileManager+Extension.swift */,
-				1A6291F62869B45F006B51CB /* CapturingThePastError.swift */,
 			);
 			path = "Capturing the Past";
 			sourceTree = "<group>";

@@ -64,7 +64,11 @@ class ArchiveEntriesStore: ObservableObject {
                     completion(.success(archiveEntries.count))
                 }
 
-            } catch {}
+            } catch {
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
+            }
         }
     }
 }
