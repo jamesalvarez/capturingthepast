@@ -115,9 +115,18 @@ struct ArchiveEntryEditView: View {
     }
 
     func sanitizeFilename(input: String) -> String {
-        return String(input.map {
+        let tag = String(input.map {
             $0 == "/" ? "_" : ($0 == " " ? "_" : $0)
         })
+
+        var fileName = tag
+        var appendNumber = 1
+        while(FileManager().imageWithFilenameExists(fileName)) {
+            appendNumber += 1
+            fileName = "\(tag)_\(appendNumber)"
+        }
+
+        return fileName
     }
 
     func addPhoto() {

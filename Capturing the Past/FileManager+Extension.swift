@@ -18,6 +18,10 @@ extension FileManager {
         fileExists(atPath: Self.docDirURL.appendingPathComponent(docName).path)
     }
 
+    func imageWithFilenameExists(_ imageName: String) -> Bool {
+        return docExist(named: "\(imageName).jpg")
+    }
+
     func saveImage(_ id: String, image: UIImage) throws {
         if let data = image.jpegData(compressionQuality: 0.6) {
             let imageURL = FileManager.docDirURL.appendingPathComponent("\(id).jpg")
