@@ -15,7 +15,7 @@ struct CapturingThePastApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                ArchiveEntriesView(archiveEntries: $archiveEntriesStore.archiveEntries) {
+                ArchiveEntriesView(archiveEntries: $archiveEntriesStore.archiveEntries, repositories: $repositoriesStore.repositories) {
                     ArchiveEntriesStore.save(archiveEntries: archiveEntriesStore.archiveEntries) { result in
                         if case .failure(let error) = result {
                             fatalError(error.localizedDescription)

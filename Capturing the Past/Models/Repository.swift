@@ -28,3 +28,28 @@ extension Repository {
             Repository(id: UUID(), name: "Repository 2", code: "repo2")
         ]
 }
+
+/**
+ * Data type to contain editable properties of Repository, to process edits and updates
+ */
+extension Repository {
+    struct Data {
+        var name: String = ""
+        var code: String = ""
+    }
+
+    var data: Data {
+        return Data(name: name, code: code)
+    }
+
+    mutating func update(from data: Data) {
+        name = data.name
+        code = data.code
+    }
+
+    init(fromData data: Repository.Data) {
+        id = UUID()
+        name = data.name
+        code = data.code
+    }
+}

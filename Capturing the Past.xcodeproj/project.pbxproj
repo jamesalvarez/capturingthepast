@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		1A0ED5C9287EB479007F0933 /* RepositoriesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0ED5C8287EB479007F0933 /* RepositoriesStore.swift */; };
+		1A0ED5CB287EB6E6007F0933 /* RepositoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0ED5CA287EB6E6007F0933 /* RepositoriesView.swift */; };
+		1A0ED5CD287EB6F8007F0933 /* RepositoryRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0ED5CC287EB6F8007F0933 /* RepositoryRowView.swift */; };
+		1A0ED5CF287EB706007F0933 /* RepositoryEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0ED5CE287EB706007F0933 /* RepositoryEditView.swift */; };
 		1A44ECB42858CD1F006624B0 /* CapturingThePastApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A44ECB32858CD1F006624B0 /* CapturingThePastApp.swift */; };
 		1A44ECB62858CD1F006624B0 /* ArchiveEntryEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A44ECB52858CD1F006624B0 /* ArchiveEntryEditView.swift */; };
 		1A44ECB82858CD23006624B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A44ECB72858CD23006624B0 /* Assets.xcassets */; };
@@ -26,6 +29,9 @@
 
 /* Begin PBXFileReference section */
 		1A0ED5C8287EB479007F0933 /* RepositoriesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesStore.swift; sourceTree = "<group>"; };
+		1A0ED5CA287EB6E6007F0933 /* RepositoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesView.swift; sourceTree = "<group>"; };
+		1A0ED5CC287EB6F8007F0933 /* RepositoryRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryRowView.swift; sourceTree = "<group>"; };
+		1A0ED5CE287EB706007F0933 /* RepositoryEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryEditView.swift; sourceTree = "<group>"; };
 		1A44ECB02858CD1F006624B0 /* Capturing the Past.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Capturing the Past.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A44ECB32858CD1F006624B0 /* CapturingThePastApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapturingThePastApp.swift; sourceTree = "<group>"; };
 		1A44ECB52858CD1F006624B0 /* ArchiveEntryEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveEntryEditView.swift; sourceTree = "<group>"; };
@@ -81,6 +87,9 @@
 				1A44ECC628630157006624B0 /* ArchiveEntriesView.swift */,
 				1A44ECC828630431006624B0 /* ArchiveEntryRowView.swift */,
 				1A44ECB52858CD1F006624B0 /* ArchiveEntryEditView.swift */,
+				1A0ED5CA287EB6E6007F0933 /* RepositoriesView.swift */,
+				1A0ED5CC287EB6F8007F0933 /* RepositoryRowView.swift */,
+				1A0ED5CE287EB706007F0933 /* RepositoryEditView.swift */,
 				1A6291F82869BD4A006B51CB /* ButtonLabel.swift */,
 				1A6291EE2869AA8A006B51CB /* ImagePicker.swift */,
 				1A6291F22869AA91006B51CB /* FileManager+Extension.swift */,
@@ -178,8 +187,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A0ED5CB287EB6E6007F0933 /* RepositoriesView.swift in Sources */,
 				1A44ECB62858CD1F006624B0 /* ArchiveEntryEditView.swift in Sources */,
 				1A44ECC928630431006624B0 /* ArchiveEntryRowView.swift in Sources */,
+				1A0ED5CD287EB6F8007F0933 /* RepositoryRowView.swift in Sources */,
+				1A0ED5CF287EB706007F0933 /* RepositoryEditView.swift in Sources */,
 				1A6291F72869B45F006B51CB /* CapturingThePastError.swift in Sources */,
 				1A44ECC52862F8FF006624B0 /* ArchiveEntry.swift in Sources */,
 				1A6291F52869B38D006B51CB /* Photo.swift in Sources */,
