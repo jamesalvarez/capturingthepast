@@ -24,6 +24,7 @@ struct RepositoryEditView: View {
 
     var body: some View {
         VStack {
+            Text("Edit the repository's name and code")
             Form {
                 dataFields
             }

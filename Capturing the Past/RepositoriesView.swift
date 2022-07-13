@@ -34,6 +34,7 @@ struct RepositoriesView: View {
     }
 
     var body: some View {
+        Text("A list of your repositories.  Tap to edit the name or code. To add a new one tap the plus icon.")
         List {
             ForEach($repositories, id: \.id) { $repository in
                 Button(action: {

@@ -36,6 +36,7 @@ struct ArchiveEntriesView: View {
     }
 
     var body: some View {
+        Text("A list of your record.  Tap to edit or to add a new one tap the plus icon.")
         List {
             ForEach($archiveEntries, id: \.id) { $archiveEntry in
                 Button(action: {
