@@ -18,7 +18,7 @@ struct ArchiveEntriesView: View {
     @State private var editedData: ArchiveEntry.Data = .init()
     @State private var isEditing = false
     @Environment(\.scenePhase) private var scenePhase
-    let saveAction: ()->Void
+    let saveAction: () -> Void
 
     func updateFromEditedData() {
         if let editedEntry = editedEntry {
@@ -36,8 +36,8 @@ struct ArchiveEntriesView: View {
     }
 
     var body: some View {
-        Text("A list of your record.  Tap to edit or to add a new one tap the plus icon.")
         List {
+            Text("Your records.  Tap to edit or to add a new one tap the plus icon.")
             ForEach($archiveEntries, id: \.id) { $archiveEntry in
                 Button(action: {
                     editedEntry = archiveEntry.id
@@ -48,6 +48,7 @@ struct ArchiveEntriesView: View {
                 }
             }
         }
+
         .navigationTitle("Records")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -62,7 +63,7 @@ struct ArchiveEntriesView: View {
                 NavigationLink(destination: RepositoriesView(repositories: $repositories) {
                     saveAction() // Triggers root save action when saving repositories
                 }) {
-                Image(systemName: "building.columns")
+                    Image(systemName: "building.columns")
 
                 }.accessibilityLabel("Repository Settings")
             }
