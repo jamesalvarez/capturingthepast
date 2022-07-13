@@ -81,6 +81,7 @@ struct ArchiveEntryEditView: View {
 
     var dataFields: some View {
         VStack {
+            // TODO: In future indicate if entries repo is no longer in list
             Picker(selection: $data.repositoryID, label: Text("Repository")) {
                 ForEach(repositories, id:\.id) { repo in
                     Text(repo.nameCodeString)

@@ -17,6 +17,7 @@ struct RepositoryEditView: View {
         VStack {
             TextField("Name", text: $data.name)
             Spacer()
+            // TODO: Check that id is not the same as any others
             TextField("Code", text: $data.id)
         }
     }
