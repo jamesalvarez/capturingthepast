@@ -19,10 +19,12 @@ struct ArchiveEntry: Identifiable, Codable {
     var subItem: Int = 0
     var specialCase: String = ""
     var note: String = ""
-    var referenceSequence: String = ""
     var photoRefs: [String] = []
-
-
+    var referenceSequence: String {
+        get {
+            return "\(catReference)_\(item)_\(subItem)_\(specialCase)"
+        }
+    }
 }
 
 /**
@@ -38,7 +40,6 @@ extension ArchiveEntry {
                          subItem: 2,
                          specialCase: "",
                          note: "Design of operating table",
-                         referenceSequence: "GB0387_PYE345_54_6_1_2",
                          photoRefs: []),
             ArchiveEntry(id: UUID(),
                          repositoryID: Repository.initialRepositories[0].id,
@@ -47,7 +48,6 @@ extension ArchiveEntry {
                          subItem: 3,
                          specialCase: "",
                          note: "Something else",
-                         referenceSequence: "GB0387_PYE345_54_6_1_3",
                          photoRefs: [])
         ]
 }
@@ -86,7 +86,6 @@ extension ArchiveEntry {
         specialCase = data.specialCase
         note = data.note
         photoRefs = data.photos.map { $0.id }
-        referenceSequence = data.referenceSequence
     }
 
     init(fromData data: ArchiveEntry.Data) {
@@ -98,6 +97,5 @@ extension ArchiveEntry {
         specialCase = data.specialCase
         note = data.note
         photoRefs = data.photos.map { $0.id }
-        referenceSequence = data.referenceSequence
     }
 }
