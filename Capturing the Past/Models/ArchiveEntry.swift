@@ -13,7 +13,7 @@ import SwiftUI
  */
 struct ArchiveEntry: Identifiable, Codable {
     let id: UUID
-    var repositoryID: UUID? = nil
+    var repositoryID: String
     var catReference: String = ""
     var item: Int = 0
     var subItem: Int = 0
@@ -22,7 +22,7 @@ struct ArchiveEntry: Identifiable, Codable {
     var photoRefs: [String] = []
     var referenceSequence: String {
         get {
-            return "\(catReference)_\(item)_\(subItem)_\(specialCase)"
+            return "\(repositoryID)_\(catReference)_\(item)_\(subItem)_\(specialCase)"
         }
     }
 }
@@ -57,7 +57,7 @@ extension ArchiveEntry {
  */
 extension ArchiveEntry {
     struct Data {
-        var repositoryID: UUID? = nil
+        var repositoryID: String = ""
         var catReference: String = ""
         var item: Int = 0
         var subItem: Int = 0

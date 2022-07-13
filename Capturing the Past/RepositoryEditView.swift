@@ -17,7 +17,7 @@ struct RepositoryEditView: View {
         VStack {
             TextField("Name", text: $data.name)
             Spacer()
-            TextField("Code", text: $data.code)
+            TextField("Code", text: $data.id)
         }
     }
 

@@ -12,7 +12,7 @@ import SwiftUI
  */
 struct RepositoriesView: View {
     @Binding var repositories: [Repository]
-    @State private var editedEntry: UUID? = nil
+    @State private var editedEntry: String? = nil
     @State private var editedData: Repository.Data = .init()
     @State private var isEditing = false
     @Environment(\.scenePhase) private var scenePhase

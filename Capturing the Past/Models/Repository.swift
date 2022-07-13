@@ -13,9 +13,8 @@ import Foundation
  *  The ID is used to link to archive entries
  */
 struct Repository: Identifiable, Codable {
-    let id: UUID
+    var id: String // Archon code
     var name: String
-    var code: String
 }
 
 /**
@@ -24,8 +23,8 @@ struct Repository: Identifiable, Codable {
 extension Repository {
     static let initialRepositories: [Repository] =
         [
-            Repository(id: UUID(), name: "Repository 1", code: "repo1"),
-            Repository(id: UUID(), name: "Repository 2", code: "repo2")
+            Repository(id: "repo1uk", name: "Repository 1"),
+            Repository(id: "repo2uk", name: "Repository 2")
         ]
 }
 
@@ -34,22 +33,24 @@ extension Repository {
  */
 extension Repository {
     struct Data {
-        var name: String = ""
-        var code: String = ""
-    }
+        var id: String = ""
+        var name: String = ""    }
 
     var data: Data {
-        return Data(name: name, code: code)
+        return Data(id: id, name: name)
     }
 
     mutating func update(from data: Data) {
         name = data.name
-        code = data.code
+        id = data.id
     }
 
     init(fromData data: Repository.Data) {
-        id = UUID()
+        id = data.id
         name = data.name
-        code = data.code
+    }
+
+    var nameCodeString: String {
+        return "\(name) - \(id)"
     }
 }

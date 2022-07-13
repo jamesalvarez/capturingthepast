@@ -24,6 +24,7 @@ struct ArchiveEntryEditView: View {
     @State var showFileAlert = false
     @State var appError: CapturingThePastError.ErrorType?
 
+
     func showPhotoPicker() {
         do {
             if source == .camera {
@@ -80,13 +81,12 @@ struct ArchiveEntryEditView: View {
 
     var dataFields: some View {
         VStack {
-            /*
-             Picker(selection: $selectedRepositoryIndex, label: Text("Repository")) {
-             ForEach(0 ..< repositories.count) {
-             Text(self.repositories[$0])
-             }
-             }
-             */
+            Picker(selection: $data.repositoryID, label: Text("Repository")) {
+                ForEach(repositories, id:\.id) { repo in
+                    Text(repo.nameCodeString)
+                }
+            }
+
             TextField("Catalogue reference", text: $data.catReference)
             Spacer()
             Stepper(value: $data.item, in: 0...999) {
@@ -106,9 +106,8 @@ struct ArchiveEntryEditView: View {
     }
 
     func didDismissImagePicker() {
-
         // If an image was picked, then show the image name
-        if (image != nil) {
+        if image != nil {
             showPicker = true
         }
     }
@@ -120,7 +119,7 @@ struct ArchiveEntryEditView: View {
 
         var fileName = tag
         var appendNumber = 1
-        while(FileManager().imageWithFilenameExists(fileName)) {
+        while FileManager().imageWithFilenameExists(fileName) {
             appendNumber += 1
             fileName = "\(tag)_\(appendNumber)"
         }
@@ -129,7 +128,6 @@ struct ArchiveEntryEditView: View {
     }
 
     func addPhoto() {
-
         // Santize imageName for file
         imageName = sanitizeFilename(input: imageName)
 
@@ -158,7 +156,6 @@ struct ArchiveEntryEditView: View {
                     .ignoresSafeArea()
             } else {
                 VStack {
-
                     Text("Chosen image")
                     Image(uiImage: image!)
                         .resizable()
@@ -172,7 +169,7 @@ struct ArchiveEntryEditView: View {
                     Divider()
                     HStack {
                         Button(action: {
-                            if (imageName == sanitizeFilename(input: imageName)){
+                            if imageName == sanitizeFilename(input: imageName) {
                                 addPhoto()
                                 image = nil
                                 showPicker = false
