@@ -59,7 +59,7 @@ struct ArchiveEntriesView: View {
             }
             ToolbarItem(placement: .navigationBarLeading) {
                 NavigationLink(destination: RepositoriesView(repositories: $repositories) {
-
+                    saveAction() // Triggers root save action when saving repositories
                 }) {
                 Image(systemName: "building.columns")
 
