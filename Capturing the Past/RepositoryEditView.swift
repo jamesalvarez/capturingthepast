@@ -18,7 +18,7 @@ struct RepositoryEditView: View {
             TextField("Name", text: $data.name)
             Spacer()
             // TODO: Check that id is not the same as any others
-            TextField("Code", text: $data.id)
+            TextField("Code", text: $data.archon)
         }
     }
 

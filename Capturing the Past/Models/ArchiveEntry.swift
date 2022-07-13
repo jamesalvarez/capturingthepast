@@ -34,7 +34,7 @@ extension ArchiveEntry {
     static let sampleEntries: [ArchiveEntry] =
         [
             ArchiveEntry(id: UUID(),
-                         repositoryID: Repository.initialRepositories[0].id,
+                         repositoryID: Repository.sampleRepositories[0].archon,
                          catReference: "pye345/54/6",
                          item: 1,
                          subItem: 2,
@@ -42,7 +42,7 @@ extension ArchiveEntry {
                          note: "Design of operating table",
                          photoRefs: []),
             ArchiveEntry(id: UUID(),
-                         repositoryID: Repository.initialRepositories[0].id,
+                         repositoryID: Repository.sampleRepositories[1].archon,
                          catReference: "pye345/54/6",
                          item: 1,
                          subItem: 3,
@@ -65,6 +65,39 @@ extension ArchiveEntry {
         var note: String = ""
         var photos: [Photo] = []
 
+        /*
+         private String createCatRef() {
+         catRef = strArchon;
+         if(strRef.length()>0){
+         catRef+=  "/" + strRef;
+         }
+         if(strItem.length()>0){
+         catRef+="/" + strItem;
+         }
+         if (strSubItem.length()>0){
+         catRef+="/" + strSubItem;
+         }
+         if(strPart.length()>0){
+         catRef+= strPart;
+         }
+
+         catRef = catRef.replaceAll("\\s+", "").toUpperCase();
+         catRef = catRef.replaceAll("//", "/");
+         catRef = catRef.replaceAll("/", "_");
+         catRef = catRef.replaceAll("[!@#$%^&*]", "_");
+         catRef = catRef.replaceAll("\\\\\\\\", "\\\\");
+         catRef = catRef.replaceAll("\\\\", "_");
+
+         if (catRef.equals("GB0000")) {
+         catRef = "Ref";
+         }
+         catRef = catRef.replaceAll("_{2,}", "_");
+         if (catRef.length() > 128) {
+         Toast.makeText(this, "Your catalogue reference is very long and may result in unusable file names.", Toast.LENGTH_SHORT).show();
+         }
+         return catRef;
+         }
+         */
         var referenceSequence: String {
             get {
                 return "\(catReference)_\(item)_\(subItem)_\(specialCase)"

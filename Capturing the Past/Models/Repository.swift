@@ -13,7 +13,15 @@ import Foundation
  *  The ID is used to link to archive entries
  */
 struct Repository: Identifiable, Codable {
-    var id: String // Archon code
+    var id: String {
+        get {
+            return archon
+        }
+        set {
+            archon = newValue
+        }
+    }
+    var archon: String // Archon code
     var name: String
 }
 
@@ -21,36 +29,54 @@ struct Repository: Identifiable, Codable {
  * A static array of the initial set up for repositories, users can reset to this state
  */
 extension Repository {
-    static let initialRepositories: [Repository] =
-        [
-            Repository(id: "repo1uk", name: "Repository 1"),
-            Repository(id: "repo2uk", name: "Repository 2")
-        ]
+    static let initialRepositories: [Repository] = loadInitialRepositoryList()
+    static let sampleRepositories: [Repository] =
+    [
+        Repository(archon: "GB0021", name: "Archives and Cornish Studies Service"),
+        Repository(archon: "GB0004", name: "Bedfordshire Archives & Record Service")
+    ]
+
+    static func loadInitialRepositoryList() -> [Repository] {
+        guard let path = Bundle.main.path(forResource: "DefaultRepositories", ofType: "json") else { return [] }
+
+        let url = URL(fileURLWithPath: path)
+
+        do {
+            let data = try Foundation.Data(contentsOf: url)
+            let decoder = JSONDecoder()
+            return try decoder.decode([Repository].self, from: data)
+        } catch {
+            print(error)
+            return []
+        }
+    }
 }
+
+
 
 /**
  * Data type to contain editable properties of Repository, to process edits and updates
  */
 extension Repository {
     struct Data {
-        var id: String = ""
+        var archon: String = ""
         var name: String = ""    }
 
     var data: Data {
-        return Data(id: id, name: name)
+        return Data(archon: archon, name: name)
     }
 
     mutating func update(from data: Data) {
         name = data.name
-        id = data.id
+        archon = data.archon
     }
 
     init(fromData data: Repository.Data) {
-        id = data.id
+        archon = data.archon
         name = data.name
     }
 
     var nameCodeString: String {
-        return "\(name) - \(id)"
+        return "\(name) - \(archon)"
     }
 }

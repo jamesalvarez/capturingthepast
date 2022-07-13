@@ -1,0 +1,270 @@
+[
+    {
+        "name": "Repository - GB0000",
+        "archon": "GB0000",
+    },
+    {
+        "name": "Archives and Cornish Studies Service",
+        "archon": "GB0021",
+    },
+    {
+        "name": "Bedfordshire Archives & Record Service",
+        "archon": "GB0004",
+    },
+    {
+        "name": "Berkshire Record Office",
+        "archon": "GB0005",
+    },
+    {
+        "name": "British Library Manuscript Collections",
+        "archon": "GB0058",
+    },
+    {
+        "name": "Brotherton Library - Leeds University",
+        "archon": "GB1471",
+    },
+    {
+        "name": "Buckinghamshire Archives",
+        "archon": "GB0008",
+    },
+    {
+        "name": "Cambridge University Library: Department of Manuscripts and University Archives",
+        "archon": "GB0012",
+    },
+    {
+        "name": "Cambridgeshire Archives",
+        "archon": "GB0010",
+    },
+    {
+        "name": "Ceredigion Archives",
+        "archon": "GB0212",
+    },
+    {
+        "name": "Chester Archives and Local Studies",
+        "archon": "GB0017",
+    },
+    {
+        "name": "Coventry Archives and Local Record Office",
+        "archon": "GB0144",
+    },
+    {
+        "name": "Cumbria Archive Service (Barrow)",
+        "archon": "GB0025",
+    },
+    {
+        "name": "Cumbria Archive Service (Carlisle)",
+        "archon": "GB0023",
+    },
+    {
+        "name": "Cumbria Archive Service (Kendal)",
+        "archon": "GB0024",
+    },
+    {
+        "name": "Cumbria Archive Service (Whitehaven)",
+        "archon": "GB1831",
+    },
+    {
+        "name": "Derby Local Studies and Family History Library",
+        "archon": "GB1160",
+    },
+    {
+        "name": "Derbyshire Local Studies Library",
+        "archon": "GB1944",
+    },
+    {
+        "name": "Derbyshire Record Office",
+        "archon": "GB0026",
+    },
+    {
+        "name": "Devon Archives and Local Studies Service (South WestHeritage Trust)",
+        "archon": "GB0027",
+    },
+    {
+        "name": "Dorset History Centre",
+        "archon": "GB0031",
+    },
+    {
+        "name": "Dr Williams’s Library",
+        "archon": "GB0123",
+    },
+    {
+        "name": "Dudley Archives and Local History Centre",
+        "archon": "GB0145",
+    },
+    {
+        "name": "Durham County Record Office",
+        "archon": "GB0032",
+    },
+    {
+        "name": "East Sussex and Brighton and Hove Record Office",
+        "archon": "GB0179",
+    },
+    {
+        "name": "Essex Record Office",
+        "archon": "GB0037",
+    },
+    {
+        "name": "Gloucestershire Archives",
+        "archon": "GB0040",
+    },
+    {
+        "name": "Hampshire Archives and Local Studies",
+        "archon": "GB0041",
+    },
+    {
+        "name": "Herefordshire Archives and Records Centre",
+        "archon": "GB0044",
+    },
+    {
+        "name": "Hertfordshire Archives and Local Studies",
+        "archon": "GB0046",
+    },
+    {
+        "name": "John Rylands Library",
+        "archon": "GB3191",
+    },
+    {
+        "name": "Kent History and Library Centre",
+        "archon": "GB0051",
+    },
+    {
+        "name": "Lambeth Palace Library",
+        "archon": "GB0109",
+    },
+    {
+        "name": "Lincolnshire Archives",
+        "archon": "GB0057",
+    },
+    {
+        "name": "Liverpool Record Office",
+        "archon": "GB1623",
+    },
+    {
+        "name": "London Metropolitan Archives",
+        "archon": "GB0074",
+    },
+    {
+        "name": "Manchester City Archives",
+        "archon": "GB0127",
+    },
+    {
+        "name": "National Library of Scotland",
+        "archon": "GB0233",
+    },
+    {
+        "name": "Norfolk Record Office",
+        "archon": "GB0153",
+    },
+    {
+        "name": "North Yorkshire County Record Office",
+        "archon": "GB0191",
+    },
+    {
+        "name": "Northamptonshire Archives",
+        "archon": "GB0154",
+    },
+    {
+        "name": "Northumberland Archives",
+        "archon": "GB0155",
+    },
+    {
+        "name": "Northumberland Record Office - Morpeth",
+        "archon": "GB1834",
+    },
+    {
+        "name": "Nottinghamshire Archives",
+        "archon": "GB0157",
+    },
+    {
+        "name": "Oxford University: Bodleian Library - Special Collections",
+        "archon": "GB0161",
+    },
+    {
+        "name": "Oxfordshire History Centre",
+        "archon": "GB0160",
+    },
+    {
+        "name": "Religious Society of Friends Library",
+        "archon": "GB0111",
+    },
+    {
+        "name": "Sheffield City Archives",
+        "archon": "GB1163",
+    },
+    {
+        "name": "Sheffield Local Studies Library",
+        "archon": "GB1783",
+    },
+    {
+        "name": "Shropshire Archives",
+        "archon": "GB0166",
+    },
+    {
+        "name": "Somerset Heritage Centre",
+        "archon": "GB0168",
+    },
+    {
+        "name": "Suffolk Record Office - Bury St Edmunds Branch",
+        "archon": "GB0174",
+    },
+    {
+        "name": "Suffolk Record Office - Ipswich Branch",
+        "archon": "GB0173",
+    },
+    {
+        "name": "Surrey History Centre",
+        "archon": "GB0176",
+    },
+    {
+        "name": "The National Archives - Kew",
+        "archon": "GB0066",
+    },
+    {
+        "name": "Tyne & Wear Archives",
+        "archon": "GB0183",
+    },
+    {
+        "name": "University of Birmingham: Cadbury Research Library",
+        "archon": "GB0150",
+    },
+    {
+        "name": "Ushaw College Library (Durham University Special Collections)",
+        "archon": "GB0033",
+    },
+    {
+        "name": "WellcomeCollection",
+        "archon": "GB0120",
+    },
+    {
+        "name": "West Sussex Record Office",
+        "archon": "GB0182",
+    },
+    {
+        "name": "West Yorkshire Archive Service (Bradford)",
+        "archon": "GB0202",
+    },
+    {
+        "name": "West Yorkshire Archive Service (Calderdale)",
+        "archon": "GB0203",
+    },
+    {
+        "name": "West Yorkshire Archive Service (Kirklees)",
+        "archon": "GB0204",
+    },
+    {
+        "name": "West Yorkshire Archive Service (Leeds)",
+        "archon": "GB0205",
+    },
+    {
+        "name": "Wiltshire and Swindon History Centre",
+        "archon": "GB0190",
+    },
+    {
+        "name": "Wolverhampton City Archives",
+        "archon": "GB0149",
+    },
+    {
+        "name": "York City Archives",
+        "archon": "GBYORK",
+    }
+]
