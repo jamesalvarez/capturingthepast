@@ -47,7 +47,7 @@ struct ArchiveEntriesView: View {
                 }
             }
         }
-        .navigationTitle("Archives")
+        .navigationTitle("Records")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {

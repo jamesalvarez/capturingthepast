@@ -45,7 +45,7 @@ struct RepositoriesView: View {
                 }
             }
         }
-        .navigationTitle("Archives")
+        .navigationTitle("Repositories")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
@@ -53,13 +53,7 @@ struct RepositoriesView: View {
                     editedData = Repository.Data()
                     isEditing = true
                 }) { Image(systemName: "plus") }
-                    .accessibilityLabel("New archive entry")
-            }
-            ToolbarItem(placement: .navigationBarLeading) {
-                NavigationLink(destination: Text("Repositories")) {
-                    Image(systemName: "building.columns")
-
-                }.accessibilityLabel("Repository Settings")
+                    .accessibilityLabel("New repository")
             }
         }
         .fullScreenCover(isPresented: $isEditing, onDismiss: saveAction) {
