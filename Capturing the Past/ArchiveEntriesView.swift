@@ -70,7 +70,7 @@ struct ArchiveEntriesView: View {
         }
         .fullScreenCover(isPresented: $isEditing, onDismiss: saveAction) {
             NavigationView {
-                ArchiveEntryEditView(data: $editedData)
+                ArchiveEntryEditView(repositories: $repositories, data: $editedData)
                     .navigationTitle("Edit Entry")
                     .navigationBarItems(leading: Button("Cancel") {
                         isEditing = false

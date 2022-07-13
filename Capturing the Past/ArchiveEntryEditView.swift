@@ -11,6 +11,7 @@ import SwiftUI
  * View for viewing and editing an archive entry
  */
 struct ArchiveEntryEditView: View {
+    @Binding var repositories: [Repository]
     @Binding var data: ArchiveEntry.Data
     @State var showPicker = false
     @State var image: UIImage?
@@ -22,8 +23,6 @@ struct ArchiveEntryEditView: View {
     @State var selectedImage: Photo?
     @State var showFileAlert = false
     @State var appError: CapturingThePastError.ErrorType?
-
-    var repositories = ["Repository 1", "Repository 2"]
 
     func showPhotoPicker() {
         do {
@@ -191,7 +190,7 @@ struct ArchiveEntryEditView: View {
 struct ArchiveEntryEditView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ArchiveEntryEditView(data: .constant(ArchiveEntry.sampleEntries[0].data))
+            ArchiveEntryEditView(repositories: .constant(Repository.initialRepositories), data: .constant(ArchiveEntry.sampleEntries[0].data))
         }
     }
 }
