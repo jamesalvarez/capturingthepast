@@ -13,7 +13,7 @@ import SwiftUI
  */
 struct ArchiveEntry: Identifiable, Codable {
     let id: UUID
-    var date: Date = Date()
+    var date: Date
     var repositoryID: String
     var catReference: String = ""
     var item: Int = 0
@@ -35,6 +35,7 @@ extension ArchiveEntry {
     static let sampleEntries: [ArchiveEntry] =
         [
             ArchiveEntry(id: UUID(),
+                         date: Date(),
                          repositoryID: Repository.sampleRepositories[0].archon,
                          catReference: "pye345/54/6",
                          item: 1,
@@ -43,6 +44,7 @@ extension ArchiveEntry {
                          note: "Design of operating table",
                          photoRef: ""),
             ArchiveEntry(id: UUID(),
+                         date: Date(),
                          repositoryID: Repository.sampleRepositories[1].archon,
                          catReference: "pye345/54/6",
                          item: 1,
@@ -65,6 +67,7 @@ extension ArchiveEntry {
         var specialCase: String = ""
         var note: String = ""
         var photo: Photo = Photo()
+        var date: Date = Date()
 
         /*
          private String createCatRef() {
@@ -104,12 +107,25 @@ extension ArchiveEntry {
                 return "\(repositoryID)_\(catReference)_\(item)_\(subItem)_\(specialCase)"
             }
         }
+
+        func generatePhotoFileName() -> String {
+
+            let tag = String(referenceSequence.map {
+                $0 == "/" ? "_" : ($0 == " " ? "_" : $0)
+            })
+
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "YYMMdd_HHmmss"
+            let dateString = dateFormatter.string(from: date)
+            return "cpast_\(dateString)_\(tag).jpg"
+
+        }
     }
 
     var data: Data {
         let photo = Photo(fromFilename: photoRef)
 
-        return Data(repositoryID: repositoryID, catReference: catReference, item: item, subItem: subItem, specialCase: specialCase, note: note, photo: photo)
+        return Data(repositoryID: repositoryID, catReference: catReference, item: item, subItem: subItem, specialCase: specialCase, note: note, photo: photo, date: date)
     }
 
     mutating func update(from data: Data) {
@@ -120,6 +136,7 @@ extension ArchiveEntry {
         specialCase = data.specialCase
         note = data.note
         photoRef = data.photo.id
+        date = data.date
     }
 
     init(fromData data: ArchiveEntry.Data) {
@@ -131,5 +148,6 @@ extension ArchiveEntry {
         specialCase = data.specialCase
         note = data.note
         photoRef = data.photo.id
+        date = data.date
     }
 }

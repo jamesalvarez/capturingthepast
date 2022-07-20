@@ -33,8 +33,6 @@ struct ArchiveEntryEditView: View {
             if source == .camera {
                 try ImagePicker.checkPermissions()
             }
-            // Set proposed imagename to the ref sequence
-            imageName = getImageFileName(input: data.referenceSequence)
             showPicker = true
         } catch {
             showCameraAlert = true
@@ -111,17 +109,10 @@ struct ArchiveEntryEditView: View {
         // If an image was picked, then show the image name
         if image != nil {
             showPicker = true
+            // Set proposed imagename to the ref sequence
+            data.date = Date()
+            imageName = data.generatePhotoFileName()
         }
-    }
-
-    func getImageFileName(input: String) -> String {
-        let tag = String(input.map {
-            $0 == "/" ? "_" : ($0 == " " ? "_" : $0)
-        })
-
-        //(TODO: check for file existing)
-        let fileName = "\(tag).jpg"
-        return fileName
     }
 
     func addPhoto() {
@@ -130,6 +121,7 @@ struct ArchiveEntryEditView: View {
                 let photo = Photo(id: imageName, image: image)
                 try photo.save()
                 data.photo = photo
+
             }
         } catch {
             showFileAlert = true
@@ -170,6 +162,15 @@ struct ArchiveEntryEditView: View {
 
                         }) {
                             Text("Ok")
+                        }
+                        Spacer()
+                        Button(action: {
+                            imageName = ""
+                            image = nil
+                            showPicker = false
+
+                        }) {
+                            Text("Cancel")
                         }
                     }
                 }
