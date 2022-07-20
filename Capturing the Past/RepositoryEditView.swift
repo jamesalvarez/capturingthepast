@@ -30,6 +30,7 @@ struct RepositoryEditView: View {
                 dataFields
             }
         }
+        .background(BackgroundImage())
     }
 }
 

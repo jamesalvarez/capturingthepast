@@ -47,6 +47,7 @@ struct RepositoriesView: View {
             }
         }
         .navigationTitle("Repositories")
+        .background(BackgroundImage())
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {

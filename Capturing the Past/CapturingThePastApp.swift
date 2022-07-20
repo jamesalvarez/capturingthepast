@@ -12,6 +12,11 @@ struct CapturingThePastApp: App {
     @StateObject private var archiveEntriesStore = ArchiveEntriesStore()
     @StateObject private var repositoriesStore = RepositoriesStore()
 
+    init() {
+        // To make Lists transparent to see background image
+        UITableView.appearance().backgroundColor = .clear
+    }
+
     var body: some Scene {
         WindowGroup {
             NavigationView {
@@ -28,6 +33,7 @@ struct CapturingThePastApp: App {
                     }
                 }
             }
+            .preferredColorScheme(.dark)
             .onAppear {
                 ArchiveEntriesStore.load { result in
                     switch result {

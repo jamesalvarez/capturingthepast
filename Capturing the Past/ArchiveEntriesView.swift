@@ -48,7 +48,7 @@ struct ArchiveEntriesView: View {
                 }
             }
         }
-
+        .background(BackgroundImage())
         .navigationTitle("Records")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {

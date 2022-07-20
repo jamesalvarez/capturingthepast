@@ -27,7 +27,6 @@ struct ArchiveEntryEditView: View {
     @State var showFileAlert = false
     @State var appError: CapturingThePastError.ErrorType?
 
-
     func showPhotoPicker() {
         do {
             if source == .camera {
@@ -63,19 +62,17 @@ struct ArchiveEntryEditView: View {
     }
 
     var imageScroll: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 10) {
-                VStack {
-                    Image(uiImage: data.photo.image)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 200, height: 200)
-                        .clipShape(RoundedRectangle(cornerRadius: 15))
-                        .shadow(color: .black.opacity(0.6), radius: 2, x: 2, y: 2)
-                    Text(data.photo.id)
-                }
-            }
+
+        VStack {
+            Image(uiImage: data.photo.image)
+                .resizable()
+                .scaledToFill()
+                .frame(width: 200, height: 200)
+                .clipShape(RoundedRectangle(cornerRadius: 15))
+                .shadow(color: .black.opacity(0.6), radius: 2, x: 2, y: 2)
+            Text(data.photo.id)
         }.padding(.horizontal)
+
     }
 
     var dataFields: some View {
@@ -138,6 +135,7 @@ struct ArchiveEntryEditView: View {
             Spacer()
             imageScroll
         }
+        .background(BackgroundImage())
         .sheet(isPresented: $showPicker, onDismiss: didDismissImagePicker) {
             if image == nil {
                 ImagePicker(sourceType: source == .library ? .photoLibrary : .camera, selectedImage: $image)
