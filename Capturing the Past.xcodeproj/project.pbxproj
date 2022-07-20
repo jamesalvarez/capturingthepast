@@ -12,6 +12,7 @@
 		1A0ED5CD287EB6F8007F0933 /* RepositoryRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0ED5CC287EB6F8007F0933 /* RepositoryRowView.swift */; };
 		1A0ED5CF287EB706007F0933 /* RepositoryEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0ED5CE287EB706007F0933 /* RepositoryEditView.swift */; };
 		1A0ED5D2287EEA3F007F0933 /* DefaultRepositories.json in Resources */ = {isa = PBXBuildFile; fileRef = 1A0ED5D1287EEA3F007F0933 /* DefaultRepositories.json */; };
+		1A31F75D28882F3200052839 /* CSV in Frameworks */ = {isa = PBXBuildFile; productRef = 1A31F75C28882F3200052839 /* CSV */; };
 		1A44ECB42858CD1F006624B0 /* CapturingThePastApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A44ECB32858CD1F006624B0 /* CapturingThePastApp.swift */; };
 		1A44ECB62858CD1F006624B0 /* ArchiveEntryEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A44ECB52858CD1F006624B0 /* ArchiveEntryEditView.swift */; };
 		1A44ECB82858CD23006624B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A44ECB72858CD23006624B0 /* Assets.xcassets */; };
@@ -56,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A31F75D28882F3200052839 /* CSV in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,6 +138,9 @@
 			dependencies = (
 			);
 			name = "Capturing the Past";
+			packageProductDependencies = (
+				1A31F75C28882F3200052839 /* CSV */,
+			);
 			productName = "Capturing the Past";
 			productReference = 1A44ECB02858CD1F006624B0 /* Capturing the Past.app */;
 			productType = "com.apple.product-type.application";
@@ -164,6 +169,9 @@
 				Base,
 			);
 			mainGroup = 1A44ECA72858CD1F006624B0;
+			packageReferences = (
+				1A31F75B28882F3200052839 /* XCRemoteSwiftPackageReference "CSV.swift" */,
+			);
 			productRefGroup = 1A44ECB12858CD1F006624B0 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -407,6 +415,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1A31F75B28882F3200052839 /* XCRemoteSwiftPackageReference "CSV.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/yaslab/CSV.swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1A31F75C28882F3200052839 /* CSV */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1A31F75B28882F3200052839 /* XCRemoteSwiftPackageReference "CSV.swift" */;
+			productName = CSV;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1A44ECA82858CD1F006624B0 /* Project object */;
 }
