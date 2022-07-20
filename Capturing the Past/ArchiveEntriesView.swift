@@ -84,7 +84,8 @@ struct ArchiveEntriesView: View {
                         Button("Next") {
                             updateFromEditedData()
                             editedEntry = nil
-                            editedData = ArchiveEntry.Data()
+                            editedData = ArchiveEntry(fromData: editedData).data
+                            editedData.photo = Photo()
                         }
                     })
             }
