@@ -59,7 +59,10 @@ class ArchiveEntriesStore: ObservableObject {
                     }
                 } catch {
                     let backupURL = try backupFileURL()
-                    FileManager.default.secureCopyItem(at: fileURL, to: backupURL)
+                    try? FileManager.default.secureCopyItem(at: fileURL, to: backupURL)
+                    DispatchQueue.main.async {
+                        completion(.success(ArchiveEntry.sampleEntries)) //TODO: Remove or place in debug only
+                    }
                 }
 
             } catch {
@@ -104,17 +107,11 @@ class ArchiveEntriesStore: ObservableObject {
 
 extension FileManager {
 
-    open func secureCopyItem(at srcURL: URL, to dstURL: URL) -> Bool {
-        do {
-            if FileManager.default.fileExists(atPath: dstURL.path) {
-                try FileManager.default.removeItem(at: dstURL)
-            }
-            try FileManager.default.copyItem(at: srcURL, to: dstURL)
-        } catch (let error) {
-            print("Cannot copy item at \(srcURL) to \(dstURL): \(error)")
-            return false
-        }
-        return true
-    }
+    open func secureCopyItem(at srcURL: URL, to dstURL: URL) throws {
 
+        if FileManager.default.fileExists(atPath: dstURL.path) {
+            try FileManager.default.removeItem(at: dstURL)
+        }
+        try FileManager.default.copyItem(at: srcURL, to: dstURL)
+    }
 }
