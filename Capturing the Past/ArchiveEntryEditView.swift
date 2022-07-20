@@ -14,11 +14,14 @@ struct ArchiveEntryEditView: View {
     @Binding var repositories: [Repository]
     @Binding var data: ArchiveEntry.Data
     @State var showPicker = false
-    @State var image: UIImage?
+
     @State var source: ImagePicker.Source = .library
 
     @State var showCameraAlert = false
+
     @State var imageName: String = ""
+    @State var image: UIImage?
+
     @State var isEditing = false
     @State var selectedImage: Photo?
     @State var showFileAlert = false
@@ -30,8 +33,8 @@ struct ArchiveEntryEditView: View {
             if source == .camera {
                 try ImagePicker.checkPermissions()
             }
-            // Set imagename to the ref sequence (TODO: check for file existing)
-            imageName = sanitizeFilename(input: data.referenceSequence)
+            // Set proposed imagename to the ref sequence
+            imageName = getImageFileName(input: data.referenceSequence)
             showPicker = true
         } catch {
             showCameraAlert = true
@@ -68,7 +71,7 @@ struct ArchiveEntryEditView: View {
                     Image(uiImage: data.photo.image)
                         .resizable()
                         .scaledToFill()
-                        .frame(width: 100, height: 100)
+                        .frame(width: 200, height: 200)
                         .clipShape(RoundedRectangle(cornerRadius: 15))
                         .shadow(color: .black.opacity(0.6), radius: 2, x: 2, y: 2)
                     Text(data.photo.id)
@@ -85,9 +88,11 @@ struct ArchiveEntryEditView: View {
                     Text(repo.nameCodeString)
                 }
             }
+            Spacer()
 
             TextField("Catalogue reference", text: $data.catReference)
             Spacer()
+
             Stepper(value: $data.item, in: 0...999) {
                 Text("Item: \(data.item)")
             }
@@ -95,11 +100,9 @@ struct ArchiveEntryEditView: View {
                 Text("Sub Item: \(data.subItem)")
             }
             Spacer()
-            /*
-             Stepper(value: $archiveEntry.specialCase, in: 0...999) {
-             Text("Special Case: \($archiveEntry.specialCase)")
-             }
-             */
+
+            TextField("Special Case:", text: $data.specialCase)
+            Spacer()
             TextField("Note", text: $data.note)
         }
     }
@@ -111,29 +114,23 @@ struct ArchiveEntryEditView: View {
         }
     }
 
-    func sanitizeFilename(input: String) -> String {
+    func getImageFileName(input: String) -> String {
         let tag = String(input.map {
             $0 == "/" ? "_" : ($0 == " " ? "_" : $0)
         })
 
-        var fileName = tag
-        var appendNumber = 1
-        while FileManager().imageWithFilenameExists(fileName) {
-            appendNumber += 1
-            fileName = "\(tag)_\(appendNumber)"
-        }
-
+        //(TODO: check for file existing)
+        let fileName = "\(tag).jpg"
         return fileName
     }
 
     func addPhoto() {
-        // Santize imageName for file
-        imageName = sanitizeFilename(input: imageName)
-
-        let photo = Photo(id: imageName)
         do {
-            try FileManager().saveImage("\(photo.id)", image: image!)
-            data.photo = Photo(id: imageName)
+            if let image = image {
+                let photo = Photo(id: imageName, image: image)
+                try photo.save()
+                data.photo = photo
+            }
         } catch {
             showFileAlert = true
             appError = CapturingThePastError.ErrorType(error: error as! CapturingThePastError)
@@ -163,16 +160,14 @@ struct ArchiveEntryEditView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 15))
                         .shadow(color: .black.opacity(0.6), radius: 2, x: 2, y: 2)
                     Divider()
-                    Text("Filename")
-                    TextField("Filename", text: $imageName)
+                    Text("Filename: \(imageName)")
                     Divider()
                     HStack {
                         Button(action: {
-                            if imageName == sanitizeFilename(input: imageName) {
-                                addPhoto()
-                                image = nil
-                                showPicker = false
-                            }
+                            addPhoto()
+                            image = nil
+                            showPicker = false
+
                         }) {
                             Text("Ok")
                         }

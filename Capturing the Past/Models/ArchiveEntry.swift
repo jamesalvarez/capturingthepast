@@ -64,7 +64,7 @@ extension ArchiveEntry {
         var subItem: Int = 0
         var specialCase: String = ""
         var note: String = ""
-        var photo: Photo = Photo(id: "")
+        var photo: Photo = Photo()
 
         /*
          private String createCatRef() {
@@ -101,13 +101,13 @@ extension ArchiveEntry {
          */
         var referenceSequence: String {
             get {
-                return "\(catReference)_\(item)_\(subItem)_\(specialCase)"
+                return "\(repositoryID)_\(catReference)_\(item)_\(subItem)_\(specialCase)"
             }
         }
     }
 
     var data: Data {
-        let photo = Photo(id: photoRef)
+        let photo = Photo(fromFilename: photoRef)
 
         return Data(repositoryID: repositoryID, catReference: catReference, item: item, subItem: subItem, specialCase: specialCase, note: note, photo: photo)
     }
