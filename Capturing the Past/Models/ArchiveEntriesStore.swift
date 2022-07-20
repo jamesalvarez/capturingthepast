@@ -23,6 +23,14 @@ class ArchiveEntriesStore: ObservableObject {
             .appendingPathComponent("archive.data")
     }
 
+    private static func backupFileURL() throws -> URL {
+        try FileManager.default.url(for: .documentDirectory,
+                                    in: .userDomainMask,
+                                    appropriateFor: nil,
+                                    create: false)
+        .appendingPathComponent("archive.data.backup")
+    }
+
     private static func csvURL() throws -> URL {
         try FileManager.default.url(for: .documentDirectory,
                                     in: .userDomainMask,
@@ -43,10 +51,15 @@ class ArchiveEntriesStore: ObservableObject {
                     return
                 }
 
-                let archiveEntries = try JSONDecoder().decode([ArchiveEntry].self, from: file.availableData)
+                do {
+                    let archiveEntries = try JSONDecoder().decode([ArchiveEntry].self, from: file.availableData)
 
-                DispatchQueue.main.async {
-                    completion(.success(archiveEntries))
+                    DispatchQueue.main.async {
+                        completion(.success(archiveEntries))
+                    }
+                } catch {
+                    let backupURL = try backupFileURL()
+                    FileManager.default.secureCopyItem(at: fileURL, to: backupURL)
                 }
 
             } catch {
@@ -70,7 +83,7 @@ class ArchiveEntriesStore: ObservableObject {
 
                 try csv.write(row: ["Date", "Cat Ref", "Filename", "Note"])
                 for archiveEntry in archiveEntries {
-                    try csv.write(row: ["", archiveEntry.catReference, archiveEntry.photoRefs[0], archiveEntry.note])
+                    try csv.write(row: ["", archiveEntry.catReference, archiveEntry.photoRef, archiveEntry.note])
                 }
 
                 csv.stream.close()
@@ -87,4 +100,21 @@ class ArchiveEntriesStore: ObservableObject {
             }
         }
     }
+}
+
+extension FileManager {
+
+    open func secureCopyItem(at srcURL: URL, to dstURL: URL) -> Bool {
+        do {
+            if FileManager.default.fileExists(atPath: dstURL.path) {
+                try FileManager.default.removeItem(at: dstURL)
+            }
+            try FileManager.default.copyItem(at: srcURL, to: dstURL)
+        } catch (let error) {
+            print("Cannot copy item at \(srcURL) to \(dstURL): \(error)")
+            return false
+        }
+        return true
+    }
+
 }

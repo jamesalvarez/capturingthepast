@@ -64,16 +64,14 @@ struct ArchiveEntryEditView: View {
     var imageScroll: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 10) {
-                ForEach(data.photos) { photo in
-                    VStack {
-                        Image(uiImage: photo.image)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 100, height: 100)
-                            .clipShape(RoundedRectangle(cornerRadius: 15))
-                            .shadow(color: .black.opacity(0.6), radius: 2, x: 2, y: 2)
-                        Text(photo.id)
-                    }
+                VStack {
+                    Image(uiImage: data.photo.image)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 100, height: 100)
+                        .clipShape(RoundedRectangle(cornerRadius: 15))
+                        .shadow(color: .black.opacity(0.6), radius: 2, x: 2, y: 2)
+                    Text(data.photo.id)
                 }
             }
         }.padding(.horizontal)
@@ -135,7 +133,7 @@ struct ArchiveEntryEditView: View {
         let photo = Photo(id: imageName)
         do {
             try FileManager().saveImage("\(photo.id)", image: image!)
-            data.photos.append(Photo(id: imageName))
+            data.photo = Photo(id: imageName)
         } catch {
             showFileAlert = true
             appError = CapturingThePastError.ErrorType(error: error as! CapturingThePastError)

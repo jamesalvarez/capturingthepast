@@ -32,7 +32,8 @@ struct CapturingThePastApp: App {
                 ArchiveEntriesStore.load { result in
                     switch result {
                     case .failure(let error):
-                        fatalError(error.localizedDescription)
+                        print(error.localizedDescription)
+                        archiveEntriesStore.archiveEntries = ArchiveEntry.sampleEntries
                     case .success(let archiveEntries):
                         archiveEntriesStore.archiveEntries = archiveEntries
                     }

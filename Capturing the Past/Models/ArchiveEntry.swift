@@ -13,13 +13,14 @@ import SwiftUI
  */
 struct ArchiveEntry: Identifiable, Codable {
     let id: UUID
+    var date: Date = Date()
     var repositoryID: String
     var catReference: String = ""
     var item: Int = 0
     var subItem: Int = 0
     var specialCase: String = ""
     var note: String = ""
-    var photoRefs: [String] = []
+    var photoRef: String = ""
     var referenceSequence: String {
         get {
             return "\(repositoryID)_\(catReference)_\(item)_\(subItem)_\(specialCase)"
@@ -40,7 +41,7 @@ extension ArchiveEntry {
                          subItem: 2,
                          specialCase: "",
                          note: "Design of operating table",
-                         photoRefs: []),
+                         photoRef: ""),
             ArchiveEntry(id: UUID(),
                          repositoryID: Repository.sampleRepositories[1].archon,
                          catReference: "pye345/54/6",
@@ -48,7 +49,7 @@ extension ArchiveEntry {
                          subItem: 3,
                          specialCase: "",
                          note: "Something else",
-                         photoRefs: [])
+                         photoRef: "")
         ]
 }
 
@@ -63,7 +64,7 @@ extension ArchiveEntry {
         var subItem: Int = 0
         var specialCase: String = ""
         var note: String = ""
-        var photos: [Photo] = []
+        var photo: Photo = Photo(id: "")
 
         /*
          private String createCatRef() {
@@ -106,9 +107,9 @@ extension ArchiveEntry {
     }
 
     var data: Data {
-        let photos = photoRefs.map { Photo(id: $0) }
+        let photo = Photo(id: photoRef)
 
-        return Data(repositoryID: repositoryID, catReference: catReference, item: item, subItem: subItem, specialCase: specialCase, note: note, photos: photos)
+        return Data(repositoryID: repositoryID, catReference: catReference, item: item, subItem: subItem, specialCase: specialCase, note: note, photo: photo)
     }
 
     mutating func update(from data: Data) {
@@ -118,7 +119,7 @@ extension ArchiveEntry {
         subItem = data.subItem
         specialCase = data.specialCase
         note = data.note
-        photoRefs = data.photos.map { $0.id }
+        photoRef = data.photo.id
     }
 
     init(fromData data: ArchiveEntry.Data) {
@@ -129,6 +130,6 @@ extension ArchiveEntry {
         subItem = data.subItem
         specialCase = data.specialCase
         note = data.note
-        photoRefs = data.photos.map { $0.id }
+        photoRef = data.photo.id
     }
 }
