@@ -35,6 +35,7 @@
 		1A0ED5CC287EB6F8007F0933 /* RepositoryRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryRowView.swift; sourceTree = "<group>"; };
 		1A0ED5CE287EB706007F0933 /* RepositoryEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryEditView.swift; sourceTree = "<group>"; };
 		1A0ED5D1287EEA3F007F0933 /* DefaultRepositories.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = DefaultRepositories.json; path = "Capturing the Past/DefaultRepositories.json"; sourceTree = "<group>"; };
+		1A31F75E288835D200052839 /* Capturing-the-Past-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Capturing-the-Past-Info.plist"; sourceTree = SOURCE_ROOT; };
 		1A44ECB02858CD1F006624B0 /* Capturing the Past.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Capturing the Past.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A44ECB32858CD1F006624B0 /* CapturingThePastApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapturingThePastApp.swift; sourceTree = "<group>"; };
 		1A44ECB52858CD1F006624B0 /* ArchiveEntryEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveEntryEditView.swift; sourceTree = "<group>"; };
@@ -84,6 +85,7 @@
 		1A44ECB22858CD1F006624B0 /* Capturing the Past */ = {
 			isa = PBXGroup;
 			children = (
+				1A31F75E288835D200052839 /* Capturing-the-Past-Info.plist */,
 				1A44ECB72858CD23006624B0 /* Assets.xcassets */,
 				1A44ECB92858CD23006624B0 /* Preview Content */,
 				1A44ECC12862F890006624B0 /* Models */,
@@ -346,6 +348,8 @@
 				DEVELOPMENT_TEAM = 7M9C479L4K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Capturing-the-Past-Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This is required in order to take photos in the app for the archive";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -375,6 +379,8 @@
 				DEVELOPMENT_TEAM = 7M9C479L4K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Capturing-the-Past-Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This is required in order to take photos in the app for the archive";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
