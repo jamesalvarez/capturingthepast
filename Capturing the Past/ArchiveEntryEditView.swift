@@ -62,12 +62,12 @@ struct ArchiveEntryEditView: View {
     }
 
     var pickerButtons: some View {
-        VStack() {
+        HStack() {
             Button {
                 source = .camera
                 showPhotoPicker()
             } label: {
-                ButtonLabel(symbolName: "camera", label: "Camera")
+                ButtonLabel(symbolName: "camera", label: "Camera").frame(width: 150)
             }
             .alert("Error", isPresented: $showCameraAlert, presenting: appError, actions: { cameraError in
                 cameraError.button
@@ -78,10 +78,10 @@ struct ArchiveEntryEditView: View {
                 source = .library
                 showPhotoPicker()
             } label: {
-                ButtonLabel(symbolName: "photo", label: "Photos")
+                ButtonLabel(symbolName: "photo", label: "Photos").frame(width: 150)
             }
 
-        }.frame(width: 150)
+        }
     }
 
     var body: some View {
@@ -101,20 +101,22 @@ struct ArchiveEntryEditView: View {
                         LabelledTextView("Special Case:", text: $data.specialCase)
                         LabelledTextView("Note", text: $data.note)
                         LabelledText(title: "Ref", text: data.referenceSequence).foregroundColor(Color.accentColor)
-                    }
-                    HStack {
-                        Image(uiImage: data.photo.image)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 100, height: 100)
-                            .clipShape(RoundedRectangle(cornerRadius: 15))
-                            .shadow(color: .black.opacity(0.6), radius: 2, x: 2, y: 2)
-                        pickerButtons
-                    }
-                    LabelledText(title: "Photo", text: data.photo.id).foregroundColor(Color.accentColor)
-                }
-                .frame(height: 750)
+                        HStack {
+                            Image(uiImage: data.photo.image)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 30, height: 30)
+                                .clipShape(RoundedRectangle(cornerRadius: 5))
+                                .shadow(color: .black.opacity(0.6), radius: 2, x: 2, y: 2)
+                            LabelledText(title: "Photo", text: data.photo.id).foregroundColor(Color.accentColor)
+                        }
 
+                    }
+
+
+                }
+                .frame(height: 490)
+                pickerButtons
             }
         }
         .background(BackgroundImage())
