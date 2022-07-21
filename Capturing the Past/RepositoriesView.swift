@@ -47,6 +47,7 @@ struct RepositoriesView: View {
             }
         }
         .navigationTitle("Repositories")
+        .navigationBarTitleDisplayMode(.inline)
         .background(BackgroundImage())
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -61,7 +62,8 @@ struct RepositoriesView: View {
         .fullScreenCover(isPresented: $isEditing, onDismiss: saveAction) {
             NavigationView {
                 RepositoryEditView(data: $editedData)
-                    .navigationTitle("Edit Entry")
+                    .navigationTitle("Edit Repository")
+                    .navigationBarTitleDisplayMode(.inline)
                     .navigationBarItems(leading: Button("Cancel") {
                         isEditing = false
                         editedEntry = nil

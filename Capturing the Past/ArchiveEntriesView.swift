@@ -50,6 +50,7 @@ struct ArchiveEntriesView: View {
         }
         .background(BackgroundImage())
         .navigationTitle("Records")
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
@@ -72,6 +73,7 @@ struct ArchiveEntriesView: View {
             NavigationView {
                 ArchiveEntryEditView(repositories: $repositories, data: $editedData)
                     .navigationTitle("Edit Entry")
+                    .navigationBarTitleDisplayMode(.inline)
                     .navigationBarItems(leading: Button("Cancel") {
                         isEditing = false
                         editedEntry = nil
@@ -95,15 +97,6 @@ struct ArchiveEntriesView: View {
         }
     }
 }
-
-/*
- .navigationTitle("Edit Archive Entry")
- .navigationBarItems(leading: Button("Cancel") {
-
- }, trailing: Button("Save") {
- archiveEntry.update(from: data)
- })
- */
 
 struct ArchiveEntriesView_Previews: PreviewProvider {
     static var previews: some View {
