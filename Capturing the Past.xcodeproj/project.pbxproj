@@ -14,6 +14,9 @@
 		1A0ED5D2287EEA3F007F0933 /* DefaultRepositories.json in Resources */ = {isa = PBXBuildFile; fileRef = 1A0ED5D1287EEA3F007F0933 /* DefaultRepositories.json */; };
 		1A31F75D28882F3200052839 /* CSV in Frameworks */ = {isa = PBXBuildFile; productRef = 1A31F75C28882F3200052839 /* CSV */; };
 		1A31F76028889BF100052839 /* BackgroundImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A31F75F28889BF100052839 /* BackgroundImage.swift */; };
+		1A31F7622888A0AE00052839 /* LabelledTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A31F7612888A0AE00052839 /* LabelledTextView.swift */; };
+		1A31F76428893C1500052839 /* LabelledStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A31F76328893C1500052839 /* LabelledStepper.swift */; };
+		1A31F76628893D7800052839 /* LabelledText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A31F76528893D7800052839 /* LabelledText.swift */; };
 		1A44ECB42858CD1F006624B0 /* CapturingThePastApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A44ECB32858CD1F006624B0 /* CapturingThePastApp.swift */; };
 		1A44ECB62858CD1F006624B0 /* ArchiveEntryEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A44ECB52858CD1F006624B0 /* ArchiveEntryEditView.swift */; };
 		1A44ECB82858CD23006624B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A44ECB72858CD23006624B0 /* Assets.xcassets */; };
@@ -38,6 +41,9 @@
 		1A0ED5D1287EEA3F007F0933 /* DefaultRepositories.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = DefaultRepositories.json; path = "Capturing the Past/DefaultRepositories.json"; sourceTree = "<group>"; };
 		1A31F75E288835D200052839 /* Capturing-the-Past-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Capturing-the-Past-Info.plist"; sourceTree = SOURCE_ROOT; };
 		1A31F75F28889BF100052839 /* BackgroundImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundImage.swift; sourceTree = "<group>"; };
+		1A31F7612888A0AE00052839 /* LabelledTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelledTextView.swift; sourceTree = "<group>"; };
+		1A31F76328893C1500052839 /* LabelledStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelledStepper.swift; sourceTree = "<group>"; };
+		1A31F76528893D7800052839 /* LabelledText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelledText.swift; sourceTree = "<group>"; };
 		1A44ECB02858CD1F006624B0 /* Capturing the Past.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Capturing the Past.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A44ECB32858CD1F006624B0 /* CapturingThePastApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapturingThePastApp.swift; sourceTree = "<group>"; };
 		1A44ECB52858CD1F006624B0 /* ArchiveEntryEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveEntryEditView.swift; sourceTree = "<group>"; };
@@ -96,6 +102,9 @@
 				1A44ECC628630157006624B0 /* ArchiveEntriesView.swift */,
 				1A44ECC828630431006624B0 /* ArchiveEntryRowView.swift */,
 				1A44ECB52858CD1F006624B0 /* ArchiveEntryEditView.swift */,
+				1A31F7612888A0AE00052839 /* LabelledTextView.swift */,
+				1A31F76528893D7800052839 /* LabelledText.swift */,
+				1A31F76328893C1500052839 /* LabelledStepper.swift */,
 				1A0ED5CA287EB6E6007F0933 /* RepositoriesView.swift */,
 				1A0ED5CC287EB6F8007F0933 /* RepositoryRowView.swift */,
 				1A0ED5CE287EB706007F0933 /* RepositoryEditView.swift */,
@@ -211,6 +220,7 @@
 				1A0ED5CF287EB706007F0933 /* RepositoryEditView.swift in Sources */,
 				1A6291F72869B45F006B51CB /* CapturingThePastError.swift in Sources */,
 				1A44ECC52862F8FF006624B0 /* ArchiveEntry.swift in Sources */,
+				1A31F76628893D7800052839 /* LabelledText.swift in Sources */,
 				1A6291F52869B38D006B51CB /* Photo.swift in Sources */,
 				1A44ECB42858CD1F006624B0 /* CapturingThePastApp.swift in Sources */,
 				1A0ED5C9287EB479007F0933 /* RepositoriesStore.swift in Sources */,
@@ -219,7 +229,9 @@
 				1A44ECC32862F8BC006624B0 /* Repository.swift in Sources */,
 				1A44ECC728630157006624B0 /* ArchiveEntriesView.swift in Sources */,
 				1A31F76028889BF100052839 /* BackgroundImage.swift in Sources */,
+				1A31F76428893C1500052839 /* LabelledStepper.swift in Sources */,
 				1A6291F32869AA91006B51CB /* FileManager+Extension.swift in Sources */,
+				1A31F7622888A0AE00052839 /* LabelledTextView.swift in Sources */,
 				1A44ECCB28631885006624B0 /* ArchiveEntriesStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
