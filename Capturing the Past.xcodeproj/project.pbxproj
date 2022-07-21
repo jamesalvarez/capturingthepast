@@ -31,6 +31,7 @@
 		1A6291F52869B38D006B51CB /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6291F42869B38D006B51CB /* Photo.swift */; };
 		1A6291F72869B45F006B51CB /* CapturingThePastError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6291F62869B45F006B51CB /* CapturingThePastError.swift */; };
 		1A6291F92869BD4A006B51CB /* ButtonLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6291F82869BD4A006B51CB /* ButtonLabel.swift */; };
+		1A96D0332889B1EB005C638A /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A96D0322889B1EB005C638A /* Toast.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +60,7 @@
 		1A6291F42869B38D006B51CB /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		1A6291F62869B45F006B51CB /* CapturingThePastError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapturingThePastError.swift; sourceTree = "<group>"; };
 		1A6291F82869BD4A006B51CB /* ButtonLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonLabel.swift; sourceTree = "<group>"; };
+		1A96D0322889B1EB005C638A /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 				1A31F75F28889BF100052839 /* BackgroundImage.swift */,
 				1A6291EE2869AA8A006B51CB /* ImagePicker.swift */,
 				1A6291F22869AA91006B51CB /* FileManager+Extension.swift */,
+				1A96D0322889B1EB005C638A /* Toast.swift */,
 			);
 			path = "Capturing the Past";
 			sourceTree = "<group>";
@@ -226,6 +229,7 @@
 				1A0ED5C9287EB479007F0933 /* RepositoriesStore.swift in Sources */,
 				1A6291F92869BD4A006B51CB /* ButtonLabel.swift in Sources */,
 				1A6291F02869AA8A006B51CB /* ImagePicker.swift in Sources */,
+				1A96D0332889B1EB005C638A /* Toast.swift in Sources */,
 				1A44ECC32862F8BC006624B0 /* Repository.swift in Sources */,
 				1A44ECC728630157006624B0 /* ArchiveEntriesView.swift in Sources */,
 				1A31F76028889BF100052839 /* BackgroundImage.swift in Sources */,

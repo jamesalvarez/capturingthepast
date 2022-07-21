@@ -20,7 +20,9 @@ struct CapturingThePastApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                ArchiveEntriesView(archiveEntries: $archiveEntriesStore.archiveEntries, repositories: $repositoriesStore.repositories) {
+                ArchiveEntryEditView(repositories: $repositoriesStore.repositories,
+                                     archiveEntries: $archiveEntriesStore.archiveEntries) {
+                    // Save action
                     ArchiveEntriesStore.save(archiveEntries: archiveEntriesStore.archiveEntries) { result in
                         if case .failure(let error) = result {
                             fatalError(error.localizedDescription)
@@ -32,7 +34,9 @@ struct CapturingThePastApp: App {
                         }
                     }
                 }
+                
             }
+
             .preferredColorScheme(.dark)
             .onAppear {
                 ArchiveEntriesStore.load { result in

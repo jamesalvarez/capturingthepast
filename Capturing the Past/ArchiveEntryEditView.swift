@@ -12,12 +12,17 @@ import SwiftUI
  */
 struct ArchiveEntryEditView: View {
     @Binding var repositories: [Repository]
-    @Binding var data: ArchiveEntry.Data
-    @State var showPicker = false
+    @Binding var archiveEntries: [ArchiveEntry]
+    let saveAction: () -> Void
 
+    enum EditState {
+        case DataEntry, PhotoPicking, Confirmation
+    }
+
+    @State var editState: EditState = .DataEntry
     @State var source: ImagePicker.Source = .library
-
     @State var showCameraAlert = false
+    @State var data: ArchiveEntry.Data = .init()
 
     @State var imageName: String = ""
     @State var image: UIImage?
@@ -25,26 +30,26 @@ struct ArchiveEntryEditView: View {
     @State var isEditing = false
     @State var selectedImage: Photo?
     @State var showFileAlert = false
+    @State var showImagePicker = false
+    @State var showConfirmationDialog = false
     @State var appError: CapturingThePastError.ErrorType?
+
+    public func sheetVisible() -> Binding<Bool> {
+        return Binding<Bool>(get: { self.editState != EditState.DataEntry },
+                             set: { _ in })
+    }
 
     func showPhotoPicker() {
         do {
             if source == .camera {
                 try ImagePicker.checkPermissions()
             }
-            showPicker = true
+            editState = EditState.PhotoPicking
+            showImagePicker = true
         } catch {
             showCameraAlert = true
             appError = CapturingThePastError.ErrorType(error: error as! CapturingThePastError)
-        }
-    }
-
-    func didDismissImagePicker() {
-        // If an image was picked, then show the image name
-        if image != nil {
-            showPicker = true
-            data.date = Date()
-            imageName = data.generatePhotoFileName()
+            editState = EditState.DataEntry
         }
     }
 
@@ -55,10 +60,22 @@ struct ArchiveEntryEditView: View {
                 try photo.save()
                 data.photo = photo
             }
+
+            // Add data to repositories list and save
+            archiveEntries.append(ArchiveEntry.init(fromData: data))
+            saveAction();
         } catch {
             showFileAlert = true
             appError = CapturingThePastError.ErrorType(error: error as! CapturingThePastError)
         }
+    }
+
+    func resetUIToDataEntry() {
+        showImagePicker = false
+        showConfirmationDialog = false
+        imageName = ""
+        image = nil
+        editState = EditState.DataEntry
     }
 
     var pickerButtons: some View {
@@ -83,6 +100,15 @@ struct ArchiveEntryEditView: View {
         }
     }
 
+    var repositoriesEditButton: some View {
+        NavigationLink(destination: RepositoriesView(repositories: $repositories) {
+            saveAction() // Triggers root save action when saving repositories
+        }) {
+            Image(systemName: "building.columns")
+
+        }.accessibilityLabel("Repository Settings")
+    }
+
     var body: some View {
         ScrollView(.vertical) {
             VStack {
@@ -93,6 +119,7 @@ struct ArchiveEntryEditView: View {
                             Text(repo.nameCodeString)
                         }
                     }
+
                     VStack {
                         LabelledTextView("Catalogue reference", text: $data.catReference)
                         LabelledStepper("Item", value: $data.item)
@@ -100,74 +127,54 @@ struct ArchiveEntryEditView: View {
                         LabelledTextView("Special Case:", text: $data.specialCase)
                         LabelledTextView("Note", text: $data.note)
                         LabelledText(title: "Ref", text: data.referenceSequence).foregroundColor(Color.accentColor)
-                        VStack(alignment: .leading) {
-                            Text("Photo")
-                                .font(.caption)
-                                .foregroundColor(Color(.placeholderText))
-                                .offset(y: 0)
-                            HStack() {
-
-                                if (data.photo.id != "") {
-                                    Button(action: {
-                                        image = data.photo.image
-                                        imageName = data.photo.id
-                                        showPicker = true
-                                    }) {
-                                        Image(uiImage: data.photo.image)
-                                            .resizable()
-                                            .scaledToFill()
-                                            .frame(width: 30, height: 30)
-                                            .clipShape(RoundedRectangle(cornerRadius: 5))
-                                            .shadow(color: .black.opacity(0.6), radius: 2, x: 2, y: 2)
-                                    }
-                                    Text(data.photo.id).foregroundColor(Color.accentColor).minimumScaleFactor(0.01)
-                                } else {
-                                    Text("Add a photo using buttons below").foregroundColor(Color(.placeholderText))
-                                }
-
-                                Spacer()
-                            }
-                        }
                     }
                 }
                 .frame(height: 520)
                 pickerButtons
             }
         }
+        .navigationTitle("Capturing the Past")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                repositoriesEditButton
+            }
+        }
         .background(BackgroundImage())
-        .sheet(isPresented: $showPicker, onDismiss: didDismissImagePicker) {
-            if image == nil {
-                ImagePicker(sourceType: source == .library ? .photoLibrary : .camera, selectedImage: $image)
-                    .ignoresSafeArea()
+        .sheet(isPresented: $showImagePicker, onDismiss: {
+            if image != nil {
+                data.date = Date()
+                imageName = data.generatePhotoFileName()
+                editState = EditState.Confirmation
+                showConfirmationDialog = true
             } else {
-                Form {
-                    VStack {
-                        Text("Chosen image")
-                        Image(uiImage: image!)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 200, height: 200)
-                            .clipShape(RoundedRectangle(cornerRadius: 15))
-                            .shadow(color: .black.opacity(0.6), radius: 2, x: 2, y: 2)
-                        Text("Filename: \(imageName)").multilineTextAlignment(.leading).lineLimit(nil).minimumScaleFactor(0.01)
-                        Divider()
-                        HStack(spacing: 20) {
-                            Button(action: {
-                                addPhoto()
-                                image = nil
-                                showPicker = false
-
-                            }) {
-                                Text("Ok")
-                            }
-                            Button(action: {
-                                imageName = ""
-                                image = nil
-                                showPicker = false
-
-                            }) {
-                                Text("Cancel")
-                            }
+                editState = EditState.DataEntry
+            }
+        }) {
+            ImagePicker(sourceType: source == .library ? .photoLibrary : .camera, selectedImage: $image)
+                .ignoresSafeArea()
+        }
+        .sheet(isPresented: $showConfirmationDialog, onDismiss: resetUIToDataEntry) {
+            Form {
+                VStack {
+                    Text("Chosen image")
+                    Image(uiImage: image!)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 200, height: 200)
+                        .clipShape(RoundedRectangle(cornerRadius: 15))
+                        .shadow(color: .black.opacity(0.6), radius: 2, x: 2, y: 2)
+                    Text("Filename: \(imageName)").multilineTextAlignment(.leading).lineLimit(nil).minimumScaleFactor(0.01)
+                    Divider()
+                    HStack(spacing: 20) {
+                        Button(action: {
+                            addPhoto()
+                            resetUIToDataEntry()
+                        }) {
+                            Text("Ok")
+                        }
+                        Button(action: resetUIToDataEntry) {
+                            Text("Cancel")
                         }
                     }
                 }
@@ -179,7 +186,7 @@ struct ArchiveEntryEditView: View {
 struct ArchiveEntryEditView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ArchiveEntryEditView(repositories: .constant(Repository.initialRepositories), data: .constant(ArchiveEntry.sampleEntries[0].data))
+            ArchiveEntryEditView(repositories: .constant(Repository.initialRepositories), archiveEntries: .constant(ArchiveEntry.sampleEntries)) {}
         }
     }
 }
