@@ -32,6 +32,7 @@ struct ArchiveEntryEditView: View {
     @State var showFileAlert = false
     @State var showImagePicker = false
     @State var showConfirmationDialog = false
+    @State var showToast = false
     @State var appError: CapturingThePastError.ErrorType?
 
     public func sheetVisible() -> Binding<Bool> {
@@ -64,6 +65,7 @@ struct ArchiveEntryEditView: View {
             // Add data to repositories list and save
             archiveEntries.append(ArchiveEntry.init(fromData: data))
             saveAction();
+            showToast = true
         } catch {
             showFileAlert = true
             appError = CapturingThePastError.ErrorType(error: error as! CapturingThePastError)
@@ -180,6 +182,9 @@ struct ArchiveEntryEditView: View {
                 }
             }
         }
+        .toast(message: "Photo added to archive",
+               isShowing: $showToast,
+               duration: Toast.short)
     }
 }
 
