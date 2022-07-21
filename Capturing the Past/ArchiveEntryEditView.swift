@@ -62,7 +62,7 @@ struct ArchiveEntryEditView: View {
     }
 
     var pickerButtons: some View {
-        HStack() {
+        HStack {
             Button {
                 source = .camera
                 showPhotoPicker()
@@ -80,7 +80,6 @@ struct ArchiveEntryEditView: View {
             } label: {
                 ButtonLabel(symbolName: "photo", label: "Photos").frame(width: 150)
             }
-
         }
     }
 
@@ -101,27 +100,37 @@ struct ArchiveEntryEditView: View {
                         LabelledTextView("Special Case:", text: $data.specialCase)
                         LabelledTextView("Note", text: $data.note)
                         LabelledText(title: "Ref", text: data.referenceSequence).foregroundColor(Color.accentColor)
-                        HStack {
-                            Button(action: {
-                                image = data.photo.image
-                                imageName = data.photo.id
-                                showPicker = true
-                            }) {
-                            Image(uiImage: data.photo.image)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 30, height: 30)
-                                .clipShape(RoundedRectangle(cornerRadius: 5))
-                                .shadow(color: .black.opacity(0.6), radius: 2, x: 2, y: 2)
+                        VStack(alignment: .leading) {
+                            Text("Photo")
+                                .font(.caption)
+                                .foregroundColor(Color(.placeholderText))
+                                .offset(y: 0)
+                            HStack() {
+
+                                if (data.photo.id != "") {
+                                    Button(action: {
+                                        image = data.photo.image
+                                        imageName = data.photo.id
+                                        showPicker = true
+                                    }) {
+                                        Image(uiImage: data.photo.image)
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: 30, height: 30)
+                                            .clipShape(RoundedRectangle(cornerRadius: 5))
+                                            .shadow(color: .black.opacity(0.6), radius: 2, x: 2, y: 2)
+                                    }
+                                    Text(data.photo.id).foregroundColor(Color.accentColor).minimumScaleFactor(0.01)
+                                } else {
+                                    Text("Add a photo using buttons below").foregroundColor(Color(.placeholderText))
+                                }
+
+                                Spacer()
                             }
-                            LabelledText(title: "Photo", text: data.photo.id).foregroundColor(Color.accentColor)
                         }
-
                     }
-
-
                 }
-                .frame(height: 490)
+                .frame(height: 520)
                 pickerButtons
             }
         }
@@ -131,36 +140,36 @@ struct ArchiveEntryEditView: View {
                 ImagePicker(sourceType: source == .library ? .photoLibrary : .camera, selectedImage: $image)
                     .ignoresSafeArea()
             } else {
-                Form{
-                VStack {
-                    Text("Chosen image")
-                    Image(uiImage: image!)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 200, height: 200)
-                        .clipShape(RoundedRectangle(cornerRadius: 15))
-                        .shadow(color: .black.opacity(0.6), radius: 2, x: 2, y: 2)
-                    Text("Filename: \(imageName)").multilineTextAlignment(.leading).lineLimit(nil).minimumScaleFactor(0.01)
-                    Divider()
-                    HStack(spacing: 20) {
-                        Button(action: {
-                            addPhoto()
-                            image = nil
-                            showPicker = false
+                Form {
+                    VStack {
+                        Text("Chosen image")
+                        Image(uiImage: image!)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 200, height: 200)
+                            .clipShape(RoundedRectangle(cornerRadius: 15))
+                            .shadow(color: .black.opacity(0.6), radius: 2, x: 2, y: 2)
+                        Text("Filename: \(imageName)").multilineTextAlignment(.leading).lineLimit(nil).minimumScaleFactor(0.01)
+                        Divider()
+                        HStack(spacing: 20) {
+                            Button(action: {
+                                addPhoto()
+                                image = nil
+                                showPicker = false
 
-                        }) {
-                            Text("Ok")
-                        }
-                        Button(action: {
-                            imageName = ""
-                            image = nil
-                            showPicker = false
+                            }) {
+                                Text("Ok")
+                            }
+                            Button(action: {
+                                imageName = ""
+                                image = nil
+                                showPicker = false
 
-                        }) {
-                            Text("Cancel")
+                            }) {
+                                Text("Cancel")
+                            }
                         }
                     }
-                }
                 }
             }
         }
