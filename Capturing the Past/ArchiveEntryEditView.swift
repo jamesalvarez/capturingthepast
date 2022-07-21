@@ -102,12 +102,18 @@ struct ArchiveEntryEditView: View {
                         LabelledTextView("Note", text: $data.note)
                         LabelledText(title: "Ref", text: data.referenceSequence).foregroundColor(Color.accentColor)
                         HStack {
+                            Button(action: {
+                                image = data.photo.image
+                                imageName = data.photo.id
+                                showPicker = true
+                            }) {
                             Image(uiImage: data.photo.image)
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: 30, height: 30)
                                 .clipShape(RoundedRectangle(cornerRadius: 5))
                                 .shadow(color: .black.opacity(0.6), radius: 2, x: 2, y: 2)
+                            }
                             LabelledText(title: "Photo", text: data.photo.id).foregroundColor(Color.accentColor)
                         }
 
@@ -125,6 +131,7 @@ struct ArchiveEntryEditView: View {
                 ImagePicker(sourceType: source == .library ? .photoLibrary : .camera, selectedImage: $image)
                     .ignoresSafeArea()
             } else {
+                Form{
                 VStack {
                     Text("Chosen image")
                     Image(uiImage: image!)
@@ -133,10 +140,9 @@ struct ArchiveEntryEditView: View {
                         .frame(width: 200, height: 200)
                         .clipShape(RoundedRectangle(cornerRadius: 15))
                         .shadow(color: .black.opacity(0.6), radius: 2, x: 2, y: 2)
+                    Text("Filename: \(imageName)").multilineTextAlignment(.leading).lineLimit(nil).minimumScaleFactor(0.01)
                     Divider()
-                    Text("Filename: \(imageName)")
-                    Divider()
-                    HStack {
+                    HStack(spacing: 20) {
                         Button(action: {
                             addPhoto()
                             image = nil
@@ -145,7 +151,6 @@ struct ArchiveEntryEditView: View {
                         }) {
                             Text("Ok")
                         }
-                        Spacer()
                         Button(action: {
                             imageName = ""
                             image = nil
@@ -155,6 +160,7 @@ struct ArchiveEntryEditView: View {
                             Text("Cancel")
                         }
                     }
+                }
                 }
             }
         }
