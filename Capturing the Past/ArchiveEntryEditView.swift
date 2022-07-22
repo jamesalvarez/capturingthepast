@@ -5,8 +5,8 @@
 //  Created by James Alvarez on 14/06/2022.
 //
 
+import PopupView
 import SwiftUI
-
 /**
  * View for viewing and editing an archive entry
  */
@@ -33,6 +33,7 @@ struct ArchiveEntryEditView: View {
     @State var showImagePicker = false
     @State var showConfirmationDialog = false
     @State var showToast = false
+    @State var showingInfoPopup = false
     @State var appError: CapturingThePastError.ErrorType?
 
     public func sheetVisible() -> Binding<Bool> {
@@ -63,8 +64,8 @@ struct ArchiveEntryEditView: View {
             }
 
             // Add data to repositories list and save
-            archiveEntries.append(ArchiveEntry.init(fromData: data))
-            saveAction();
+            archiveEntries.append(ArchiveEntry(fromData: data))
+            saveAction()
             showToast = true
         } catch {
             showFileAlert = true
@@ -182,9 +183,15 @@ struct ArchiveEntryEditView: View {
                 }
             }
         }
-        .toast(message: "Photo added to archive",
-               isShowing: $showToast,
-               duration: Toast.short)
+        .popup(isPresented: $showToast, type: .toast, position: .bottom, autohideIn: 2, dragToDismiss: true) {
+            Text("Photo added to archive")
+                .frame(width: 200, height: 30)
+                .background(Color.black)
+                .cornerRadius(5)
+        }
+        .popup(isPresented: $showingInfoPopup) {
+
+        }
     }
 }
 
