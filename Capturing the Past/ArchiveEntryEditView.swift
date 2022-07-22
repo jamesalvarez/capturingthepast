@@ -165,17 +165,32 @@ struct ArchiveEntryEditView: View {
         }.accessibilityLabel("Repository Settings")
     }
 
+    @ViewBuilder
+    var pickerLabel: some View {
+        if (data.repositoryID == "") {
+            Text("Choose repository").foregroundColor(Color(.placeholderText))
+        } else {
+            EmptyView()
+        }
+    }
+
     var body: some View {
         ScrollView(.vertical) {
             VStack {
                 Form {
-                    Picker(selection: $data.repositoryID, label: Text("Repository")) {
-                        // TODO: In future indicate if entries repo is no longer in list
-                        ForEach(repositories, id: \.id) { repo in
-                            Text(repo.nameCodeString)
-                        }
-                    }
+
                     VStack {
+                        LabelledControl(title: "Repository", infoClickAction: {
+                            showInfoPopup(InfoPopupContent.RepositorySelector)
+                        }) {
+                            Picker(selection: $data.repositoryID, label: pickerLabel) {
+                                // TODO: In future indicate if entries repo is no longer in list
+                                ForEach(repositories, id: \.id) { repo in
+                                    Text(repo.nameCodeString)
+                                }
+                            }.labelsHidden()
+                        }
+
                         LabelledTextView(title: "Catalogue reference", text: $data.catReference) {
                             showInfoPopup(InfoPopupContent.CatalogueReference)
                         }
