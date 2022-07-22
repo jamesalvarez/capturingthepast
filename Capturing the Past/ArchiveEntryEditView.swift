@@ -246,18 +246,38 @@ struct ArchiveEntryEditView: View {
                         .frame(width: 200, height: 200)
                         .clipShape(RoundedRectangle(cornerRadius: 15))
                         .shadow(color: .black.opacity(0.6), radius: 2, x: 2, y: 2)
-                    Text("Filename: \(imageName)").multilineTextAlignment(.leading).lineLimit(nil).minimumScaleFactor(0.01)
+                    LabelledControl(title: "Filename", infoClickAction: {}) {
+                        Text(imageName).lineLimit(nil).minimumScaleFactor(0.01).foregroundColor(Color(.placeholderText))
+                    }
+                    LabelledControl(title: "Reference Sequence", infoClickAction: {}) {
+                        Text(data.referenceSequence ?? "").lineLimit(nil).minimumScaleFactor(0.01).foregroundColor(Color(.placeholderText))
+                    }.frame(maxWidth: .infinity, alignment: .leading)
                     Divider()
+                         Text("Do you want to add this to the archive?")
                     HStack(spacing: 20) {
                         Button(action: {
                             addPhoto()
                             resetUIToDataEntry()
                         }) {
-                            Text("Ok")
-                        }
+                            Text("Archive")
+                        }.buttonStyle(.plain)
+                            .font(.system(size: 18, weight: .bold))
+                            .padding(.vertical, 9)
+                            .padding(.horizontal, 12)
+                            .foregroundColor(.white)
+                            .background(Color.accentColor)
+                            .cornerRadius(12)
+                            .frame(width: 100)
                         Button(action: resetUIToDataEntry) {
                             Text("Cancel")
-                        }
+                        }.buttonStyle(.plain)
+                            .font(.system(size: 18, weight: .bold))
+                            .padding(.vertical, 9)
+                            .padding(.horizontal, 12)
+                            .foregroundColor(.white)
+                            .background(Color.gray)
+                            .cornerRadius(12)
+                            .frame(width: 100)
                     }
                 }
             }
