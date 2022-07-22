@@ -126,8 +126,14 @@ struct ArchiveEntryEditView: View {
     var pickerButtons: some View {
         HStack {
             Button {
-                source = .camera
-                showPhotoPicker()
+                if (data.referenceSequence == nil) {
+                    showCameraAlert = true
+                    appError = CapturingThePastError.ErrorType(error: .referenceNotSet)
+                } else {
+                    source = .camera
+                    showPhotoPicker()
+                }
+
             } label: {
                 ButtonLabel(symbolName: "camera", label: "Camera").frame(width: 150)
             }
@@ -137,8 +143,13 @@ struct ArchiveEntryEditView: View {
                 Text(cameraError.message)
             })
             Button {
-                source = .library
-                showPhotoPicker()
+                if (data.referenceSequence == nil) {
+                    showCameraAlert = true
+                    appError = CapturingThePastError.ErrorType(error: .referenceNotSet)
+                } else {
+                    source = .library
+                    showPhotoPicker()
+                }
             } label: {
                 ButtonLabel(symbolName: "photo", label: "Photos").frame(width: 150)
             }
@@ -180,7 +191,7 @@ struct ArchiveEntryEditView: View {
                         LabelledTextView(title: "Note", text: $data.note) {
                             showInfoPopup(InfoPopupContent.Note)
                         }
-                        LabelledText(title: "Ref", text: data.referenceSequence) {
+                        LabelledText(title: "Ref", text: data.referenceSequence ?? "") {
                             showInfoPopup(InfoPopupContent.Ref)
                         }.foregroundColor(Color.accentColor)
                     }
@@ -200,7 +211,7 @@ struct ArchiveEntryEditView: View {
         .sheet(isPresented: $showImagePicker, onDismiss: {
             if image != nil {
                 data.date = Date()
-                imageName = data.generatePhotoFileName()
+                imageName = data.generatePhotoFileName() ?? ""
                 editState = EditState.Confirmation
                 showConfirmationDialog = true
             } else {

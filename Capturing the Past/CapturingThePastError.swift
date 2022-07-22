@@ -15,6 +15,7 @@ enum CapturingThePastError: Error, LocalizedError {
     case cameraUnavailable
     case cameraRestricted
     case cameraDenied
+    case referenceNotSet
 
     var errorDescription: String? {
         switch self {
@@ -32,6 +33,8 @@ enum CapturingThePastError: Error, LocalizedError {
             return NSLocalizedString("You are not allowed to access media capture devices.", comment: "")
         case .cameraDenied:
             return NSLocalizedString("You have explicitly denied permission for media capture. Please open permissions/Privacy/Camera and grant access for this application.", comment: "")
+        case .referenceNotSet:
+            return NSLocalizedString("You must set a repository and catalogue reference to capture a photo.", comment: "")
         }
 
     }

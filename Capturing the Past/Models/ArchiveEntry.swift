@@ -102,13 +102,21 @@ extension ArchiveEntry {
          return catRef;
          }
          */
-        var referenceSequence: String {
+        var referenceSequence: String? {
             get {
-                return "\(repositoryID)_\(catReference)_\(item)_\(subItem)_\(specialCase)"
+                if (repositoryID == "" || catReference == "") {
+                    return nil
+                } else {
+                    return "\(repositoryID)_\(catReference)_\(item)_\(subItem)_\(specialCase)"
+                }
             }
         }
 
-        func generatePhotoFileName() -> String {
+        func generatePhotoFileName() -> String? {
+
+            guard let referenceSequence = referenceSequence else {
+                return nil
+            }
 
             let tag = String(referenceSequence.map {
                 $0 == "/" ? "_" : ($0 == " " ? "_" : $0)
