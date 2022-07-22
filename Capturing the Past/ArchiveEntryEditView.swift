@@ -19,6 +19,10 @@ struct ArchiveEntryEditView: View {
         case DataEntry, PhotoPicking, Confirmation
     }
 
+    enum InfoPopupContent {
+        case RepositorySelector, CatalogueReference, ItemLevel, SubItemLevel, SpecialCases
+    }
+
     @State var editState: EditState = .DataEntry
     @State var source: ImagePicker.Source = .library
     @State var showCameraAlert = false
@@ -34,11 +38,40 @@ struct ArchiveEntryEditView: View {
     @State var showConfirmationDialog = false
     @State var showToast = false
     @State var showingInfoPopup = false
+    @State var infoPopupText: String = ""
+    @State var infoPopupHeader: String = ""
     @State var appError: CapturingThePastError.ErrorType?
 
     public func sheetVisible() -> Binding<Bool> {
         return Binding<Bool>(get: { self.editState != EditState.DataEntry },
                              set: { _ in })
+    }
+
+    func showInfoPopup(_ type: InfoPopupContent) {
+        switch type {
+        case .RepositorySelector:
+            infoPopupHeader = "Repository Selector"
+            infoPopupText = "The repository selector sets the first segment of the catalogue reference. Normally this is a country code followed an Archon code. \n\nThe numbering scheme is used in The National Archive\'s Discovery Catalogue. The segment is inserted in the file name to associate the image with the source institution. \n\nAdd custom Archon Codes to identify other sources."
+            break
+        case .CatalogueReference:
+            infoPopupHeader = "Catalogue Reference"
+            infoPopupText = "Enter the catalogue number to associate photos with a specific document in a catalogue.\n\nWhen working with sequences such as entire collections it may be convenient to use the optional controls below to increment the final levels of the catalogue reference. E.g. books or letters. Non sequential entry of reference numbers may be easier using a single text field.\n\nThe character limit for filenames is accumulated across all input fields though is not restricted as you may have a valid reason for creating filenames that do not work in common file systems. Instead a warning message is shown when 128 characters is exceeded, this would be a really long file name. Actual limits vary for according to file system, but 255 characters is likely to work."
+            break
+        case .ItemLevel:
+            infoPopupHeader = "Item Level"
+            infoPopupText = "Optional - The incrementing and decrementing buttons are intended to help with sequential capture tasks such as working through a series or collection. The input is restricted to numeric values"
+            break
+        case .SubItemLevel:
+            infoPopupHeader = "Sub Item Level"
+            infoPopupText = "Optional - The sub item is intended to  be used to associate photos with specific parts of an item. E.g. The individual pages of books or letters. \n\n\n\nFile names include a time stamp to enable unlimited numbers of photos for any reference number. \n\nThe sub item level is often used by projects to provide an additional level of catalogue description beyond the institutions catalogue numbering."
+            break
+        case .SpecialCases:
+            infoPopupHeader = "Special Cases"
+            infoPopupText = "Optional - this control is intended to be reserved for special cases such as detached or torn document parts. The control adds a distinguishable identifier to the end of the reference using a combination of letters and numbers."
+            break
+        }
+
+        showingInfoPopup = true
     }
 
     func showPhotoPicker() {
@@ -122,13 +155,18 @@ struct ArchiveEntryEditView: View {
                             Text(repo.nameCodeString)
                         }
                     }
-
                     VStack {
-                        LabelledTextView("Catalogue reference", text: $data.catReference)
+                        LabelledTextView(title: "Catalogue reference", text: $data.catReference) {
+                            showInfoPopup(InfoPopupContent.CatalogueReference)
+                        }
                         LabelledStepper("Item", value: $data.item)
                         LabelledStepper("Sub Item", value: $data.subItem)
-                        LabelledTextView("Special Case:", text: $data.specialCase)
-                        LabelledTextView("Note", text: $data.note)
+                        LabelledTextView(title: "Special Case:", text: $data.specialCase) {
+                            showInfoPopup(InfoPopupContent.SpecialCases)
+                        }
+                        LabelledTextView(title: "Note", text: $data.note) {
+
+                        }
                         LabelledText(title: "Ref", text: data.referenceSequence).foregroundColor(Color.accentColor)
                     }
                 }
@@ -183,14 +221,47 @@ struct ArchiveEntryEditView: View {
                 }
             }
         }
-        .popup(isPresented: $showToast, type: .toast, position: .bottom, autohideIn: 2, dragToDismiss: true) {
-            Text("Photo added to archive")
-                .frame(width: 200, height: 30)
-                .background(Color.black)
-                .cornerRadius(5)
-        }
-        .popup(isPresented: $showingInfoPopup) {
+        .popup(isPresented: $showToast, type: .floater(), position: .bottom, animation: .spring(), autohideIn: 4) {
+            HStack(spacing: 8) {
+                Image(systemName: "archivebox")
+                    .foregroundColor(.white)
+                    .frame(width: 24, height: 24)
 
+                Text("Photo successfully added to archive")
+                    .foregroundColor(.white)
+                    .font(.system(size: 16))
+            }
+            .padding(16)
+            .background(Color(hex: "b37407").cornerRadius(12))
+            .padding(.horizontal, 16)
+        }
+        .popup(isPresented: $showingInfoPopup, type: .`default`, closeOnTap: false, backgroundColor: .black.opacity(0.4)) {
+            VStack(spacing: 12) {
+                Text(infoPopupHeader)
+                    .font(.system(size: 24))
+                    .padding(.top, 12)
+
+                Text(infoPopupText)
+                    .font(.system(size: 16))
+                    .opacity(0.6)
+                    .multilineTextAlignment(.leading)
+                    .padding(.bottom, 20)
+                    .minimumScaleFactor(0.01)
+
+                Button("Ok") {
+                    showingInfoPopup = false
+                }
+                .buttonStyle(.plain)
+                .font(.system(size: 18, weight: .bold))
+                .padding(.vertical, 9)
+                .padding(.horizontal, 12)
+                .foregroundColor(.white)
+                .background(Color.accentColor)
+                .cornerRadius(12)
+            }
+            .padding(EdgeInsets(top: 37, leading: 24, bottom: 40, trailing: 24))
+            .background(Color.black.cornerRadius(20))
+            .padding(.horizontal, 40)
         }
     }
 }
