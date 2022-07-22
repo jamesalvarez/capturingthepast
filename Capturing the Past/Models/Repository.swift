@@ -77,6 +77,6 @@ extension Repository {
     }
 
     var nameCodeString: String {
-        return "\(name) - \(archon)"
+        return "\(archon) - \(name)"
     }
 }
