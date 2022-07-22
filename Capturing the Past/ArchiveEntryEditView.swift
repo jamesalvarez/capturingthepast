@@ -206,7 +206,7 @@ struct ArchiveEntryEditView: View {
                         LabelledTextView(title: "Note", text: $data.note) {
                             showInfoPopup(InfoPopupContent.Note)
                         }
-                        LabelledText(title: "Ref", text: data.referenceSequence ?? "") {
+                        LabelledText(title: "Ref", text: data.referenceSequence ?? " ") {
                             showInfoPopup(InfoPopupContent.Ref)
                         }.foregroundColor(Color.accentColor)
                     }
