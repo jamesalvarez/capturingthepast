@@ -185,7 +185,7 @@ struct ArchiveEntryEditView: View {
                         LabelledStepper(title: "Sub Item", value: $data.subItem) {
                             showInfoPopup(InfoPopupContent.SubItemLevel)
                         }
-                        LabelledTextView(title: "Special Case:", text: $data.specialCase) {
+                        LabelledSpecialCaseControl(title: "Special Case:", value: $data.specialCase) {
                             showInfoPopup(InfoPopupContent.SpecialCases)
                         }
                         LabelledTextView(title: "Note", text: $data.note) {
