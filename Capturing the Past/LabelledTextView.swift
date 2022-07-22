@@ -14,7 +14,7 @@ struct LabelledTextView: View {
 
     var body: some View {
         LabelledControl(title: title, infoClickAction: infoClickAction) {
-            TextField("Enter \(title)", text: $text)
+            TextField("Enter \(title)", text: $text).textFieldStyle(RoundedBorderTextFieldStyle())
         }
     }
 }

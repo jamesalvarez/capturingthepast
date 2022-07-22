@@ -24,8 +24,12 @@ struct LabelledSpecialCaseControl: View {
 
     var body: some View {
         LabelledControl(title: title, infoClickAction: infoClickAction) {
-            Stepper(value: valueInt, in: 0...999) {
-                Text(value)
+            HStack {
+                TextField("Enter Value", text: $value)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .frame(maxWidth: .infinity)
+                Stepper(title, value: valueInt, in: 0...999).labelsHidden()
+
             }
         }
     }
@@ -76,5 +80,3 @@ extension StringProtocol {
         self[index(startIndex, offsetBy: offset)]
     }
 }
-
-
