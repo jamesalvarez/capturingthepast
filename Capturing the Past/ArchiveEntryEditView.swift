@@ -20,7 +20,7 @@ struct ArchiveEntryEditView: View {
     }
 
     enum InfoPopupContent {
-        case RepositorySelector, CatalogueReference, ItemLevel, SubItemLevel, SpecialCases
+        case RepositorySelector, CatalogueReference, ItemLevel, SubItemLevel, SpecialCases, Note, Ref
     }
 
     @State var editState: EditState = .DataEntry
@@ -69,7 +69,16 @@ struct ArchiveEntryEditView: View {
             infoPopupHeader = "Special Cases"
             infoPopupText = "Optional - this control is intended to be reserved for special cases such as detached or torn document parts. The control adds a distinguishable identifier to the end of the reference using a combination of letters and numbers."
             break
+        case .Note:
+            infoPopupHeader = "Note"
+            infoPopupText = "Optional note field: Notes are stored with the reference in the log file."
+            break
+        case .Ref:
+            infoPopupHeader = "Ref"
+            infoPopupText = "This is the final full reference that will appear the log file."
+            break
         }
+
 
         showingInfoPopup = true
     }
@@ -169,10 +178,10 @@ struct ArchiveEntryEditView: View {
                             showInfoPopup(InfoPopupContent.SpecialCases)
                         }
                         LabelledTextView(title: "Note", text: $data.note) {
-
+                            showInfoPopup(InfoPopupContent.Note)
                         }
                         LabelledText(title: "Ref", text: data.referenceSequence) {
-
+                            showInfoPopup(InfoPopupContent.Ref)
                         }.foregroundColor(Color.accentColor)
                     }
                 }
