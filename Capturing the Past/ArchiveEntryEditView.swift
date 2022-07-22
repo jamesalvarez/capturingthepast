@@ -159,15 +159,21 @@ struct ArchiveEntryEditView: View {
                         LabelledTextView(title: "Catalogue reference", text: $data.catReference) {
                             showInfoPopup(InfoPopupContent.CatalogueReference)
                         }
-                        LabelledStepper("Item", value: $data.item)
-                        LabelledStepper("Sub Item", value: $data.subItem)
+                        LabelledStepper(title: "Item", value: $data.item) {
+                            showInfoPopup(InfoPopupContent.ItemLevel)
+                        }
+                        LabelledStepper(title: "Sub Item", value: $data.subItem) {
+                            showInfoPopup(InfoPopupContent.SubItemLevel)
+                        }
                         LabelledTextView(title: "Special Case:", text: $data.specialCase) {
                             showInfoPopup(InfoPopupContent.SpecialCases)
                         }
                         LabelledTextView(title: "Note", text: $data.note) {
 
                         }
-                        LabelledText(title: "Ref", text: data.referenceSequence).foregroundColor(Color.accentColor)
+                        LabelledText(title: "Ref", text: data.referenceSequence) {
+
+                        }.foregroundColor(Color.accentColor)
                     }
                 }
                 .frame(height: 520)

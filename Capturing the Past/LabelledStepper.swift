@@ -8,20 +8,12 @@
 import SwiftUI
 
 struct LabelledStepper: View {
-    var title: String
+    let title: String
     @Binding var value: Int
-
-    init(_ title: String, value: Binding<Int>) {
-        self.title = title
-        self._value = value
-    }
+    let infoClickAction: () -> Void
 
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(title)
-                .font(.caption)
-                .foregroundColor(Color(.placeholderText))
-                .offset(y: 0)
+        LabelledControl(title: title, infoClickAction: infoClickAction) {
             Stepper(value: $value, in: 0...999) {
                 Text("\(value)")
             }

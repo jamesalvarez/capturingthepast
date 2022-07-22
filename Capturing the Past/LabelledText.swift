@@ -8,15 +8,12 @@
 import SwiftUI
 
 struct LabelledText: View {
-    var title: String
+    let title: String
     var text: String
+    let infoClickAction: () -> Void
 
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(title)
-                .font(.caption)
-                .foregroundColor(Color(.placeholderText))
-                .offset(y: 0)
+        LabelledControl(title: title, infoClickAction: infoClickAction) {
             Text(text)
         }.frame(
             minWidth: 0,

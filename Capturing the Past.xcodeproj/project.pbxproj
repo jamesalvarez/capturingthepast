@@ -33,6 +33,7 @@
 		1A6291F92869BD4A006B51CB /* ButtonLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6291F82869BD4A006B51CB /* ButtonLabel.swift */; };
 		1A96D038288A8E58005C638A /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 1A96D037288A8E58005C638A /* PopupView */; };
 		1A96D03A288A91C3005C638A /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A96D039288A91C3005C638A /* Color+Extension.swift */; };
+		1A96D03C288A9CCB005C638A /* LabelledControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A96D03B288A9CCB005C638A /* LabelledControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		1A6291F62869B45F006B51CB /* CapturingThePastError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapturingThePastError.swift; sourceTree = "<group>"; };
 		1A6291F82869BD4A006B51CB /* ButtonLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonLabel.swift; sourceTree = "<group>"; };
 		1A96D039288A91C3005C638A /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
+		1A96D03B288A9CCB005C638A /* LabelledControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelledControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 				1A44ECC828630431006624B0 /* ArchiveEntryRowView.swift */,
 				1A44ECB52858CD1F006624B0 /* ArchiveEntryEditView.swift */,
 				1A31F7612888A0AE00052839 /* LabelledTextView.swift */,
+				1A96D03B288A9CCB005C638A /* LabelledControl.swift */,
 				1A31F76528893D7800052839 /* LabelledText.swift */,
 				1A31F76328893C1500052839 /* LabelledStepper.swift */,
 				1A0ED5CA287EB6E6007F0933 /* RepositoriesView.swift */,
@@ -226,6 +229,7 @@
 				1A44ECC928630431006624B0 /* ArchiveEntryRowView.swift in Sources */,
 				1A0ED5CD287EB6F8007F0933 /* RepositoryRowView.swift in Sources */,
 				1A0ED5CF287EB706007F0933 /* RepositoryEditView.swift in Sources */,
+				1A96D03C288A9CCB005C638A /* LabelledControl.swift in Sources */,
 				1A6291F72869B45F006B51CB /* CapturingThePastError.swift in Sources */,
 				1A44ECC52862F8FF006624B0 /* ArchiveEntry.swift in Sources */,
 				1A31F76628893D7800052839 /* LabelledText.swift in Sources */,

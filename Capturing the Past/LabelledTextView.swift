@@ -8,19 +8,12 @@
 import SwiftUI
 
 struct LabelledTextView: View {
-    var title: String
+    let title: String
     @Binding var text: String
     let infoClickAction: () -> Void
 
     var body: some View {
-        VStack(alignment: .leading) {
-            Button(action: {}) {
-            Text(title)
-                .foregroundColor(Color(.placeholderText))
-                .offset(y: 0)
-            }.onTapGesture {
-                infoClickAction()
-            }
+        LabelledControl(title: title, infoClickAction: infoClickAction) {
             TextField("Enter \(title)", text: $text)
         }
     }
