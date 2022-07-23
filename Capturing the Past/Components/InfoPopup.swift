@@ -20,7 +20,7 @@ struct InfoPopup: View {
                 .font(.system(size: 24))
                 .padding(.top, 12)
 
-            Text(text)
+            Text(.init(text))
                 .font(.system(size: 16))
                 .opacity(0.6)
                 .multilineTextAlignment(.leading)
