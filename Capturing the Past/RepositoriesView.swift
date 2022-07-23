@@ -18,6 +18,9 @@ struct RepositoriesView: View {
     @Environment(\.scenePhase) private var scenePhase
     let saveAction: () -> Void
     @State var showResetPopup = false
+    @State var justDeleted: Repository? = nil
+    @State var deletedIndex: Int = 0
+    @State var showDeleteToast = false
 
     var repositoriesResetButton: some View {
         Button {
@@ -46,6 +49,23 @@ struct RepositoriesView: View {
         repositories = Repository.loadBundledRepositoryList(name: listName)
     }
 
+    func deleteRepository(repository: Repository) {
+        justDeleted = repository
+        if let entryIndex = repositories.firstIndex(where: { entry in
+            entry.id == repository.id
+        }) {
+            repositories.remove(at: entryIndex)
+            deletedIndex = entryIndex
+            showDeleteToast = true
+        }
+    }
+
+    func undoDelete() {
+        if let repository = justDeleted {
+            repositories.insert(repository, at: deletedIndex)
+        }
+    }
+
     var body: some View {
         List {
             Text("A list of your repositories.  Tap to edit the name or code. To add a new one tap the plus icon.")
@@ -55,7 +75,7 @@ struct RepositoriesView: View {
                     editedData = repository.data
                     isEditing = true
                 }) {
-                    RepositoryRowView(repository: repository)
+                    RepositoryRowView(repository: repository, deleteAction: deleteRepository)
                 }
             }
         }
@@ -103,15 +123,15 @@ struct RepositoriesView: View {
                     .padding(.top, 4)
                 Text("Note: Selecting a preset will overwrite any respository list customisations")
                 Divider()
-                Button(action: {resetRepositoriesList("DefaultRepositories")}) {
+                Button(action: { resetRepositoriesList("DefaultRepositories") }) {
                     Text("Reset to Default List")
                 }
                 .foregroundColor(.red)
-                Button(action: {resetRepositoriesList("ShortRepositories")}) {
+                Button(action: { resetRepositoriesList("ShortRepositories") }) {
                     Text("Reset to Short List")
                 }
                 .foregroundColor(.red)
-                Button(action: {resetRepositoriesList("AlternativeRepositories")}) {
+                Button(action: { resetRepositoriesList("AlternativeRepositories") }) {
                     Text("Reset to Alternative List")
                 }
                 .foregroundColor(.red)
@@ -129,6 +149,21 @@ struct RepositoriesView: View {
             }
             .padding(EdgeInsets(top: 37, leading: 24, bottom: 40, trailing: 24))
             .background(Color.black.cornerRadius(20))
+        }
+        .popup(isPresented: $showDeleteToast, type: .floater(), position: .bottom, animation: .spring(), autohideIn: 4) {
+            HStack(spacing: 8) {
+                Image(systemName: "trash")
+                    .foregroundColor(.white)
+                    .frame(width: 24, height: 24)
+
+                Text("Repository deleted")
+                    .foregroundColor(.white)
+                    .font(.system(size: 16))
+                Button(action: undoDelete, label: {Text("Undo")})
+            }
+            .padding(16)
+            .background(Color(hex: "b37407").cornerRadius(12))
+            .padding(.horizontal, 16)
         }
     }
 }

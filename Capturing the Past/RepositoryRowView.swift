@@ -12,10 +12,19 @@ import SwiftUI
  */
 struct RepositoryRowView: View {
     let repository: Repository
+    let deleteAction: (Repository) -> Void
     var body: some View {
         VStack(alignment: .leading) {
-            Text(repository.name)
-                .font(.headline)
+            HStack {
+                Text(repository.name)
+                    .font(.headline)
+                Button(action: {
+                    deleteAction(repository)
+                }) {
+                    Image(systemName: "trash")
+                }.frame(maxWidth: .infinity, alignment: .trailing)
+            }
+
         }
     }
 }
@@ -23,7 +32,7 @@ struct RepositoryRowView: View {
 struct RepositoryRowView_Previews: PreviewProvider {
     static var repository = Repository.initialRepositories[0]
     static var previews: some View {
-        RepositoryRowView(repository: repository)
+        RepositoryRowView(repository: repository, deleteAction: {_ in })
             .previewLayout(.fixed(width: 400, height: 60))
     }
 }
