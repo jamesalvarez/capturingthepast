@@ -38,5 +38,8 @@ struct InfoPopup: View {
             .background(Color.accentColor)
             .cornerRadius(12)
         }
+        .padding(EdgeInsets(top: 37, leading: 24, bottom: 40, trailing: 24))
+        .background(Color.black.cornerRadius(20))
+        .padding(.horizontal, 40)
     }
 }
