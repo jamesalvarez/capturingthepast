@@ -14,8 +14,8 @@ struct ConfirmationDialog: View {
     var image: UIImage
     var imageName: String
     var referenceSequence: String
-    let addPhoto: () -> Void
-    let resetUIToDataEntry: () -> Void
+    let archive: () -> Void
+    let cancel: () -> Void
     var body: some View {
         Form {
             VStack {
@@ -35,10 +35,7 @@ struct ConfirmationDialog: View {
                 Divider()
                 Text("Do you want to add this to the archive?")
                 HStack(spacing: 20) {
-                    Button(action: {
-                        addPhoto()
-                        resetUIToDataEntry()
-                    }) {
+                    Button(action: archive) {
                         Text("Archive")
                     }.buttonStyle(.plain)
                         .font(.system(size: 18, weight: .bold))
@@ -48,7 +45,7 @@ struct ConfirmationDialog: View {
                         .background(Color.accentColor)
                         .cornerRadius(12)
                         .frame(width: 100)
-                    Button(action: resetUIToDataEntry) {
+                    Button(action: cancel) {
                         Text("Cancel")
                     }.buttonStyle(.plain)
                         .font(.system(size: 18, weight: .bold))
