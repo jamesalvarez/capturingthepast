@@ -44,7 +44,7 @@
 		1A0ED5CA287EB6E6007F0933 /* RepositoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesView.swift; sourceTree = "<group>"; };
 		1A0ED5CC287EB6F8007F0933 /* RepositoryRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryRowView.swift; sourceTree = "<group>"; };
 		1A0ED5CE287EB706007F0933 /* RepositoryEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryEditView.swift; sourceTree = "<group>"; };
-		1A0ED5D1287EEA3F007F0933 /* DefaultRepositories.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = DefaultRepositories.json; path = "Capturing the Past/DefaultRepositories.json"; sourceTree = "<group>"; };
+		1A0ED5D1287EEA3F007F0933 /* DefaultRepositories.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DefaultRepositories.json; sourceTree = "<group>"; };
 		1A31F75E288835D200052839 /* Capturing-the-Past-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Capturing-the-Past-Info.plist"; sourceTree = SOURCE_ROOT; };
 		1A31F75F28889BF100052839 /* BackgroundImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundImage.swift; sourceTree = "<group>"; };
 		1A31F7612888A0AE00052839 /* LabelledTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelledTextView.swift; sourceTree = "<group>"; };
@@ -88,10 +88,6 @@
 		1A44ECA72858CD1F006624B0 = {
 			isa = PBXGroup;
 			children = (
-				1A96D039288A91C3005C638A /* Color+Extension.swift */,
-				1A0ED5D1287EEA3F007F0933 /* DefaultRepositories.json */,
-				1AB223E3288C325900A8AA29 /* ShortRepositories.json */,
-				1AB223E5288C326D00A8AA29 /* AlternativeRepositories.json */,
 				1A44ECB22858CD1F006624B0 /* Capturing the Past */,
 				1A44ECB12858CD1F006624B0 /* Products */,
 			);
@@ -108,27 +104,22 @@
 		1A44ECB22858CD1F006624B0 /* Capturing the Past */ = {
 			isa = PBXGroup;
 			children = (
+				1AB223EA288C403700A8AA29 /* Repository Lists */,
 				1A31F75E288835D200052839 /* Capturing-the-Past-Info.plist */,
 				1A44ECB72858CD23006624B0 /* Assets.xcassets */,
+				1AB223E7288C3BA300A8AA29 /* Components */,
 				1A44ECB92858CD23006624B0 /* Preview Content */,
 				1A44ECC12862F890006624B0 /* Models */,
+				1AB223EB288C404A00A8AA29 /* Utils */,
 				1A44ECB32858CD1F006624B0 /* CapturingThePastApp.swift */,
 				1A6291F62869B45F006B51CB /* CapturingThePastError.swift */,
 				1A44ECC628630157006624B0 /* ArchiveEntriesView.swift */,
 				1A44ECC828630431006624B0 /* ArchiveEntryRowView.swift */,
 				1A44ECB52858CD1F006624B0 /* ArchiveEntryEditView.swift */,
-				1A31F7612888A0AE00052839 /* LabelledTextView.swift */,
-				1A96D03B288A9CCB005C638A /* LabelledControl.swift */,
-				1A31F76528893D7800052839 /* LabelledText.swift */,
-				1A31F76328893C1500052839 /* LabelledStepper.swift */,
-				1A96D03D288AA161005C638A /* LabelledSpecialCaseControl.swift */,
 				1A0ED5CA287EB6E6007F0933 /* RepositoriesView.swift */,
 				1A0ED5CC287EB6F8007F0933 /* RepositoryRowView.swift */,
 				1A0ED5CE287EB706007F0933 /* RepositoryEditView.swift */,
-				1A6291F82869BD4A006B51CB /* ButtonLabel.swift */,
-				1A31F75F28889BF100052839 /* BackgroundImage.swift */,
 				1A6291EE2869AA8A006B51CB /* ImagePicker.swift */,
-				1A6291F22869AA91006B51CB /* FileManager+Extension.swift */,
 			);
 			path = "Capturing the Past";
 			sourceTree = "<group>";
@@ -151,6 +142,39 @@
 				1A0ED5C8287EB479007F0933 /* RepositoriesStore.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		1AB223E7288C3BA300A8AA29 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				1A6291F82869BD4A006B51CB /* ButtonLabel.swift */,
+				1A31F75F28889BF100052839 /* BackgroundImage.swift */,
+				1A31F7612888A0AE00052839 /* LabelledTextView.swift */,
+				1A96D03B288A9CCB005C638A /* LabelledControl.swift */,
+				1A31F76528893D7800052839 /* LabelledText.swift */,
+				1A31F76328893C1500052839 /* LabelledStepper.swift */,
+				1A96D03D288AA161005C638A /* LabelledSpecialCaseControl.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		1AB223EA288C403700A8AA29 /* Repository Lists */ = {
+			isa = PBXGroup;
+			children = (
+				1A0ED5D1287EEA3F007F0933 /* DefaultRepositories.json */,
+				1AB223E3288C325900A8AA29 /* ShortRepositories.json */,
+				1AB223E5288C326D00A8AA29 /* AlternativeRepositories.json */,
+			);
+			path = "Repository Lists";
+			sourceTree = "<group>";
+		};
+		1AB223EB288C404A00A8AA29 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				1A96D039288A91C3005C638A /* Color+Extension.swift */,
+				1A6291F22869AA91006B51CB /* FileManager+Extension.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

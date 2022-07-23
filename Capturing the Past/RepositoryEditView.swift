@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
-
+import PopupView
 /**
  * View for viewing and editing an archive entry
  */
 struct RepositoryEditView: View {
     @Binding var data: Repository.Data
+    
 
     var dataFields: some View {
         VStack {

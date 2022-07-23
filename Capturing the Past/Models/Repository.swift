@@ -37,7 +37,11 @@ extension Repository {
     ]
 
     static func loadInitialRepositoryList() -> [Repository] {
-        guard let path = Bundle.main.path(forResource: "DefaultRepositories", ofType: "json") else { return [] }
+        return loadBundledRepositoryList(name: "DefaultRepositories")
+    }
+
+    static func loadBundledRepositoryList(name: String) -> [Repository] {
+        guard let path = Bundle.main.path(forResource: name, ofType: "json") else { return [] }
 
         let url = URL(fileURLWithPath: path)
 
