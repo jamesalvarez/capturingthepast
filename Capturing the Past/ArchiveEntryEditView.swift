@@ -245,14 +245,23 @@ struct ArchiveEntryEditView: View {
         .padding(EdgeInsets(top: 37, leading: 24, bottom: 40, trailing: 24))
         .background(Color.black.cornerRadius(20))
         .padding(.horizontal, 40)
-        
     }
 }
 
 struct ArchiveEntryEditView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            ArchiveEntryEditView(repositories: .constant(Repository.initialRepositories), archiveEntries: .constant(ArchiveEntry.sampleEntries)) {}
+        Group {
+            NavigationView {
+                ArchiveEntryEditView(repositories: .constant(Repository.initialRepositories), archiveEntries: .constant(ArchiveEntry.sampleEntries)) {}
+            }
+                .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
+                .previewDisplayName("iPhone SE")
+
+            NavigationView {
+                ArchiveEntryEditView(repositories: .constant(Repository.initialRepositories), archiveEntries: .constant(ArchiveEntry.sampleEntries)) {}
+            }
+                .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro Max"))
+                .previewDisplayName("iPhone 11 Pro Max")
         }
     }
 }
