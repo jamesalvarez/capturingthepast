@@ -1,0 +1,30 @@
+[
+    {
+        "name": "Default Repository - GB0000",
+        "archon": "GB0000"
+    },
+    {
+        "name": "TNA",
+        "archon": "GB0066"
+    },
+    {
+        "name": "Cumbria",
+        "archon": "GB0023"
+    },
+    {
+        "name": "East Sussex",
+        "archon": "GB0179"
+    },
+    {
+        "name": "Staffordshire",
+        "archon": "GB0169"
+    },
+    {
+        "name": "St Bartholomew's Hospital Archives",
+        "archon": "GB0405"
+    },
+    {
+        "name": "Royal London Hospital Archives",
+        "archon": "GB0387"
+    }
+]

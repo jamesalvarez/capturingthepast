@@ -35,6 +35,8 @@
 		1A96D03A288A91C3005C638A /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A96D039288A91C3005C638A /* Color+Extension.swift */; };
 		1A96D03C288A9CCB005C638A /* LabelledControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A96D03B288A9CCB005C638A /* LabelledControl.swift */; };
 		1A96D03E288AA161005C638A /* LabelledSpecialCaseControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A96D03D288AA161005C638A /* LabelledSpecialCaseControl.swift */; };
+		1AB223E4288C325900A8AA29 /* ShortRepositories.json in Resources */ = {isa = PBXBuildFile; fileRef = 1AB223E3288C325900A8AA29 /* ShortRepositories.json */; };
+		1AB223E6288C326D00A8AA29 /* AlternativeRepositories.json in Resources */ = {isa = PBXBuildFile; fileRef = 1AB223E5288C326D00A8AA29 /* AlternativeRepositories.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +68,8 @@
 		1A96D039288A91C3005C638A /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		1A96D03B288A9CCB005C638A /* LabelledControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelledControl.swift; sourceTree = "<group>"; };
 		1A96D03D288AA161005C638A /* LabelledSpecialCaseControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelledSpecialCaseControl.swift; sourceTree = "<group>"; };
+		1AB223E3288C325900A8AA29 /* ShortRepositories.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ShortRepositories.json; sourceTree = "<group>"; };
+		1AB223E5288C326D00A8AA29 /* AlternativeRepositories.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AlternativeRepositories.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +90,8 @@
 			children = (
 				1A96D039288A91C3005C638A /* Color+Extension.swift */,
 				1A0ED5D1287EEA3F007F0933 /* DefaultRepositories.json */,
+				1AB223E3288C325900A8AA29 /* ShortRepositories.json */,
+				1AB223E5288C326D00A8AA29 /* AlternativeRepositories.json */,
 				1A44ECB22858CD1F006624B0 /* Capturing the Past */,
 				1A44ECB12858CD1F006624B0 /* Products */,
 			);
@@ -215,7 +221,9 @@
 			files = (
 				1A44ECBB2858CD23006624B0 /* Preview Assets.xcassets in Resources */,
 				1A44ECB82858CD23006624B0 /* Assets.xcassets in Resources */,
+				1AB223E4288C325900A8AA29 /* ShortRepositories.json in Resources */,
 				1A0ED5D2287EEA3F007F0933 /* DefaultRepositories.json in Resources */,
+				1AB223E6288C326D00A8AA29 /* AlternativeRepositories.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
