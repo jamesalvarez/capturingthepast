@@ -10,7 +10,7 @@ import SwiftUI
 /**
  * View for viewing and editing an archive entry
  */
-struct ArchiveEntryEditView: View {
+struct MainEditView: View {
     @EnvironmentObject var repositoriesStore: RepositoriesStore
     @EnvironmentObject var archiveEntriesStore: ArchiveEntriesStore
 
@@ -265,13 +265,13 @@ struct ArchiveEntryEditView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             NavigationView {
-                ArchiveEntryEditView()
+                MainEditView()
             }
             .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
             .previewDisplayName("iPhone SE")
 
             NavigationView {
-                ArchiveEntryEditView()
+                MainEditView()
             }
             .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro Max"))
             .previewDisplayName("iPhone 11 Pro Max")

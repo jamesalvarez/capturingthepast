@@ -20,7 +20,7 @@ struct CapturingThePastApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                ArchiveEntryEditView()
+                MainEditView()
             }
             .environmentObject(archiveEntriesStore)
             .environmentObject(repositoriesStore)
