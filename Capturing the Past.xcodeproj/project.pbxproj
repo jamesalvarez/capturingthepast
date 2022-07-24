@@ -23,7 +23,6 @@
 		1A44ECBB2858CD23006624B0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A44ECBA2858CD23006624B0 /* Preview Assets.xcassets */; };
 		1A44ECC32862F8BC006624B0 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A44ECC22862F8BC006624B0 /* Repository.swift */; };
 		1A44ECC52862F8FF006624B0 /* ArchiveEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A44ECC42862F8FF006624B0 /* ArchiveEntry.swift */; };
-		1A44ECC728630157006624B0 /* ArchiveEntriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A44ECC628630157006624B0 /* ArchiveEntriesView.swift */; };
 		1A44ECC928630431006624B0 /* ArchiveEntryRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A44ECC828630431006624B0 /* ArchiveEntryRowView.swift */; };
 		1A44ECCB28631885006624B0 /* ArchiveEntriesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A44ECCA28631885006624B0 /* ArchiveEntriesStore.swift */; };
 		1A6291F02869AA8A006B51CB /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6291EE2869AA8A006B51CB /* ImagePicker.swift */; };
@@ -61,7 +60,6 @@
 		1A44ECBA2858CD23006624B0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1A44ECC22862F8BC006624B0 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		1A44ECC42862F8FF006624B0 /* ArchiveEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveEntry.swift; sourceTree = "<group>"; };
-		1A44ECC628630157006624B0 /* ArchiveEntriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveEntriesView.swift; sourceTree = "<group>"; };
 		1A44ECC828630431006624B0 /* ArchiveEntryRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveEntryRowView.swift; sourceTree = "<group>"; };
 		1A44ECCA28631885006624B0 /* ArchiveEntriesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveEntriesStore.swift; sourceTree = "<group>"; };
 		1A6291EE2869AA8A006B51CB /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -121,7 +119,6 @@
 				1AB223EB288C404A00A8AA29 /* Utils */,
 				1A44ECB32858CD1F006624B0 /* CapturingThePastApp.swift */,
 				1A6291F62869B45F006B51CB /* CapturingThePastError.swift */,
-				1A44ECC628630157006624B0 /* ArchiveEntriesView.swift */,
 				1A44ECC828630431006624B0 /* ArchiveEntryRowView.swift */,
 				1A44ECB52858CD1F006624B0 /* ArchiveEntryEditView.swift */,
 				1A0ED5CA287EB6E6007F0933 /* RepositoriesView.swift */,
@@ -289,7 +286,6 @@
 				1A6291F92869BD4A006B51CB /* ButtonLabel.swift in Sources */,
 				1A6291F02869AA8A006B51CB /* ImagePicker.swift in Sources */,
 				1A44ECC32862F8BC006624B0 /* Repository.swift in Sources */,
-				1A44ECC728630157006624B0 /* ArchiveEntriesView.swift in Sources */,
 				1A31F76028889BF100052839 /* BackgroundImage.swift in Sources */,
 				1A31F76428893C1500052839 /* LabelledStepper.swift in Sources */,
 				1AB223F1288DB4C000A8AA29 /* SideMenu.swift in Sources */,
