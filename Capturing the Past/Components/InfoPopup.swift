@@ -10,8 +10,8 @@ import Foundation
 import SwiftUI
 
 struct InfoPopup: View {
-    var header: String
-    var text: String
+    @Binding var header: String
+    @Binding var text: String
     @Binding var showingInfoPopup: Bool
 
     var body: some View {

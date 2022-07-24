@@ -256,7 +256,7 @@ struct ArchiveEntryEditView: View {
             .padding(.horizontal, 16)
         }
         .popup(isPresented: $showingInfoPopup, type: .default, closeOnTap: false, backgroundColor: .black.opacity(0.4)) {
-            InfoPopup(header: infoPopupHeader, text: infoPopupText, showingInfoPopup: $showingInfoPopup)
+            InfoPopup(header: $infoPopupHeader, text: $infoPopupText, showingInfoPopup: $showingInfoPopup)
         }
     }
 }
