@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct InfoView: View {
+struct AppInfoView: View {
     @EnvironmentObject var archiveEntriesStore: ArchiveEntriesStore
     var body: some View {
         Text("Info")

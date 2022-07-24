@@ -23,7 +23,7 @@ struct SideMenu: View {
             }
             .onAppear(perform: onAppear)
             .accessibilityLabel("Repository Settings")
-            NavigationLink(destination: InfoView()) {
+            NavigationLink(destination: AppInfoView()) {
                 HStack {
                     Image(systemName: "info.circle")
                         .foregroundColor(
