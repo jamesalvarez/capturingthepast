@@ -160,43 +160,10 @@ struct ArchiveEntryEditView: View {
         backfromNavLink = true
         showingMenu = false
     }
-    var sideMenu: some View {
-        List {
-            NavigationLink(destination: RepositoriesView(repositories: $repositories) {
-                saveAction() // Triggers root save action when saving repositories
-            }) {
-                HStack {
-                    Image(systemName: "building.columns")
-                        .foregroundColor(
-                            .orange)
-                    Text("Repository Setup")
-                        .foregroundColor(
-                            .orange)
-                }
-
-            }
-            .onAppear(perform: sideMenuLinkClicked)
-            .accessibilityLabel("Repository Settings")
-            NavigationLink(destination: RepositoriesView(repositories: $repositories) {
-                saveAction() // Triggers root save action when saving repositories
-            }) {
-                HStack {
-                    Image(systemName: "info.circle")
-                        .foregroundColor(
-                            .orange)
-                    Text("Info")
-                        .foregroundColor(
-                            .orange)
-                }
-            }
-            .onAppear(perform: sideMenuLinkClicked)
-            .accessibilityLabel("Information")
-        }
-    }
 
     var body: some View {
         ZStack {
-            sideMenu
+            SideMenu(repositories: $repositories,onAppear: sideMenuLinkClicked,saveAction: saveAction)
             mainView
                 .offset(x: showingMenu ? UIScreen.main.bounds.width : 0.0, y: 0)
                 .animation(backfromNavLink ? nil : .easeOut, value: showingMenu)

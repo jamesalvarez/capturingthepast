@@ -39,6 +39,7 @@
 		1AB223E6288C326D00A8AA29 /* AlternativeRepositories.json in Resources */ = {isa = PBXBuildFile; fileRef = 1AB223E5288C326D00A8AA29 /* AlternativeRepositories.json */; };
 		1AB223ED288C40DC00A8AA29 /* ConfirmationDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB223EC288C40DC00A8AA29 /* ConfirmationDialog.swift */; };
 		1AB223EF288C43C600A8AA29 /* InfoPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB223EE288C43C600A8AA29 /* InfoPopup.swift */; };
+		1AB223F1288DB4C000A8AA29 /* SideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB223F0288DB4C000A8AA29 /* SideMenu.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		1AB223E5288C326D00A8AA29 /* AlternativeRepositories.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AlternativeRepositories.json; sourceTree = "<group>"; };
 		1AB223EC288C40DC00A8AA29 /* ConfirmationDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationDialog.swift; sourceTree = "<group>"; };
 		1AB223EE288C43C600A8AA29 /* InfoPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPopup.swift; sourceTree = "<group>"; };
+		1AB223F0288DB4C000A8AA29 /* SideMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenu.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 				1A0ED5CE287EB706007F0933 /* RepositoryEditView.swift */,
 				1AB223EC288C40DC00A8AA29 /* ConfirmationDialog.swift */,
 				1A6291EE2869AA8A006B51CB /* ImagePicker.swift */,
+				1AB223F0288DB4C000A8AA29 /* SideMenu.swift */,
 			);
 			path = "Capturing the Past";
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 				1A44ECC728630157006624B0 /* ArchiveEntriesView.swift in Sources */,
 				1A31F76028889BF100052839 /* BackgroundImage.swift in Sources */,
 				1A31F76428893C1500052839 /* LabelledStepper.swift in Sources */,
+				1AB223F1288DB4C000A8AA29 /* SideMenu.swift in Sources */,
 				1AB223ED288C40DC00A8AA29 /* ConfirmationDialog.swift in Sources */,
 				1A6291F32869AA91006B51CB /* FileManager+Extension.swift in Sources */,
 				1A31F7622888A0AE00052839 /* LabelledTextView.swift in Sources */,
