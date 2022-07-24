@@ -8,14 +8,11 @@
 import SwiftUI
 
 struct SideMenu: View {
-    @Binding var repositories: [Repository]
     let onAppear: () -> Void
     let saveAction: () -> Void
     var body: some View {
         List {
-            NavigationLink(destination: RepositoriesView(repositories: $repositories) {
-                saveAction() // Triggers root save action when saving repositories
-            }) {
+            NavigationLink(destination: RepositoriesView(saveAction: saveAction)) {
                 HStack {
                     Image(systemName: "building.columns")
                         .foregroundColor(
@@ -24,13 +21,10 @@ struct SideMenu: View {
                         .foregroundColor(
                             .orange)
                 }
-
             }
             .onAppear(perform: onAppear)
             .accessibilityLabel("Repository Settings")
-            NavigationLink(destination: RepositoriesView(repositories: $repositories) {
-                saveAction() // Triggers root save action when saving repositories
-            }) {
+            NavigationLink(destination: InfoView()) {
                 HStack {
                     Image(systemName: "info.circle")
                         .foregroundColor(

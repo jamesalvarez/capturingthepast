@@ -40,6 +40,7 @@
 		1AB223ED288C40DC00A8AA29 /* ConfirmationDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB223EC288C40DC00A8AA29 /* ConfirmationDialog.swift */; };
 		1AB223EF288C43C600A8AA29 /* InfoPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB223EE288C43C600A8AA29 /* InfoPopup.swift */; };
 		1AB223F1288DB4C000A8AA29 /* SideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB223F0288DB4C000A8AA29 /* SideMenu.swift */; };
+		1AB223F3288DC05300A8AA29 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB223F2288DC05300A8AA29 /* InfoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +77,7 @@
 		1AB223EC288C40DC00A8AA29 /* ConfirmationDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationDialog.swift; sourceTree = "<group>"; };
 		1AB223EE288C43C600A8AA29 /* InfoPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPopup.swift; sourceTree = "<group>"; };
 		1AB223F0288DB4C000A8AA29 /* SideMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenu.swift; sourceTree = "<group>"; };
+		1AB223F2288DC05300A8AA29 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,7 @@
 				1AB223EC288C40DC00A8AA29 /* ConfirmationDialog.swift */,
 				1A6291EE2869AA8A006B51CB /* ImagePicker.swift */,
 				1AB223F0288DB4C000A8AA29 /* SideMenu.swift */,
+				1AB223F2288DC05300A8AA29 /* InfoView.swift */,
 			);
 			path = "Capturing the Past";
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 				1A0ED5CD287EB6F8007F0933 /* RepositoryRowView.swift in Sources */,
 				1A0ED5CF287EB706007F0933 /* RepositoryEditView.swift in Sources */,
 				1A96D03E288AA161005C638A /* LabelledSpecialCaseControl.swift in Sources */,
+				1AB223F3288DC05300A8AA29 /* InfoView.swift in Sources */,
 				1A96D03C288A9CCB005C638A /* LabelledControl.swift in Sources */,
 				1A6291F72869B45F006B51CB /* CapturingThePastError.swift in Sources */,
 				1A44ECC52862F8FF006624B0 /* ArchiveEntry.swift in Sources */,

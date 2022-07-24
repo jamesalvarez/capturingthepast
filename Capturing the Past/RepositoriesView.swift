@@ -11,7 +11,7 @@ import SwiftUI
  * View displays list of repositories and UI to edit
  */
 struct RepositoriesView: View {
-    @Binding var repositories: [Repository]
+    @EnvironmentObject var repositoriesStore: RepositoriesStore
     @State private var editedEntry: String? = nil
     @State private var editedData: Repository.Data = .init()
     @State private var isEditing = false
@@ -33,28 +33,28 @@ struct RepositoriesView: View {
     func updateFromEditedData() {
         if let editedEntry = editedEntry {
             // Editing something already
-            if let entryIndex = repositories.firstIndex(where: { entry in
+            if let entryIndex = repositoriesStore.repositories.firstIndex(where: { entry in
                 entry.id == editedEntry
             }) {
-                repositories[entryIndex].update(from: editedData)
+                repositoriesStore.repositories[entryIndex].update(from: editedData)
             }
         } else {
             // new
             let newEntry = Repository(fromData: editedData)
-            repositories.append(newEntry)
+            repositoriesStore.repositories.append(newEntry)
         }
     }
 
     func resetRepositoriesList(_ listName: String) {
-        repositories = Repository.loadBundledRepositoryList(name: listName)
+        repositoriesStore.repositories = Repository.loadBundledRepositoryList(name: listName)
     }
 
     func deleteRepository(repository: Repository) {
         justDeleted = repository
-        if let entryIndex = repositories.firstIndex(where: { entry in
+        if let entryIndex = repositoriesStore.repositories.firstIndex(where: { entry in
             entry.id == repository.id
         }) {
-            repositories.remove(at: entryIndex)
+            repositoriesStore.repositories.remove(at: entryIndex)
             deletedIndex = entryIndex
             showDeleteToast = true
         }
@@ -62,14 +62,14 @@ struct RepositoriesView: View {
 
     func undoDelete() {
         if let repository = justDeleted {
-            repositories.insert(repository, at: deletedIndex)
+            repositoriesStore.repositories.insert(repository, at: deletedIndex)
         }
     }
 
     var body: some View {
         List {
             Text("A list of your repositories.  Tap to edit the name or code. To add a new one tap the plus icon.")
-            ForEach($repositories, id: \.id) { $repository in
+            ForEach($repositoriesStore.repositories, id: \.id) { $repository in
                 Button(action: {
                     editedEntry = repository.id
                     editedData = repository.data
@@ -168,10 +168,3 @@ struct RepositoriesView: View {
     }
 }
 
-struct RepositoriesView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            RepositoriesView(repositories: .constant(Repository.initialRepositories), saveAction: {})
-        }
-    }
-}

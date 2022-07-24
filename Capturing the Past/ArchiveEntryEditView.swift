@@ -11,6 +11,7 @@ import SwiftUI
  * View for viewing and editing an archive entry
  */
 struct ArchiveEntryEditView: View {
+
     @Binding var repositories: [Repository]
     @Binding var archiveEntries: [ArchiveEntry]
     let saveAction: () -> Void
@@ -163,7 +164,7 @@ struct ArchiveEntryEditView: View {
 
     var body: some View {
         ZStack {
-            SideMenu(repositories: $repositories,onAppear: sideMenuLinkClicked,saveAction: saveAction)
+            SideMenu(onAppear: sideMenuLinkClicked,saveAction: saveAction)
             mainView
                 .offset(x: showingMenu ? UIScreen.main.bounds.width : 0.0, y: 0)
                 .animation(backfromNavLink ? nil : .easeOut, value: showingMenu)

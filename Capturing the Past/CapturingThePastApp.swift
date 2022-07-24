@@ -36,7 +36,8 @@ struct CapturingThePastApp: App {
                 }
                 
             }
-
+            .environmentObject(archiveEntriesStore)
+            .environmentObject(repositoriesStore)
             .preferredColorScheme(.dark)
             .onAppear {
                 ArchiveEntriesStore.load { result in
