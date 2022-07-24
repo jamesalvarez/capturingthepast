@@ -18,7 +18,7 @@ struct SideMenu: View {
                             .orange)
                     Text("Repository Setup")
                         .foregroundColor(
-                            .orange)
+                            .white)
                 }
             }
             .onAppear(perform: onAppear)
@@ -30,7 +30,7 @@ struct SideMenu: View {
                             .orange)
                     Text("Info")
                         .foregroundColor(
-                            .orange)
+                            .white)
                 }
             }
             .onAppear(perform: onAppear)
