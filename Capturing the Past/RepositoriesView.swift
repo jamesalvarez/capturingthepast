@@ -16,7 +16,6 @@ struct RepositoriesView: View {
     @State private var editedData: Repository.Data = .init()
     @State private var isEditing = false
     @Environment(\.scenePhase) private var scenePhase
-    let saveAction: () -> Void
     @State var showResetPopup = false
     @State var justDeleted: Repository? = nil
     @State var deletedIndex: Int = 0
@@ -37,11 +36,13 @@ struct RepositoriesView: View {
                 entry.id == editedEntry
             }) {
                 repositoriesStore.repositories[entryIndex].update(from: editedData)
+                repositoriesStore.save()
             }
         } else {
             // new
             let newEntry = Repository(fromData: editedData)
             repositoriesStore.repositories.append(newEntry)
+            repositoriesStore.save()
         }
     }
 
@@ -55,6 +56,7 @@ struct RepositoriesView: View {
             entry.id == repository.id
         }) {
             repositoriesStore.repositories.remove(at: entryIndex)
+            repositoriesStore.save()
             deletedIndex = entryIndex
             showDeleteToast = true
         }
@@ -63,6 +65,7 @@ struct RepositoriesView: View {
     func undoDelete() {
         if let repository = justDeleted {
             repositoriesStore.repositories.insert(repository, at: deletedIndex)
+            repositoriesStore.save()
         }
     }
 
@@ -96,7 +99,7 @@ struct RepositoriesView: View {
                     .accessibilityLabel("New repository")
             }
         }
-        .fullScreenCover(isPresented: $isEditing, onDismiss: saveAction) {
+        .fullScreenCover(isPresented: $isEditing, onDismiss: { repositoriesStore.save()}) {
             NavigationView {
                 RepositoryEditView(data: $editedData)
                     .navigationTitle("Edit Repository")
@@ -114,7 +117,7 @@ struct RepositoriesView: View {
             }
         }
         .onChange(of: scenePhase) { phase in
-            if phase == .inactive { saveAction() }
+            if phase == .inactive { repositoriesStore.save() }
         }
         .popup(isPresented: $showResetPopup, type: .floater(verticalPadding: 0, useSafeAreaInset: false), position: .bottom, closeOnTapOutside: true, backgroundColor: .black.opacity(0.4)) {
             VStack(spacing: 12) {

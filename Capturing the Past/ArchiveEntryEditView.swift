@@ -11,10 +11,8 @@ import SwiftUI
  * View for viewing and editing an archive entry
  */
 struct ArchiveEntryEditView: View {
-
-    @Binding var repositories: [Repository]
-    @Binding var archiveEntries: [ArchiveEntry]
-    let saveAction: () -> Void
+    @EnvironmentObject var repositoriesStore: RepositoriesStore
+    @EnvironmentObject var archiveEntriesStore: ArchiveEntriesStore
 
     enum EditState {
         case DataEntry, PhotoPicking, Confirmation
@@ -118,8 +116,8 @@ struct ArchiveEntryEditView: View {
             }
 
             // Add data to repositories list and save
-            archiveEntries.append(ArchiveEntry(fromData: data))
-            saveAction()
+            archiveEntriesStore.archiveEntries.append(ArchiveEntry(fromData: data))
+            archiveEntriesStore.save()
             showToast = true
         } catch {
             showFileAlert = true
@@ -164,7 +162,7 @@ struct ArchiveEntryEditView: View {
 
     var body: some View {
         ZStack {
-            SideMenu(onAppear: sideMenuLinkClicked,saveAction: saveAction)
+            SideMenu(onAppear: sideMenuLinkClicked)
             mainView
                 .offset(x: showingMenu ? UIScreen.main.bounds.width : 0.0, y: 0)
                 .animation(backfromNavLink ? nil : .easeOut, value: showingMenu)
@@ -181,7 +179,7 @@ struct ArchiveEntryEditView: View {
                         }) {
                             Picker(selection: $data.repositoryID, label: pickerLabel) {
                                 // TODO: In future indicate if entries repo is no longer in list
-                                ForEach(repositories, id: \.id) { repo in
+                                ForEach(repositoriesStore.repositories, id: \.id) { repo in
                                     Text(repo.nameCodeString)
                                 }
                             }.labelsHidden()
@@ -267,13 +265,13 @@ struct ArchiveEntryEditView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             NavigationView {
-                ArchiveEntryEditView(repositories: .constant(Repository.initialRepositories), archiveEntries: .constant(ArchiveEntry.sampleEntries)) {}
+                ArchiveEntryEditView()
             }
             .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
             .previewDisplayName("iPhone SE")
 
             NavigationView {
-                ArchiveEntryEditView(repositories: .constant(Repository.initialRepositories), archiveEntries: .constant(ArchiveEntry.sampleEntries)) {}
+                ArchiveEntryEditView()
             }
             .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro Max"))
             .previewDisplayName("iPhone 11 Pro Max")

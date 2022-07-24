@@ -9,10 +9,9 @@ import SwiftUI
 
 struct SideMenu: View {
     let onAppear: () -> Void
-    let saveAction: () -> Void
     var body: some View {
         List {
-            NavigationLink(destination: RepositoriesView(saveAction: saveAction)) {
+            NavigationLink(destination: RepositoriesView()) {
                 HStack {
                     Image(systemName: "building.columns")
                         .foregroundColor(

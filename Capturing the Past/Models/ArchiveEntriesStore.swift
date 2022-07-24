@@ -15,6 +15,15 @@ import CSV
 class ArchiveEntriesStore: ObservableObject {
     @Published var archiveEntries: [ArchiveEntry] = []
 
+    func save() {
+        ArchiveEntriesStore.save(archiveEntries: self.archiveEntries) { result in
+            if case .failure(let error) = result {
+                fatalError(error.localizedDescription)
+            }
+        }
+    }
+
+
     private static func fileURL() throws -> URL {
         try FileManager.default.url(for: .documentDirectory,
                                     in: .userDomainMask,

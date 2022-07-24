@@ -20,21 +20,7 @@ struct CapturingThePastApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                ArchiveEntryEditView(repositories: $repositoriesStore.repositories,
-                                     archiveEntries: $archiveEntriesStore.archiveEntries) {
-                    // Save action
-                    ArchiveEntriesStore.save(archiveEntries: archiveEntriesStore.archiveEntries) { result in
-                        if case .failure(let error) = result {
-                            fatalError(error.localizedDescription)
-                        }
-                    }
-                    RepositoriesStore.save(Repositories: repositoriesStore.repositories) { result in
-                        if case .failure(let error) = result {
-                            fatalError(error.localizedDescription)
-                        }
-                    }
-                }
-                
+                ArchiveEntryEditView()
             }
             .environmentObject(archiveEntriesStore)
             .environmentObject(repositoriesStore)

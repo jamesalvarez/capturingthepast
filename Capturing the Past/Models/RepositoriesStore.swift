@@ -14,6 +14,14 @@ import SwiftUI
 class RepositoriesStore: ObservableObject {
     @Published var repositories: [Repository] = []
 
+    func save() {
+        RepositoriesStore.save(Repositories: self.repositories) { result in
+            if case .failure(let error) = result {
+                fatalError(error.localizedDescription)
+            }
+        }
+    }
+
     private static func fileURL() throws -> URL {
         try FileManager.default.url(for: .documentDirectory,
                                     in: .userDomainMask,
