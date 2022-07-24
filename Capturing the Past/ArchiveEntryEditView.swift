@@ -76,7 +76,6 @@ struct ArchiveEntryEditView: View {
     }
 
     func showPhotoPicker(source newSource: ImagePicker.Source) {
-
         if data.referenceSequence == nil {
             showCameraAlert = true
             appError = CapturingThePastError.ErrorType(error: .referenceNotSet)
@@ -135,13 +134,14 @@ struct ArchiveEntryEditView: View {
         editState = EditState.DataEntry
     }
 
-    var repositoriesEditButton: some View {
-        NavigationLink(destination: RepositoriesView(repositories: $repositories) {
-            saveAction() // Triggers root save action when saving repositories
+    var menuButton: some View {
+        Button(action: {
+            backfromNavLink = false
+            showingMenu.toggle()
         }) {
-            Image(systemName: "building.columns")
-
-        }.accessibilityLabel("Repository Settings")
+            Image(systemName: "line.horizontal.3")
+                .foregroundColor(.white)
+        }.accessibilityLabel("Main menu")
     }
 
     @ViewBuilder
@@ -153,7 +153,57 @@ struct ArchiveEntryEditView: View {
         }
     }
 
+    @State private var showingMenu = false
+    @State private var backfromNavLink = false
+
+    func sideMenuLinkClicked() {
+        backfromNavLink = true
+        showingMenu = false
+    }
+    var sideMenu: some View {
+        List {
+            NavigationLink(destination: RepositoriesView(repositories: $repositories) {
+                saveAction() // Triggers root save action when saving repositories
+            }) {
+                HStack {
+                    Image(systemName: "building.columns")
+                        .foregroundColor(
+                            .orange)
+                    Text("Repository Setup")
+                        .foregroundColor(
+                            .orange)
+                }
+
+            }
+            .onAppear(perform: sideMenuLinkClicked)
+            .accessibilityLabel("Repository Settings")
+            NavigationLink(destination: RepositoriesView(repositories: $repositories) {
+                saveAction() // Triggers root save action when saving repositories
+            }) {
+                HStack {
+                    Image(systemName: "info.circle")
+                        .foregroundColor(
+                            .orange)
+                    Text("Info")
+                        .foregroundColor(
+                            .orange)
+                }
+            }
+            .onAppear(perform: sideMenuLinkClicked)
+            .accessibilityLabel("Information")
+        }
+    }
+
     var body: some View {
+        ZStack {
+            sideMenu
+            mainView
+                .offset(x: showingMenu ? UIScreen.main.bounds.width : 0.0, y: 0)
+                .animation(backfromNavLink ? nil : .easeOut, value: showingMenu)
+        }
+    }
+
+    var mainView: some View {
         ScrollView(.vertical) {
             VStack {
                 Form {
@@ -205,8 +255,8 @@ struct ArchiveEntryEditView: View {
         .navigationTitle("Capturing the Past")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                repositoriesEditButton
+            ToolbarItem(placement: .navigationBarLeading) {
+                menuButton
             }
         }
         .background(BackgroundImage())
@@ -242,7 +292,6 @@ struct ArchiveEntryEditView: View {
         .popup(isPresented: $showingInfoPopup, type: .default, closeOnTap: false, backgroundColor: .black.opacity(0.4)) {
             InfoPopup(header: infoPopupHeader, text: infoPopupText, showingInfoPopup: $showingInfoPopup)
         }
-
     }
 }
 
@@ -252,14 +301,14 @@ struct ArchiveEntryEditView_Previews: PreviewProvider {
             NavigationView {
                 ArchiveEntryEditView(repositories: .constant(Repository.initialRepositories), archiveEntries: .constant(ArchiveEntry.sampleEntries)) {}
             }
-                .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
-                .previewDisplayName("iPhone SE")
+            .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
+            .previewDisplayName("iPhone SE")
 
             NavigationView {
                 ArchiveEntryEditView(repositories: .constant(Repository.initialRepositories), archiveEntries: .constant(ArchiveEntry.sampleEntries)) {}
             }
-                .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro Max"))
-                .previewDisplayName("iPhone 11 Pro Max")
+            .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro Max"))
+            .previewDisplayName("iPhone 11 Pro Max")
         }
     }
 }
