@@ -43,7 +43,7 @@ struct LabelledSpecialCaseControl: View {
         return index
     }
     func specialCaseToInteger(_ str: String) -> Int {
-        let components = str.components(separatedBy: ":")
+        let components = str.lowercased().components(separatedBy: ":")
 
         switch(components.count) {
         case 0:
