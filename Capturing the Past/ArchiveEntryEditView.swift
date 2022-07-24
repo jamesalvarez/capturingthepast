@@ -82,7 +82,7 @@ struct ArchiveEntryEditView: View {
             return
         }
 
-        source = .camera
+        source = newSource
 
         do {
             if source == .camera {
