@@ -163,6 +163,8 @@ struct ArchiveEntryEditView: View {
     var body: some View {
         ZStack {
             SideMenu(onAppear: sideMenuLinkClicked)
+                .offset(x: showingMenu ? 0.0 : 0 - UIScreen.main.bounds.width, y: 0)
+                .animation(.easeOut, value: showingMenu)
             mainView
                 .offset(x: showingMenu ? UIScreen.main.bounds.width : 0.0, y: 0)
                 .animation(backfromNavLink ? nil : .easeOut, value: showingMenu)
@@ -170,51 +172,49 @@ struct ArchiveEntryEditView: View {
     }
 
     var mainView: some View {
-        ScrollView(.vertical) {
-            VStack {
-                Form {
-                    VStack {
-                        LabelledControl(title: "Repository", infoClickAction: {
-                            showInfoPopup(InfoPopupContent.RepositorySelector)
-                        }) {
-                            Picker(selection: $data.repositoryID, label: pickerLabel) {
-                                // TODO: In future indicate if entries repo is no longer in list
-                                ForEach(repositoriesStore.repositories, id: \.id) { repo in
-                                    Text(repo.nameCodeString)
-                                }
-                            }.labelsHidden()
-                        }
+        VStack {
+            Form {
+                Section {
+                    LabelledControl(title: "Repository", infoClickAction: {
+                        showInfoPopup(InfoPopupContent.RepositorySelector)
+                    }) {
+                        Picker(selection: $data.repositoryID, label: pickerLabel) {
+                            // TODO: In future indicate if entries repo is no longer in list
+                            ForEach(repositoriesStore.repositories, id: \.id) { repo in
+                                Text(repo.nameCodeString)
+                            }
+                        }.labelsHidden()
+                    }
 
-                        LabelledTextView(title: "Catalogue reference", text: $data.catReference) {
-                            showInfoPopup(InfoPopupContent.CatalogueReference)
-                        }
-                        LabelledStepper(title: "Item", value: $data.item) {
-                            showInfoPopup(InfoPopupContent.ItemLevel)
-                        }
-                        LabelledStepper(title: "Sub Item", value: $data.subItem) {
-                            showInfoPopup(InfoPopupContent.SubItemLevel)
-                        }
-                        LabelledSpecialCaseControl(title: "Special Case:", value: $data.specialCase) {
-                            showInfoPopup(InfoPopupContent.SpecialCases)
-                        }
-                        LabelledTextView(title: "Note", text: $data.note) {
-                            showInfoPopup(InfoPopupContent.Note)
-                        }
-                        LabelledText(title: "Ref", text: data.referenceSequence ?? " ") {
-                            showInfoPopup(InfoPopupContent.Ref)
-                        }.foregroundColor(Color.accentColor)
+                    LabelledTextView(title: "Catalogue reference", text: $data.catReference) {
+                        showInfoPopup(InfoPopupContent.CatalogueReference)
                     }
+                    LabelledStepper(title: "Item", value: $data.item) {
+                        showInfoPopup(InfoPopupContent.ItemLevel)
+                    }
+                    LabelledStepper(title: "Sub Item", value: $data.subItem) {
+                        showInfoPopup(InfoPopupContent.SubItemLevel)
+                    }
+                    LabelledSpecialCaseControl(title: "Special Case:", value: $data.specialCase) {
+                        showInfoPopup(InfoPopupContent.SpecialCases)
+                    }
+                    LabelledTextView(title: "Note", text: $data.note) {
+                        showInfoPopup(InfoPopupContent.Note)
+                    }
+                    LabelledText(title: "Ref", text: data.referenceSequence ?? " ") {
+                        showInfoPopup(InfoPopupContent.Ref)
+                    }.foregroundColor(Color.accentColor)
                 }
-                .frame(width: 300, height: 520)
-                HStack {
-                    Button { showPhotoPicker(source: .camera)
-                    } label: {
-                        ButtonLabel(symbolName: "camera", label: "Camera")
-                    }
-                    Button { showPhotoPicker(source: .library)
-                    } label: {
-                        ButtonLabel(symbolName: "photo", label: "Photos")
-                    }
+            }
+            .frame(width: 300, height: 520)
+            HStack {
+                Button { showPhotoPicker(source: .camera)
+                } label: {
+                    ButtonLabel(symbolName: "camera", label: "Camera")
+                }
+                Button { showPhotoPicker(source: .library)
+                } label: {
+                    ButtonLabel(symbolName: "photo", label: "Photos")
                 }
             }
         }
