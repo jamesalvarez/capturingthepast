@@ -55,7 +55,7 @@ class ArchiveEntriesStore: ObservableObject {
                 guard let file = try? FileHandle(forReadingFrom: fileURL) else {
 
                     DispatchQueue.main.async {
-                        completion(.success(ArchiveEntry.sampleEntries)) //TODO: Remove or place in debug only
+                        completion(.success([]))
                     }
                     return
                 }
@@ -70,7 +70,7 @@ class ArchiveEntriesStore: ObservableObject {
                     let backupURL = try backupFileURL()
                     try? FileManager.default.secureCopyItem(at: fileURL, to: backupURL)
                     DispatchQueue.main.async {
-                        completion(.success(ArchiveEntry.sampleEntries)) //TODO: Remove or place in debug only
+                        completion(.success([]))
                     }
                 }
 
