@@ -13,8 +13,7 @@ import SwiftUI
 struct RepositoryEditView: View {
     @Binding var data: Repository.Data
     @State var showingInfoPopup = false
-    @State var infoPopupHeader: String = ""
-    @State var infoPopupText: String = ""
+    @State var popupContent: InfoPopup.InfoPopupContent = .RepositorySelector
 
     var body: some View {
         VStack {
@@ -22,16 +21,14 @@ struct RepositoryEditView: View {
             Form {
                 VStack {
                     LabelledTextView(title: "Repository Name", text: $data.name, infoClickAction: {
-                        infoPopupHeader = "Repository Name"
-                        infoPopupText = "The human readable name for the repository e.g. London Metropolitan Archives."
+                        popupContent = .RepositoryName
                         showingInfoPopup = true
                     })
 
                     Spacer()
                     // TODO: Check that id is not the same as any others
                     LabelledTextView(title: "Archon code", text: $data.archon, infoClickAction: {
-                        infoPopupHeader = "Archon Code"
-                        infoPopupText = "See [TNA's](https://discovery.nationalarchives.gov.uk/browse/a/A) reference for Archon codes. We suggest short non-numeric codes (10 characters or less) to identify other respositories.\n\nNew repositories are added to the top of the list and become the default selection."
+                        popupContent = .ArchonCode
                         showingInfoPopup = true
                     })
                 }
@@ -39,7 +36,7 @@ struct RepositoryEditView: View {
         }
         .background(BackgroundImage())
         .popup(isPresented: $showingInfoPopup, type: .default, closeOnTap: false, backgroundColor: .black.opacity(0.4)) {
-            InfoPopup(header: $infoPopupHeader, text: $infoPopupText, showingInfoPopup: $showingInfoPopup)
+            InfoPopup(popupContent: $popupContent, showingInfoPopup: $showingInfoPopup)
         }
     }
 }

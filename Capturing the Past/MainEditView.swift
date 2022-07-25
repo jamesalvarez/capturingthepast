@@ -18,10 +18,6 @@ struct MainEditView: View {
         case DataEntry, PhotoPicking, Confirmation
     }
 
-    enum InfoPopupContent {
-        case RepositorySelector, CatalogueReference, ItemLevel, SubItemLevel, SpecialCases, Note, Ref
-    }
-
     @State var editState: EditState = .DataEntry
     @State var source: ImagePicker.Source = .library
     @State var showCameraAlert = false
@@ -37,8 +33,7 @@ struct MainEditView: View {
     @State var showConfirmationDialog = false
     @State var showToast = false
     @State var showingInfoPopup = false
-    @State var infoPopupText: String = ""
-    @State var infoPopupHeader: String = ""
+    @State var popupContent: InfoPopup.InfoPopupContent = .RepositorySelector
     @State var appError: CapturingThePastError.ErrorType?
 
     public func sheetVisible() -> Binding<Bool> {
@@ -46,33 +41,7 @@ struct MainEditView: View {
                              set: { _ in })
     }
 
-    func showInfoPopup(_ type: InfoPopupContent) {
-        switch type {
-        case .RepositorySelector:
-            infoPopupHeader = "Repository Selector"
-            infoPopupText = "The repository selector sets the first segment of the catalogue reference. Normally this is a country code followed an Archon code. \n\nThe numbering scheme is used in The National Archive\'s Discovery Catalogue. The segment is inserted in the file name to associate the image with the source institution. \n\nAdd custom Archon Codes to identify other sources."
-        case .CatalogueReference:
-            infoPopupHeader = "Catalogue Reference"
-            infoPopupText = "Enter the catalogue number to associate photos with a specific document in a catalogue.\n\nWhen working with sequences such as entire collections it may be convenient to use the optional controls below to increment the final levels of the catalogue reference. E.g. books or letters. Non sequential entry of reference numbers may be easier using a single text field.\n\nThe character limit for filenames is accumulated across all input fields though is not restricted as you may have a valid reason for creating filenames that do not work in common file systems. Instead a warning message is shown when 128 characters is exceeded, this would be a really long file name. Actual limits vary for according to file system, but 255 characters is likely to work."
-        case .ItemLevel:
-            infoPopupHeader = "Item Level"
-            infoPopupText = "Optional - The incrementing and decrementing buttons are intended to help with sequential capture tasks such as working through a series or collection. The input is restricted to numeric values"
-        case .SubItemLevel:
-            infoPopupHeader = "Sub Item Level"
-            infoPopupText = "Optional - The sub item is intended to  be used to associate photos with specific parts of an item. E.g. The individual pages of books or letters. \n\n\n\nFile names include a time stamp to enable unlimited numbers of photos for any reference number. \n\nThe sub item level is often used by projects to provide an additional level of catalogue description beyond the institutions catalogue numbering."
-        case .SpecialCases:
-            infoPopupHeader = "Special Cases"
-            infoPopupText = "Optional - this control is intended to be reserved for special cases such as detached or torn document parts. The control adds a distinguishable identifier to the end of the reference using a combination of letters and numbers."
-        case .Note:
-            infoPopupHeader = "Note"
-            infoPopupText = "Optional note field: Notes are stored with the reference in the log file."
-        case .Ref:
-            infoPopupHeader = "Ref"
-            infoPopupText = "This is the final full reference that will appear the log file."
-        }
-
-        showingInfoPopup = true
-    }
+    
 
     func showPhotoPicker(source newSource: ImagePicker.Source) {
         if data.referenceSequence == nil {
@@ -160,6 +129,11 @@ struct MainEditView: View {
         showingMenu = false
     }
 
+    func showInfoPopup(_ content: InfoPopup.InfoPopupContent) {
+        popupContent = content
+        showingInfoPopup = true
+    }
+
     var body: some View {
         ZStack {
             SideMenu(onAppear: sideMenuLinkClicked)
@@ -176,7 +150,7 @@ struct MainEditView: View {
             Form {
                 Section {
                     LabelledControl(title: "Repository", infoClickAction: {
-                        showInfoPopup(InfoPopupContent.RepositorySelector)
+                        showInfoPopup(.RepositorySelector)
                     }) {
                         Picker(selection: $data.repositoryID, label: pickerLabel) {
                             // TODO: In future indicate if entries repo is no longer in list
@@ -187,22 +161,22 @@ struct MainEditView: View {
                     }
 
                     LabelledTextView(title: "Catalogue reference", text: $data.catReference) {
-                        showInfoPopup(InfoPopupContent.CatalogueReference)
+                        showInfoPopup(.CatalogueReference)
                     }
                     LabelledStepper(title: "Item", value: $data.item) {
-                        showInfoPopup(InfoPopupContent.ItemLevel)
+                        showInfoPopup(.ItemLevel)
                     }
                     LabelledStepper(title: "Sub Item", value: $data.subItem) {
-                        showInfoPopup(InfoPopupContent.SubItemLevel)
+                        showInfoPopup(.SubItemLevel)
                     }
                     LabelledSpecialCaseControl(title: "Special Case:", value: $data.specialCase) {
-                        showInfoPopup(InfoPopupContent.SpecialCases)
+                        showInfoPopup(.SpecialCases)
                     }
                     LabelledTextView(title: "Note", text: $data.note) {
-                        showInfoPopup(InfoPopupContent.Note)
+                        showInfoPopup(.Note)
                     }
                     LabelledText(title: "Ref", text: data.referenceSequence ?? " ") {
-                        showInfoPopup(InfoPopupContent.Ref)
+                        showInfoPopup(.Ref)
                     }.foregroundColor(Color.accentColor)
                 }
             }
@@ -256,7 +230,7 @@ struct MainEditView: View {
             .padding(.horizontal, 16)
         }
         .popup(isPresented: $showingInfoPopup, type: .default, closeOnTap: false, backgroundColor: .black.opacity(0.4)) {
-            InfoPopup(header: $infoPopupHeader, text: $infoPopupText, showingInfoPopup: $showingInfoPopup)
+            InfoPopup(popupContent: $popupContent, showingInfoPopup: $showingInfoPopup)
         }
     }
 }
