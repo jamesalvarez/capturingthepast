@@ -13,7 +13,7 @@ struct LabelledStepper: View {
     let infoClickAction: () -> Void
 
     var body: some View {
-        LabelledControl(title: title, infoClickAction: infoClickAction) {
+        HorizontalLabelledControl(title: title, infoClickAction: infoClickAction) {
             Stepper(value: $value, in: 0...999) {
                 Text("\(value)")
             }
