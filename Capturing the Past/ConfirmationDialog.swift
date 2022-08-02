@@ -29,14 +29,11 @@ struct ConfirmationDialog: View {
                 LabelledControl(title: "Filename", infoClickAction: {}) {
                     Text(imageName).lineLimit(nil).minimumScaleFactor(0.01).foregroundColor(Color(.placeholderText))
                 }
-                LabelledControl(title: "Reference Sequence", infoClickAction: {}) {
-                    Text(referenceSequence).lineLimit(nil).minimumScaleFactor(0.01).foregroundColor(Color(.placeholderText))
-                }.frame(maxWidth: .infinity, alignment: .leading)
                 Divider()
                 Text("Do you want to add this to the archive?")
                 HStack(spacing: 20) {
                     Button(action: archive) {
-                        Text("Archive")
+                        Text("Save Image")
                     }.buttonStyle(.plain)
                         .font(.system(size: 18, weight: .bold))
                         .padding(.vertical, 9)
