@@ -221,7 +221,7 @@ struct MainEditView: View {
                     .foregroundColor(.white)
                     .frame(width: 24, height: 24)
 
-                Text("Photo successfully added to archive")
+                Text("Image saved and logged")
                     .foregroundColor(.white)
                     .font(.system(size: 16))
             }
