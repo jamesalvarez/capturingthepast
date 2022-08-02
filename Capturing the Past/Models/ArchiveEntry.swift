@@ -22,9 +22,7 @@ struct ArchiveEntry: Identifiable, Codable {
     var note: String = ""
     var photoRef: String = ""
     var referenceSequence: String {
-        get {
-            return "\(repositoryID)_\(catReference)_\(item)_\(subItem)_\(specialCase)"
-        }
+        return generateReferenceSequence(repositoryID: repositoryID, catReference: catReference, item: item, subItem: subItem, specialCase: specialCase)
     }
 }
 
@@ -55,6 +53,36 @@ extension ArchiveEntry {
         ]
 }
 
+func generateReferenceSequence(repositoryID: String, catReference: String, item: Int, subItem: Int, specialCase: String) -> String {
+
+        var catRef = "\(repositoryID)_\(catReference)_\(item)_\(subItem)"
+
+
+        if specialCase.count > 0 {
+            catRef += "_" + specialCase
+        }
+
+        catRef = catRef.uppercased()
+
+        let bannedChars = CharacterSet(charactersIn: "!@#$%^&*").union(.whitespacesAndNewlines)
+
+        catRef = catRef.components(separatedBy: bannedChars)
+            .filter {!$0.isEmpty}
+            .joined(separator: "")
+
+        let pathChars = CharacterSet(charactersIn: "\\/_")
+
+        catRef = catRef.components(separatedBy: pathChars)
+            .filter {!$0.isEmpty}
+            .joined(separator: "_")
+
+        if catRef == "GB0000" {
+            catRef = "Ref"
+        }
+
+        return catRef
+}
+
 /**
   * Data type to contain editable properties of ArchiveEntry, to process edits and updates
  */
@@ -66,54 +94,18 @@ extension ArchiveEntry {
         var subItem: Int = 0
         var specialCase: String = ""
         var note: String = ""
-        var photo: Photo = Photo()
-        var date: Date = Date()
+        var photo: Photo = .init()
+        var date: Date = .init()
 
-        /*
-         private String createCatRef() {
-         catRef = strArchon;
-         if(strRef.length()>0){
-         catRef+=  "/" + strRef;
-         }
-         if(strItem.length()>0){
-         catRef+="/" + strItem;
-         }
-         if (strSubItem.length()>0){
-         catRef+="/" + strSubItem;
-         }
-         if(strPart.length()>0){
-         catRef+= strPart;
-         }
-
-         catRef = catRef.replaceAll("\\s+", "").toUpperCase();
-         catRef = catRef.replaceAll("//", "/");
-         catRef = catRef.replaceAll("/", "_");
-         catRef = catRef.replaceAll("[!@#$%^&*]", "_");
-         catRef = catRef.replaceAll("\\\\\\\\", "\\\\");
-         catRef = catRef.replaceAll("\\\\", "_");
-
-         if (catRef.equals("GB0000")) {
-         catRef = "Ref";
-         }
-         catRef = catRef.replaceAll("_{2,}", "_");
-         if (catRef.length() > 128) {
-         Toast.makeText(this, "Your catalogue reference is very long and may result in unusable file names.", Toast.LENGTH_SHORT).show();
-         }
-         return catRef;
-         }
-         */
         var referenceSequence: String? {
-            get {
-                if (repositoryID == "" || catReference == "") {
-                    return nil
-                } else {
-                    return "\(repositoryID)_\(catReference)_\(item)_\(subItem)_\(specialCase)"
-                }
+            if repositoryID == "" || catReference == "" {
+                return nil
+            } else {
+                return generateReferenceSequence(repositoryID: repositoryID, catReference: catReference, item: item, subItem: subItem, specialCase: specialCase)
             }
         }
 
         func generatePhotoFileName() -> String? {
-
             guard let referenceSequence = referenceSequence else {
                 return nil
             }
@@ -126,7 +118,6 @@ extension ArchiveEntry {
             dateFormatter.dateFormat = "YYMMdd_HHmmss"
             let dateString = dateFormatter.string(from: date)
             return "cpast_\(dateString)_\(tag).jpg"
-
         }
     }
 
