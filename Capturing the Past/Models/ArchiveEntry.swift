@@ -115,7 +115,7 @@ extension ArchiveEntry {
             })
 
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "YYMMdd_HHmmss"
+            dateFormatter.dateFormat = "YYYYMMdd_HHmmss"
             let dateString = dateFormatter.string(from: date)
             return "cpast_\(dateString)_\(tag).jpg"
         }
