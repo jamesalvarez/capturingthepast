@@ -132,7 +132,7 @@ struct MainEditView: View {
             VStack {
                 Form {
                     Section {
-                        LabelledControl(title: "Repository", infoClickAction: {
+                        LabelledControl(title: "Repository Selector", infoClickAction: {
                             popupContent = .RepositorySelector
                             showingInfoPopup = true
                         }) {
