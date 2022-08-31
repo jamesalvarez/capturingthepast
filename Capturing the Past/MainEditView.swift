@@ -167,7 +167,7 @@ struct MainEditView: View {
                         LabelledText(title: "Ref", text: data.referenceSequence ?? " ") {
                             popupContent = .Ref
                             showingInfoPopup = true
-                        }.foregroundColor(Color.accentColor)
+                        }
                     }
                 }
                 .frame(width: 300, height: 520)
