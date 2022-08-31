@@ -13,7 +13,7 @@ struct AppInfoView: View {
         ScrollView {
             Form {
                 Section("Resources") {
-                    Text(.init("[Website](https://blogs.sussex.ac.uk/capturing-the-past/about-us/)"))
+                    Text(.init("[Website](https://capturingthepast.benskitchen.com/)"))
                     Text(.init("[Instructions](https://blogs.sussex.ac.uk/capturing-the-past/2021/11/04/hello-world/)"))
                 }
                 Section("Capture Log") {

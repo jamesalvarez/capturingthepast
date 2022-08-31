@@ -144,7 +144,7 @@ struct MainEditView: View {
                             }.labelsHidden()
                         }
 
-                        LabelledTextView(title: "Catalogue reference", text: $data.catReference) {
+                        LabelledTextView(title: "Catalogue Reference", text: $data.catReference) {
                             popupContent = .CatalogueReference
                             showingInfoPopup = true
                         }
@@ -156,7 +156,7 @@ struct MainEditView: View {
                             popupContent = .SubItemLevel
                             showingInfoPopup = true
                         }
-                        LabelledSpecialCaseControl(title: "Special Case:", value: $data.specialCase) {
+                        LabelledSpecialCaseControl(title: "Special Cases", value: $data.specialCase) {
                             popupContent = .SpecialCases
                             showingInfoPopup = true
                         }
