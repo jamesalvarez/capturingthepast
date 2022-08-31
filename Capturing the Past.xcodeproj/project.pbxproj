@@ -36,7 +36,6 @@
 		1A96D03E288AA161005C638A /* LabelledSpecialCaseControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A96D03D288AA161005C638A /* LabelledSpecialCaseControl.swift */; };
 		1AB223E4288C325900A8AA29 /* ShortRepositories.json in Resources */ = {isa = PBXBuildFile; fileRef = 1AB223E3288C325900A8AA29 /* ShortRepositories.json */; };
 		1AB223E6288C326D00A8AA29 /* AlternativeRepositories.json in Resources */ = {isa = PBXBuildFile; fileRef = 1AB223E5288C326D00A8AA29 /* AlternativeRepositories.json */; };
-		1AB223ED288C40DC00A8AA29 /* ConfirmationDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB223EC288C40DC00A8AA29 /* ConfirmationDialog.swift */; };
 		1AB223EF288C43C600A8AA29 /* InfoPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB223EE288C43C600A8AA29 /* InfoPopup.swift */; };
 		1AB223F1288DB4C000A8AA29 /* SideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB223F0288DB4C000A8AA29 /* SideMenu.swift */; };
 		1AB223F3288DC05300A8AA29 /* AppInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB223F2288DC05300A8AA29 /* AppInfoView.swift */; };
@@ -73,7 +72,6 @@
 		1A96D03D288AA161005C638A /* LabelledSpecialCaseControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelledSpecialCaseControl.swift; sourceTree = "<group>"; };
 		1AB223E3288C325900A8AA29 /* ShortRepositories.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ShortRepositories.json; sourceTree = "<group>"; };
 		1AB223E5288C326D00A8AA29 /* AlternativeRepositories.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AlternativeRepositories.json; sourceTree = "<group>"; };
-		1AB223EC288C40DC00A8AA29 /* ConfirmationDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationDialog.swift; sourceTree = "<group>"; };
 		1AB223EE288C43C600A8AA29 /* InfoPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPopup.swift; sourceTree = "<group>"; };
 		1AB223F0288DB4C000A8AA29 /* SideMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenu.swift; sourceTree = "<group>"; };
 		1AB223F2288DC05300A8AA29 /* AppInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoView.swift; sourceTree = "<group>"; };
@@ -126,7 +124,6 @@
 				1A0ED5CA287EB6E6007F0933 /* RepositoriesView.swift */,
 				1A0ED5CC287EB6F8007F0933 /* RepositoryRowView.swift */,
 				1A0ED5CE287EB706007F0933 /* RepositoryEditView.swift */,
-				1AB223EC288C40DC00A8AA29 /* ConfirmationDialog.swift */,
 				1A6291EE2869AA8A006B51CB /* ImagePicker.swift */,
 				1AB223F0288DB4C000A8AA29 /* SideMenu.swift */,
 				1AB223F2288DC05300A8AA29 /* AppInfoView.swift */,
@@ -293,7 +290,6 @@
 				1A31F76028889BF100052839 /* BackgroundImage.swift in Sources */,
 				1A31F76428893C1500052839 /* LabelledStepper.swift in Sources */,
 				1AB223F1288DB4C000A8AA29 /* SideMenu.swift in Sources */,
-				1AB223ED288C40DC00A8AA29 /* ConfirmationDialog.swift in Sources */,
 				1A6291F32869AA91006B51CB /* FileManager+Extension.swift in Sources */,
 				1A31F7622888A0AE00052839 /* LabelledTextView.swift in Sources */,
 				1A44ECCB28631885006624B0 /* ArchiveEntriesStore.swift in Sources */,
@@ -424,7 +420,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Capturing the Past/Preview Content\"";
 				DEVELOPMENT_TEAM = 7M9C479L4K;
 				ENABLE_PREVIEWS = YES;
@@ -457,7 +453,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Capturing the Past/Preview Content\"";
 				DEVELOPMENT_TEAM = 7M9C479L4K;
 				ENABLE_PREVIEWS = YES;

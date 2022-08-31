@@ -15,22 +15,18 @@ struct MainEditView: View {
     @EnvironmentObject var archiveEntriesStore: ArchiveEntriesStore
 
     enum EditState {
-        case DataEntry, PhotoPicking, Confirmation
+        case DataEntry, PhotoPicking
     }
 
     @State var editState: EditState = .DataEntry
     @State var source: ImagePicker.Source = .library
     @State var showCameraAlert = false
     @State var data: ArchiveEntry.Data = .init()
-
-    @State var imageName: String = ""
     @State var image: UIImage?
-
     @State var isEditing = false
     @State var selectedImage: Photo?
     @State var showFileAlert = false
     @State var showImagePicker = false
-    @State var showConfirmationDialog = false
     @State var showToast = false
     @State var showingInfoPopup = false
     @State var popupContent: InfoPopup.InfoPopupContent = .RepositorySelector
@@ -67,22 +63,22 @@ struct MainEditView: View {
 
     func imagePickerDismissed() {
         if image != nil {
-            data.date = Date()
-            imageName = data.generatePhotoFileName() ?? ""
-            editState = EditState.Confirmation
-            showConfirmationDialog = true
-        } else {
-            editState = EditState.DataEntry
+            addPhoto()
         }
+
+        resetUIToDataEntry()
     }
 
     func addPhoto() {
         do {
             if let image = image {
+                let imageName = data.generatePhotoFileName() ?? ""
                 let photo = Photo(id: imageName, image: image)
                 try photo.save()
                 data.photo = photo
             }
+
+            data.date = Date()
 
             // Add data to repositories list and save
             archiveEntriesStore.archiveEntries.append(ArchiveEntry(fromData: data))
@@ -96,8 +92,6 @@ struct MainEditView: View {
 
     func resetUIToDataEntry() {
         showImagePicker = false
-        showConfirmationDialog = false
-        imageName = ""
         image = nil
         editState = EditState.DataEntry
     }
@@ -129,110 +123,105 @@ struct MainEditView: View {
         showingMenu = false
     }
 
-    func showInfoPopup(_ content: InfoPopup.InfoPopupContent) {
-        popupContent = content
-        showingInfoPopup = true
-    }
-
     var body: some View {
+        let _ = Self._printChanges()
         ZStack {
             SideMenu(onAppear: sideMenuLinkClicked)
                 .offset(x: showingMenu ? 0.0 : 0 - UIScreen.main.bounds.width, y: 0)
                 .animation(.easeOut, value: showingMenu)
-            mainView
+            VStack {
+                Form {
+                    Section {
+                        LabelledControl(title: "Repository", infoClickAction: {
+                            popupContent = .RepositorySelector
+                            showingInfoPopup = true
+                        }) {
+                            Picker(selection: $data.repositoryID, label: pickerLabel) {
+                                // TODO: In future indicate if entries repo is no longer in list
+                                ForEach(repositoriesStore.repositories, id: \.id) { repo in
+                                    Text(repo.nameCodeString)
+                                }
+                            }.labelsHidden()
+                        }
+
+                        LabelledTextView(title: "Catalogue reference", text: $data.catReference) {
+                            popupContent = .CatalogueReference
+                            showingInfoPopup = true
+                        }
+                        LabelledStepper(title: "Item", value: $data.item) {
+                            popupContent = .ItemLevel
+                            showingInfoPopup = true
+                        }
+                        LabelledStepper(title: "Sub Item", value: $data.subItem) {
+                            popupContent = .SubItemLevel
+                            showingInfoPopup = true
+                        }
+                        LabelledSpecialCaseControl(title: "Special Case:", value: $data.specialCase) {
+                            popupContent = .SpecialCases
+                            showingInfoPopup = true
+                        }
+                        LabelledTextView(title: "Note", text: $data.note) {
+                            popupContent = .Note
+                            showingInfoPopup = true
+                        }
+                        LabelledText(title: "Ref", text: data.referenceSequence ?? " ") {
+                            popupContent = .Ref
+                            showingInfoPopup = true
+                        }.foregroundColor(Color.accentColor)
+                    }
+                }
+                .frame(width: 300, height: 520)
+                HStack {
+                    Button { showPhotoPicker(source: .camera)
+                    } label: {
+                        ButtonLabel(symbolName: "camera", label: "Camera")
+                    }
+                    Button { showPhotoPicker(source: .library)
+                    } label: {
+                        ButtonLabel(symbolName: "photo", label: "Photos")
+                    }
+                }
+            }
+            .navigationTitle("Capturing the Past")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    menuButton
+                }
+            }
+            .background(BackgroundImage())
+            .alert("Error", isPresented: $showCameraAlert, presenting: appError, actions: { cameraError in
+                cameraError.button
+            }, message: { cameraError in
+                Text(cameraError.message)
+            })
+            .sheet(isPresented: $showImagePicker, onDismiss: imagePickerDismissed) {
+                ImagePicker(sourceType: source == .library ? .photoLibrary : .camera, selectedImage: $image)
+                    .ignoresSafeArea()
+            }
+            .popup(isPresented: $showToast, type: .floater(), position: .bottom, animation: .spring(), autohideIn: 4) {
+                HStack(spacing: 8) {
+                    Image(systemName: "archivebox")
+                        .foregroundColor(.white)
+                        .frame(width: 24, height: 24)
+
+                    Text("Image saved and logged")
+                        .foregroundColor(.white)
+                        .font(.system(size: 16))
+                }
+                .padding(16)
+                .background(Color(hex: "b37407").cornerRadius(12))
+                .padding(.horizontal, 16)
+            }
+            .popup(isPresented: $showingInfoPopup, type: .default, closeOnTap: false, backgroundColor: .black.opacity(0.4)) {
+                InfoPopup(popupContent: $popupContent, showingInfoPopup: $showingInfoPopup)
+            }
                 .offset(x: showingMenu ? UIScreen.main.bounds.width : 0.0, y: 0)
                 .animation(backfromNavLink ? nil : .easeOut, value: showingMenu)
         }
     }
 
-    var mainView: some View {
-        VStack {
-            Form {
-                Section {
-                    LabelledControl(title: "Repository", infoClickAction: {
-                        showInfoPopup(.RepositorySelector)
-                    }) {
-                        Picker(selection: $data.repositoryID, label: pickerLabel) {
-                            // TODO: In future indicate if entries repo is no longer in list
-                            ForEach(repositoriesStore.repositories, id: \.id) { repo in
-                                Text(repo.nameCodeString)
-                            }
-                        }.labelsHidden()
-                    }
 
-                    LabelledTextView(title: "Catalogue reference", text: $data.catReference) {
-                        showInfoPopup(.CatalogueReference)
-                    }
-                    LabelledStepper(title: "Item", value: $data.item) {
-                        showInfoPopup(.ItemLevel)
-                    }
-                    LabelledStepper(title: "Sub Item", value: $data.subItem) {
-                        showInfoPopup(.SubItemLevel)
-                    }
-                    LabelledSpecialCaseControl(title: "Special Case:", value: $data.specialCase) {
-                        showInfoPopup(.SpecialCases)
-                    }
-                    LabelledTextView(title: "Note", text: $data.note) {
-                        showInfoPopup(.Note)
-                    }
-                    LabelledText(title: "Ref", text: data.referenceSequence ?? " ") {
-                        showInfoPopup(.Ref)
-                    }.foregroundColor(Color.accentColor)
-                }
-            }
-            .frame(width: 300, height: 520)
-            HStack {
-                Button { showPhotoPicker(source: .camera)
-                } label: {
-                    ButtonLabel(symbolName: "camera", label: "Camera")
-                }
-                Button { showPhotoPicker(source: .library)
-                } label: {
-                    ButtonLabel(symbolName: "photo", label: "Photos")
-                }
-            }
-        }
-        .navigationTitle("Capturing the Past")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                menuButton
-            }
-        }
-        .background(BackgroundImage())
-        .alert("Error", isPresented: $showCameraAlert, presenting: appError, actions: { cameraError in
-            cameraError.button
-        }, message: { cameraError in
-            Text(cameraError.message)
-        })
-        .sheet(isPresented: $showImagePicker, onDismiss: imagePickerDismissed) {
-            ImagePicker(sourceType: source == .library ? .photoLibrary : .camera, selectedImage: $image)
-                .ignoresSafeArea()
-        }
-        .sheet(isPresented: $showConfirmationDialog, onDismiss: resetUIToDataEntry) {
-            ConfirmationDialog(image: image!, imageName: imageName, referenceSequence: data.referenceSequence ?? "", archive: {
-                addPhoto()
-                resetUIToDataEntry()
-            }, cancel: resetUIToDataEntry)
-        }
-        .popup(isPresented: $showToast, type: .floater(), position: .bottom, animation: .spring(), autohideIn: 4) {
-            HStack(spacing: 8) {
-                Image(systemName: "archivebox")
-                    .foregroundColor(.white)
-                    .frame(width: 24, height: 24)
-
-                Text("Image saved and logged")
-                    .foregroundColor(.white)
-                    .font(.system(size: 16))
-            }
-            .padding(16)
-            .background(Color(hex: "b37407").cornerRadius(12))
-            .padding(.horizontal, 16)
-        }
-        .popup(isPresented: $showingInfoPopup, type: .default, closeOnTap: false, backgroundColor: .black.opacity(0.4)) {
-            InfoPopup(popupContent: $popupContent, showingInfoPopup: $showingInfoPopup)
-        }
-    }
 }
 
 struct ArchiveEntryEditView_Previews: PreviewProvider {
