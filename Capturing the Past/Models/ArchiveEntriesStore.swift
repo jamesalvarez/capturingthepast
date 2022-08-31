@@ -95,7 +95,7 @@ class ArchiveEntriesStore: ObservableObject {
 
                 try csv.write(row: ["Date", "Cat Ref", "Filename", "Note"])
                 for archiveEntry in archiveEntries {
-                    try csv.write(row: ["", archiveEntry.catReference, archiveEntry.photoRef, archiveEntry.note])
+                    try csv.write(row: [archiveEntry.date.ISO8601Format(), archiveEntry.catReference, archiveEntry.photoRef, archiveEntry.note])
                 }
 
                 csv.stream.close()
