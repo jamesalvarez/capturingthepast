@@ -35,6 +35,30 @@ struct SideMenu: View {
             }
             .onAppear(perform: onAppear)
             .accessibilityLabel("Information")
+            Spacer()
+            HStack {
+                Image(systemName: "photo")
+                    .foregroundColor(
+                        .orange)
+                Text("Browse photos")
+                    .foregroundColor(
+                        .white)
+            }.onTapGesture {
+                guard let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first,
+                      let components = NSURLComponents(url: documentDirectory, resolvingAgainstBaseURL: true) else {
+                    return
+                }
+                components.scheme = "shareddocuments"
+
+                if let sharedDocuments = components.url {
+                    UIApplication.shared.open(
+                        sharedDocuments,
+                        options: [:],
+                        completionHandler: nil
+                    )
+                }
+            }
+            .accessibilityLabel("Browse Photos")
         }
     }
 }
