@@ -19,7 +19,7 @@ struct MainEditView: View {
     }
 
     @State var editState: EditState = .DataEntry
-    @State var source: ImagePicker.Source = .library
+    @State var source: UIImagePickerController.SourceType = .camera
     @State var showCameraAlert = false
     @State var data: ArchiveEntry.Data = .init()
     @State var image: UIImage?
@@ -39,12 +39,12 @@ struct MainEditView: View {
 
     
 
-    func showPhotoPicker(source newSource: ImagePicker.Source) {
-        if data.referenceSequence == nil {
+    func showPhotoPicker(source newSource: UIImagePickerController.SourceType) {
+        /*if data.referenceSequence == nil {
             showCameraAlert = true
             appError = CapturingThePastError.ErrorType(error: .referenceNotSet)
             return
-        }
+        }*/
 
         source = newSource
 
@@ -174,11 +174,7 @@ struct MainEditView: View {
                 HStack {
                     Button { showPhotoPicker(source: .camera)
                     } label: {
-                        ButtonLabel(symbolName: "camera", label: "Camera")
-                    }
-                    Button { showPhotoPicker(source: .library)
-                    } label: {
-                        ButtonLabel(symbolName: "photo", label: "Photos")
+                        ButtonLabel(symbolName: "camera", label: "Capture Image")
                     }
                 }
             }
@@ -196,7 +192,7 @@ struct MainEditView: View {
                 Text(cameraError.message)
             })
             .sheet(isPresented: $showImagePicker, onDismiss: imagePickerDismissed) {
-                ImagePicker(sourceType: source == .library ? .photoLibrary : .camera, selectedImage: $image)
+                ImagePicker(sourceType: $source, selectedImage: $image)
                     .ignoresSafeArea()
             }
             .popup(isPresented: $showToast, type: .floater(), position: .bottom, animation: .spring(), autohideIn: 4) {
