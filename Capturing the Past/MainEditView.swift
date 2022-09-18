@@ -168,13 +168,14 @@ struct MainEditView: View {
                             popupContent = .Ref
                             showingInfoPopup = true
                         }
-                    }
-                }
-                .frame(width: 300, height: 520)
-                HStack {
-                    Button { showPhotoPicker(source: .camera)
-                    } label: {
-                        ButtonLabel(symbolName: "camera", label: "Capture Image")
+                        HStack {
+                            Spacer()
+                            Button { showPhotoPicker(source: .camera)
+                            } label: {
+                                ButtonLabel(symbolName: "camera", label: "Capture Image")
+                            }
+                            Spacer()
+                        }.padding()
                     }
                 }
             }
@@ -212,12 +213,10 @@ struct MainEditView: View {
             .popup(isPresented: $showingInfoPopup, type: .default, closeOnTap: false, backgroundColor: .black.opacity(0.4)) {
                 InfoPopup(popupContent: $popupContent, showingInfoPopup: $showingInfoPopup)
             }
-                .offset(x: showingMenu ? UIScreen.main.bounds.width : 0.0, y: 0)
-                .animation(backfromNavLink ? nil : .easeOut, value: showingMenu)
+            .offset(x: showingMenu ? UIScreen.main.bounds.width : 0.0, y: 0)
+            .animation(backfromNavLink ? nil : .easeOut, value: showingMenu)
         }
     }
-
-
 }
 
 struct ArchiveEntryEditView_Previews: PreviewProvider {

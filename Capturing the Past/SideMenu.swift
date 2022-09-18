@@ -35,7 +35,6 @@ struct SideMenu: View {
             }
             .onAppear(perform: onAppear)
             .accessibilityLabel("Information")
-            Spacer()
             HStack {
                 Image(systemName: "photo")
                     .foregroundColor(
@@ -58,7 +57,7 @@ struct SideMenu: View {
                     )
                 }
             }
-            .accessibilityLabel("Browse Photos")
+            .accessibilityLabel("See Photos and Log")
         }
     }
 }
