@@ -25,15 +25,15 @@ class ArchiveEntriesStore: ObservableObject {
 
 
     private static func fileURL() throws -> URL {
-        try FileManager.default.url(for: .documentDirectory,
+        try FileManager.default.url(for: .applicationSupportDirectory,
                                     in: .userDomainMask,
                                     appropriateFor: nil,
-                                    create: false)
+                                    create: true)
             .appendingPathComponent("archive.data")
     }
 
     private static func backupFileURL() throws -> URL {
-        try FileManager.default.url(for: .documentDirectory,
+        try FileManager.default.url(for: .applicationSupportDirectory,
                                     in: .userDomainMask,
                                     appropriateFor: nil,
                                     create: false)
